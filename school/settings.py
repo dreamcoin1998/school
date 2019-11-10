@@ -24,6 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config.SECRET_KEY
+### qq小程序秘钥
+QQ_SECRET = config.QQ_SECRET
+### QQ 小程序APPID
+QQ_APPID = '1110027966'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

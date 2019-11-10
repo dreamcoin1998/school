@@ -18,5 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('v1.0/', include('school.version'))
+    path('v1.0/', include('school.version')), # api版本号
 ]
