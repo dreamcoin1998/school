@@ -20,10 +20,10 @@ from django.contrib.auth import authenticate, login, logout
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.decorators import action
 from rest_framework.authentication import SessionAuthentication
-# from .models import VerifyCode
 from datetime import datetime
 from school import settings
 from utils.ReturnCode import ReturnCode
+from utils.UniversityLogin import UniversityLogin
 
 
 class CsrfExemptSessionAuthentication(SessionAuthentication):
@@ -63,6 +63,45 @@ class YonghuInfo(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
                 return Response(ReturnCode(1), status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(ReturnCode(1), status=status.HTTP_400_BAD_REQUEST)
+
+
+class Authentication(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
+    lookup_field = 'pk'
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated, IsOwnerOrReadOnlyInfo)
+    authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
+
+    def get_queryset(self):
+        print(self.kwargs.get('pk'))
+        if self.kwargs.get('pk'):
+            pk = self.kwargs['pk']
+        else:
+            pk = self.request.user.pk
+        return get_user_model().objects.filter(pk=pk)
+
+    def update(self, request, *args, **kwargs):
+        '''
+        用户身份认证
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        user = self.get_object()
+        # 未验证
+        if not user.is_active:
+            user = request.user.pk
+            UserName = request.data.get('UserName')
+            Password = request.data.get('Password')
+            university = UniversityLogin()
+            if university.UscLogin(UserName, Password):
+                user.is_active = True
+                user.save()
+                return Response(ReturnCode(0), status=200)
+            else:
+                return Response(ReturnCode(1, msg='登录失败'), status=400)
+        else:
+            return Response(ReturnCode(1, msg='请勿重复验证'), status=status.HTTP_400_BAD_REQUEST)
 
 
 @csrf_exempt
@@ -115,4 +154,4 @@ def logout_view(request):
     :return:
     '''
     logout(request)
-    return Response({'msg': '注销成功', 'code': 0}, status=status.HTTP_200_OK)
+    return Response(ReturnCode(0), status=status.HTTP_200_OK)
