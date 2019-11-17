@@ -2,7 +2,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import User
+from .models import User, UscInfo
 from .serializers import UserSerializer
 from django.contrib.auth.hashers import make_password
 from rest_framework import generics
@@ -24,6 +24,7 @@ from datetime import datetime
 from school import settings
 from utils.ReturnCode import ReturnCode
 from utils.UniversityLogin import UniversityLogin
+from utils.Timetable import Timetable
 
 
 class CsrfExemptSessionAuthentication(SessionAuthentication):
@@ -97,6 +98,11 @@ class Authentication(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
             if university.UscLogin(UserName, Password):
                 user.is_active = True
                 user.save()
+                uscinfo = UscInfo()
+                uscinfo.UserName = UserName
+                uscinfo.Password = Password
+                uscinfo.user = user
+                uscinfo.save()
                 return Response(ReturnCode(0), status=200)
             else:
                 return Response(ReturnCode(1, msg='登录失败'), status=400)
@@ -113,12 +119,15 @@ def qq_login(request):
     :return:
     '''
     code = request.data.get('code')
+    print(type(code))
     userInfo = request.data.get('userInfo')
-    if type(code) != 'str':
+    if type(code) != type('str'):
+        print('运行')
         return Response(ReturnCode(1), status=status.HTTP_400_BAD_REQUEST)
     else:
         res = code2Session.c2s(settings.QQ_APPID, code)
-        if res.json().get('errcode') == 0:
+        print(res)
+        if res.get('errcode') == 0:
             openid = res.json().get('openid')
             userInfo['openid'] = openid
             user = get_user_model().objects.filter(openid=openid)

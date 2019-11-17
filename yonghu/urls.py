@@ -3,7 +3,7 @@ from django.urls import path
 
 from . import views
 from rest_framework.routers import DefaultRouter
-from .views import YonghuInfo
+from .views import YonghuInfo, Authentication
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 
@@ -14,6 +14,7 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 router = DefaultRouter()
 router.register('yonghu_info', YonghuInfo, base_name='yonghu_info')             # 获取或更新用户信息
+router.register('yonghu_yz', Authentication, base_name='yonghu_yz')             # 账号身份认证
 
 
 urlpatterns = [

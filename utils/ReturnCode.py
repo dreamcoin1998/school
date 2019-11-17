@@ -10,6 +10,6 @@ class Code:
             return 'request error.'
 
 
-def ReturnCode(code, msg=None):
+def ReturnCode(code, msg=None, data=None):
     status = Code(code, msg=msg)
-    return {'code': status.code, 'msg': status.msg}
+    return {'code': status.code, 'msg': status.msg, 'data': data}

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import AbstractUser
@@ -10,6 +11,7 @@ class User(AbstractUser):
     """
     用户类
     """
+    # username = models.CharField(unique=False, null=True)
     openid = models.CharField(max_length=64, primary_key=True)
     nickName = models.CharField(max_length=64, verbose_name='昵称', null=True)
     GENDER = (
@@ -38,4 +40,14 @@ class User(AbstractUser):
     class Meta(AbstractUser.Meta):
         # swappable = 'AUTH_USER_MODEL'
         verbose_name = '用户'
+        verbose_name_plural = verbose_name
+
+
+class UscInfo(models.Model):
+    UserName = models.CharField(max_length=16, verbose_name='校园网用户名', unique=True, null=True)
+    Password = models.CharField(max_length=32, verbose_name='校园网密码', null=True)
+    user = models.OneToOneField(User, on_delete=models.DO_NOTHING, verbose_name='所关联用户', related_name='usc')
+
+    class Meta:
+        verbose_name = '南华大学教务在线用户信息'
         verbose_name_plural = verbose_name

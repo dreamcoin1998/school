@@ -26,7 +26,3 @@ class UniversityLogin:
             return True
         else:
             return False
-
-if __name__ == '__main__':
-    uni = UniversityLogin()
-    uni.UscLogin('20174670323', '18759799353')

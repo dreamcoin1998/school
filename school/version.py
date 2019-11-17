@@ -6,4 +6,5 @@ urlpatterns = [
     path('forum/', include('forum.urls')),
     path('transaction/', include('transaction.urls')),
     path('auth/', include('yonghu.urls')),
+    path('api/', include('tools.urls')),
 ]
