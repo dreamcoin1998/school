@@ -9,6 +9,13 @@ class Timetable:
     获取课表
     '''
     def USC_Timetable(self, UserName, Password, termCode):
+        '''
+        南华大学课表
+        :param UserName:
+        :param Password:
+        :param termCode:
+        :return:
+        '''
         User_Agent = [
             'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
             'Mozilla/5.0 (Linux; U; Android 8.1.0; zh-cn; BLA-AL00 Build/HUAWEIBLA-AL00) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/57.0.2987.132 MQQBrowser/8.9 Mobile Safari/537.36',

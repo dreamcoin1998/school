@@ -25,6 +25,21 @@ from school import settings
 from utils.ReturnCode import ReturnCode
 from utils.UniversityLogin import UniversityLogin
 from utils.Timetable import Timetable
+from django.contrib.auth.backends import ModelBackend
+
+
+class MyYonghuBackend(ModelBackend):
+    '''
+    自定义登陆验证
+    '''
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        try:
+            openid = kwargs['openid']
+            user = get_user_model().objects.get(openid=openid)
+            return user
+        except Exception as e:
+            return None
+
 
 
 class CsrfExemptSessionAuthentication(SessionAuthentication):
@@ -119,7 +134,7 @@ def qq_login(request):
     :return:
     '''
     code = request.data.get('code')
-    print(type(code))
+    # print(type(code))
     userInfo = request.data.get('userInfo')
     if type(code) != type('str'):
         print('运行')
@@ -128,7 +143,8 @@ def qq_login(request):
         res = code2Session.c2s(settings.QQ_APPID, code)
         print(res)
         if res.get('errcode') == 0:
-            openid = res.json().get('openid')
+            openid = res.get('openid')
+            print('openid: ', openid)
             userInfo['openid'] = openid
             user = get_user_model().objects.filter(openid=openid)
             ### 不存在,重新创建
@@ -140,18 +156,18 @@ def qq_login(request):
                     return Response(ReturnCode(1, msg=f'{serializer.errors}'), status=400)
             ### 存在,修改
             else:
-                serializer = UserSerializer(user, data=userInfo)
+                serializer = UserSerializer(user[0], data=userInfo)
                 if serializer.is_valid():
                     serializer.save()
                 else:
                     return Response(ReturnCode(1, msg=f'{serializer.errors}'), status=400)
             # 用户登录
             user = authenticate(openid=openid)
+            print(user)
             if user is not None:
                 login(request, user)
-            return Response(ReturnCode(0), status=200)
-        else:
-            return Response(ReturnCode(1, msg='登录错误，请重新登录'), status=status.HTTP_400_BAD_REQUEST)
+                return Response(ReturnCode(0), status=200)
+        return Response(ReturnCode(1, msg='登录失败，请重新登录'), status=status.HTTP_400_BAD_REQUEST)
 
 
 @csrf_exempt
