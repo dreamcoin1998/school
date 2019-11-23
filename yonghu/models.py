@@ -24,7 +24,7 @@ class User(AbstractUser):
     province = models.CharField(max_length=32, verbose_name='省份', default='')
     city = models.CharField(max_length=16, verbose_name='城市', default='')
     avatarUrl = models.URLField(default='',null=True,blank=True, verbose_name='头像地址')
-    is_active = models.BooleanField(default=False, verbose_name='是否激活')
+    is_auth = models.BooleanField(default=False, verbose_name='是否认证')
 
     def change_info(self, nickName):
         try:

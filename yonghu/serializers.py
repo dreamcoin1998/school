@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ('openid', 'nickName', 'gender', 'country', 'province', 'city', 'avatarUrl')
+        fields = ('openid', 'nickName', 'gender', 'country', 'province', 'city', 'avatarUrl', 'is_auth')
 
 
 ### 验证码序列化类

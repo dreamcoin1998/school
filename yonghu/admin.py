@@ -3,7 +3,7 @@ from .models import User, UscInfo
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('openid', 'nickName', 'gender', 'country', 'province', 'city', 'avatarUrl', 'is_active')
+    list_display = ('openid', 'nickName', 'gender', 'country', 'province', 'city', 'avatarUrl', 'is_auth')
 
 
 @admin.register(UscInfo)

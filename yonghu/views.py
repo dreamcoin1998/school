@@ -41,7 +41,6 @@ class MyYonghuBackend(ModelBackend):
             return None
 
 
-
 class CsrfExemptSessionAuthentication(SessionAuthentication):
     '''
     禁用跨域
@@ -71,7 +70,7 @@ class YonghuInfo(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
 
     def update(self, request, *args, **kwargs):
         user = self.get_object()
-        if user.is_active:
+        if user.is_auth:
             nickname = request.data.get('nickName')
             if user.change_info(nickname):
                 return Response(ReturnCode(0), status=status.HTTP_200_OK)
@@ -85,14 +84,16 @@ class Authentication(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
     lookup_field = 'pk'
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnlyInfo)
-    authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
+    authentication_classes = [CsrfExemptSessionAuthentication]
 
     def get_queryset(self):
         print(self.kwargs.get('pk'))
         if self.kwargs.get('pk'):
             pk = self.kwargs['pk']
+
         else:
             pk = self.request.user.pk
+            print("user:", self.request.user)
         return get_user_model().objects.filter(pk=pk)
 
     def update(self, request, *args, **kwargs):
@@ -104,21 +105,22 @@ class Authentication(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
         :return:
         '''
         user = self.get_object()
+        serializer = UserSerializer(user)
         # 未验证
-        if not user.is_active:
-            user = request.user.pk
+        if not user.is_auth:
+            # user = request.user.pk
             UserName = request.data.get('UserName')
             Password = request.data.get('Password')
             university = UniversityLogin()
             if university.UscLogin(UserName, Password):
-                user.is_active = True
+                user.is_auth = True
                 user.save()
                 uscinfo = UscInfo()
                 uscinfo.UserName = UserName
                 uscinfo.Password = Password
                 uscinfo.user = user
                 uscinfo.save()
-                return Response(ReturnCode(0), status=200)
+                return Response(ReturnCode(0, data=serializer.data), status=200)
             else:
                 return Response(ReturnCode(1, msg='登录失败'), status=400)
         else:
@@ -166,7 +168,7 @@ def qq_login(request):
             print(user)
             if user is not None:
                 login(request, user)
-                return Response(ReturnCode(0), status=200)
+                return Response(ReturnCode(0, data=serializer.data), status=200)
         return Response(ReturnCode(1, msg='登录失败，请重新登录'), status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -180,3 +182,13 @@ def logout_view(request):
     '''
     logout(request)
     return Response(ReturnCode(0), status=status.HTTP_200_OK)
+
+
+@csrf_exempt
+@api_view(["POST"])
+def test_login(request):
+    openid = request.data.get("openid")
+    user = get_user_model().objects.get(openid=openid)
+    user = authenticate(openid=openid)
+    login(request, user)
+    return Response(ReturnCode(0))

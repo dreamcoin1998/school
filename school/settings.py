@@ -134,6 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = (
     'yonghu.views.MyYonghuBackend',
+    "django.contrib.auth.backends.ModelBackend"
 )
 
 REST_FRAMEWORK = {
@@ -153,7 +154,7 @@ REST_FRAMEWORK = {
     )
 }
 
-# Internationalization
+# Internationalization-
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'zh-hans'
