@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8a5d59f5-de63-4713-9659-3ed34a4ba406" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/school/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/Timetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Timetable.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +68,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.views">
+  <component name="RunManager" selected="Python.Timetable">
     <configuration name="Timetable" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="school" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -158,8 +160,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.views" />
         <item itemvalue="Python.Timetable" />
+        <item itemvalue="Python.views" />
         <item itemvalue="Python.UniversityLogin" />
       </list>
     </recent_temporary>

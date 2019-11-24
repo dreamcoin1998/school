@@ -8,6 +8,7 @@ class Timetable:
     '''
     获取课表
     '''
+    @classmethod
     def USC_Timetable(self, UserName, Password, termCode):
         '''
         南华大学课表
@@ -35,7 +36,7 @@ class Timetable:
         if res.json().get('type') == 1:
             data = {'termCode': termCode, 'sort': 'TimeName', 'order': 'ASC'}
             res = s.post('http://jwzx.usc.edu.cn/Student/StuTimetable/GetStudentTimetable', headers=headers, data=data)
-            print(res.json())
+            # print(res.json())
             rows = res.json().get('rows')
             result = []
             for r in rows:
@@ -43,18 +44,28 @@ class Timetable:
                 del r['TimeCode']
                 del r['TimeName']
                 # print(r)
+                timeName = {}
+                timeNameClasses = []
                 for k, v in r.items():
                     if len(v):
                         root = etree.HTML(v)
                         classes = root.xpath('//ul//li/text()')
-                        n = len(classes) // 5
-                        cls = [classes[5*(n-1): 5*n] for n in range(1, n+1)]
+                        # print(classes)
+                        n = len(classes) // 5 # 前5个为一个课时
+                        cls = [classes[5*(n-1): 5*n] for n in range(1, n+1)] # 课时信息
+                        # timeName[TimeName] = []
                         for c in cls:
-                            dic = {}
-                            dic[k] = c
-                            dic['TimeName'] = TimeName
+                            cla = {}
+                            cla[k] = c
+                            timeNameClasses.append(cla)
                             # print(dic)
-                            result.append(dic)
+                        timeName[TimeName] = timeNameClasses
+                result.append(timeName)
+                # print(result)
             return result
         else:
             return False
+
+
+if __name__ == '__main__':
+    print(Timetable.USC_Timetable('20174670323', '18759799353', '2019-2020-1'))
