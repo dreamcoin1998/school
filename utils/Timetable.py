@@ -2,6 +2,7 @@ from lxml import etree
 import requests
 import random
 from utils.IdentifiVerify import IdentifiVerify
+import re
 
 
 class Timetable:
@@ -56,12 +57,25 @@ class Timetable:
                         # timeName[TimeName] = []
                         for c in cls:
                             cla = {}
+                            week = []
+                            for time_section in c[3].split('.'):
+                                time_section = time_section.replace(' (红湘)', '')
+                                start_end = time_section.split('-')
+                                if len(start_end) == 2:
+                                    for time in range(int(start_end[0]), int(start_end[1]) + 1):
+                                        week.append(str(time))
+                                else:
+                                    week.append(str(start_end[0]))
+                            print(c[4])
+                            c[4] = re.match(r'^(\d+\-\d{3}\-{0,1}\w{0,1})\s\(\w+\s{0,5}\)$', c[4]).groups()[0]
+                            c[3] = ' '.join(week)
+                            # print(c)
                             cla[k] = c
                             timeNameClasses.append(cla)
                             # print(dic)
                         timeName[TimeName] = timeNameClasses
                 result.append(timeName)
-                # print(result)
+            print(result)
             return result
         else:
             return False
