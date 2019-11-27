@@ -11,7 +11,7 @@ class User(AbstractUser):
     """
     用户类
     """
-    # username = models.CharField(unique=False, null=True)
+    username = models.CharField(max_length=25, unique=False, null=True)
     openid = models.CharField(max_length=64, primary_key=True)
     nickName = models.CharField(max_length=64, verbose_name='昵称', null=True)
     GENDER = (
@@ -25,6 +25,7 @@ class User(AbstractUser):
     city = models.CharField(max_length=16, verbose_name='城市', default='')
     avatarUrl = models.URLField(default='',null=True,blank=True, verbose_name='头像地址')
     is_auth = models.BooleanField(default=False, verbose_name='是否认证')
+    USERNAME_FIELD = 'openid'
 
     def change_info(self, nickName):
         try:
