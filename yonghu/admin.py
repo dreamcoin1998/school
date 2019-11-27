@@ -1,11 +1,15 @@
 from django.contrib import admin
-from .models import User, VerifyCode
+from .models import User, UscInfo
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'nickname', 'phone', 'email', 'is_active', 'data')
+    list_display = ('openid', 'nickName', 'gender', 'country', 'province', 'city', 'avatarUrl', 'is_auth')
 
 
-@admin.register(VerifyCode)
-class VerifyCode(admin.ModelAdmin):
-    list_display = ('code', 'email', 'send_type', 'send_time')
+@admin.register(UscInfo)
+class UscInfoAdmin(admin.ModelAdmin):
+    list_display = ('UserName', 'user')
+
+# @admin.register(VerifyCode)
+# class VerifyCode(admin.ModelAdmin):
+#     list_display = ('code', 'email', 'send_type', 'send_time')

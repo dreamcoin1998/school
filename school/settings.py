@@ -24,6 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config.SECRET_KEY
+### qq小程序秘钥
+QQ_SECRET = config.QQ_SECRET
+### QQ 小程序APPID
+QQ_APPID = '1110027966'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -128,6 +132,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'yonghu.views.MyYonghuBackend',
+    "django.contrib.auth.backends.ModelBackend"
+)
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10,
@@ -139,13 +148,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # drf的这一阶段主要是做验证,middleware的auth主要是设置session和user到request对象
         # 默认的验证是按照验证列表从上到下的验证
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
         "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
     )
 }
 
-# Internationalization
+# Internationalization-
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'zh-hans'
