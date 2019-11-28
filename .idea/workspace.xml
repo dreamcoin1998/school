@@ -2,9 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a5d59f5-de63-4713-9659-3ed34a4ba406" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Administrator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/school/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/permissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/permissions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonghu/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonghu/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonghu/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonghu/migrations/0002_auto_20191123_0113.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonghu/migrations/0003_auto_20191128_0037.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/yonghu/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonghu/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonghu/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonghu/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonghu/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonghu/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonghu/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonghu/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -2,29 +2,19 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import User, UscInfo
-from .serializers import UserSerializer
-from django.contrib.auth.hashers import make_password
-from rest_framework import generics
+from .models import UscInfo, Yonghu
+from .serializers import YonghuSerializer
 from django.contrib.auth import get_user_model
-from django.shortcuts import render
-import re
-from django.db.utils import IntegrityError
-# from .tasks import random_str, send_register_email
 from rest_framework import viewsets, mixins, generics
-from rest_framework.permissions import IsAuthenticated
-from utils.EmailCode import token_confirm
 from utils.permissions import IsOwnerOrReadOnlyInfo
+from utils.permissions import IsAuthenticated
 from utils import code2Session
 from django.contrib.auth import authenticate, login, logout
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-from rest_framework.decorators import action
 from rest_framework.authentication import SessionAuthentication
-from datetime import datetime
 from school import settings
 from utils.ReturnCode import ReturnCode
 from utils.UniversityLogin import UniversityLogin
-from utils.Timetable import Timetable
 from django.contrib.auth.backends import ModelBackend
 
 
@@ -34,8 +24,8 @@ class MyYonghuBackend(ModelBackend):
     '''
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
-            openid = kwargs['openid']
-            user = get_user_model().objects.get(openid=openid)
+            openid = kwargs['pk']
+            user = Yonghu.objects.get(openid=openid)
             return user
         except Exception as e:
             return None
@@ -56,7 +46,7 @@ class YonghuInfo(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
     update: http://hostname/auth/yonghu_info/pk/ PUT # pk必须带
     '''
     lookup_field = 'pk'
-    serializer_class = UserSerializer
+    serializer_class = YonghuSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnlyInfo)
     authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
 
@@ -65,24 +55,13 @@ class YonghuInfo(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
         if self.kwargs.get('pk'):
             pk = self.kwargs['pk']
         else:
-            pk = self.request.user.pk
-        return get_user_model().objects.filter(pk=pk)
-
-    def update(self, request, *args, **kwargs):
-        user = self.get_object()
-        if user.is_auth:
-            nickname = request.data.get('nickName')
-            if user.change_info(nickname):
-                return Response(ReturnCode(0), status=status.HTTP_200_OK)
-            else:
-                return Response(ReturnCode(1), status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response(ReturnCode(1), status=status.HTTP_400_BAD_REQUEST)
+            pk = self.request.session['pk']
+        return Yonghu.objects.filter(pk=pk)
 
 
 class Authentication(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
     lookup_field = 'pk'
-    serializer_class = UserSerializer
+    serializer_class = YonghuSerializer
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnlyInfo)
     authentication_classes = [CsrfExemptSessionAuthentication]
 
@@ -90,11 +69,10 @@ class Authentication(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
         print(self.kwargs.get('pk'))
         if self.kwargs.get('pk'):
             pk = self.kwargs['pk']
-
         else:
-            pk = self.request.user.pk
+            pk = self.request.session['pk']
             print("user:", self.request.user)
-        return get_user_model().objects.filter(pk=pk)
+        return Yonghu.objects.filter(pk=pk)
 
     def update(self, request, *args, **kwargs):
         '''
@@ -105,7 +83,7 @@ class Authentication(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
         :return:
         '''
         user = self.get_object()
-        serializer = UserSerializer(user)
+        serializer = YonghuSerializer(user)
         # 未验证
         if not user.is_auth:
             # user = request.user.pk
@@ -128,7 +106,7 @@ class Authentication(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
 
 
 @csrf_exempt
-@api_view(['POST'])
+@api_view(["POST"])
 def qq_login(request):
     '''
     QQ登录
@@ -148,27 +126,23 @@ def qq_login(request):
             openid = res.get('openid')
             print('openid: ', openid)
             userInfo['openid'] = openid
-            user = get_user_model().objects.filter(openid=openid)
+            user = Yonghu.objects.filter(openid=openid)
             ### 不存在,重新创建
             if len(user) == 0:
-                serializer = UserSerializer(data=userInfo)
+                serializer = YonghuSerializer(data=userInfo)
                 if serializer.is_valid():
                     serializer.save()
                 else:
-                    return Response(ReturnCode(1, msg=f'{serializer.errors}'), status=400)
+                    return Response(ReturnCode(1), status=400)
             ### 存在,修改
             else:
-                serializer = UserSerializer(user[0], data=userInfo)
+                serializer = YonghuSerializer(user[0], data=userInfo)
                 if serializer.is_valid():
                     serializer.save()
                 else:
                     return Response(ReturnCode(1, msg=f'{serializer.errors}'), status=400)
-            # 用户登录
-            user = authenticate(openid=openid)
-            print(user)
-            if user is not None:
-                login(request, user)
-                return Response(ReturnCode(0, data=serializer.data), status=200)
+            request.session['pk'] = openid
+            return Response(ReturnCode(0, data=serializer.data), status=200)
         return Response(ReturnCode(1, msg='登录失败，请重新登录'), status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -180,15 +154,5 @@ def logout_view(request):
     :param request:
     :return:
     '''
-    logout(request)
+    request.session.clear()
     return Response(ReturnCode(0), status=status.HTTP_200_OK)
-
-
-@csrf_exempt
-@api_view(["POST"])
-def test_login(request):
-    openid = request.data.get("openid")
-    user = get_user_model().objects.get(openid=openid)
-    user = authenticate(openid=openid)
-    login(request, user)
-    return Response(ReturnCode(0))

@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import User, UscInfo
+from .models import Yonghu, UscInfo
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+@admin.register(Yonghu)
+class YonghuAdmin(admin.ModelAdmin):
     list_display = ('openid', 'nickName', 'gender', 'country', 'province', 'city', 'avatarUrl', 'is_auth')
 
 

@@ -70,8 +70,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'school.urls'
-# 自定义用户模型所在的位置
-AUTH_USER_MODEL = 'yonghu.User'
 
 # jwt接口验证
 JWT_AUTH = {
