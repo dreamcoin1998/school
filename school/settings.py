@@ -30,7 +30,7 @@ QQ_SECRET = config.QQ_SECRET
 QQ_APPID = '1110027966'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*',]
 
