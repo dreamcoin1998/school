@@ -16,6 +16,7 @@ class Yonghu(models.Model):
     city = models.CharField(max_length=16, verbose_name='城市', default='')
     avatarUrl = models.URLField(default='', null=True, blank=True, verbose_name='头像地址')
     is_auth = models.BooleanField(default=False, verbose_name='是否认证')
+    is_auth_new = models.BooleanField(default=False, verbose_name='是否认证(新系统)')
 
 
 class UscInfo(models.Model):
@@ -25,4 +26,15 @@ class UscInfo(models.Model):
 
     class Meta:
         verbose_name = '南华大学教务在线用户信息'
+        verbose_name_plural = verbose_name
+
+
+class NewUSCINFO(models.Model):
+    UserName = models.CharField(max_length=16, verbose_name='校园网用户名', unique=True, null=True)
+    Password = models.CharField(max_length=32, verbose_name='校园网密码', null=True)
+    user = models.OneToOneField(Yonghu, on_delete=models.DO_NOTHING, verbose_name='所关联用户', related_name='uscNew')
+
+
+    class Meta:
+        verbose_name = '南华大学新版教务在线用户信息'
         verbose_name_plural = verbose_name

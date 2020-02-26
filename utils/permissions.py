@@ -24,6 +24,7 @@ class IsAuthenticated(permissions.BasePermission):
 
     def has_permission(self, request, view):
         try:
+            print(request.session['pk'])
             if request.session['pk']:
                 return True
             else:

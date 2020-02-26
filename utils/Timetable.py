@@ -8,6 +8,7 @@ import re
 class Timetable:
     '''
     获取课表
+    用子类NewTimetable()
     '''
     @classmethod
     def USC_Timetable(self, UserName, Password, termCode):

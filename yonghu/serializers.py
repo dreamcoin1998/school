@@ -7,4 +7,4 @@ from django.contrib.auth import get_user_model
 class YonghuSerializer(serializers.ModelSerializer):
     class Meta:
         model = Yonghu
-        fields = ('openid', 'nickName', 'gender', 'country', 'province', 'city', 'avatarUrl', 'is_auth')
+        fields = ('openid', 'nickName', 'gender', 'country', 'province', 'city', 'avatarUrl', 'is_auth', 'is_auth_new')
