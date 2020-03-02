@@ -23,7 +23,4 @@ urlpatterns = [
     path('api-token-refresh/', refresh_jwt_token),   # jwt刷新
     path('yonghu_logout', views.logout),             # 注销登录
     path('qq_login', views.qq_login),                # QQ登录
-    path('tt_login', views.testLoginToutiao),
-    path('aaaa', views.aaaa),
-    path('bbbb', views.bbbb)
 ] + router.urls

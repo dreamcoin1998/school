@@ -37,9 +37,9 @@ class UscLogin(UniversityLogin):
                     'encoded': encoded
                 }
                 res = self.s.post('http://61.187.179.66:8924/Logon.do?method=logon', headers=self.headers, data=data)
-                print(res.status_code)
+                print(res.headers.get('cache-control'))
                 # 登陆成功则为200
-                if res.status_code == 200:
+                if res.headers.get('cache-control') is None:
                     return True
                 else:
                     return False

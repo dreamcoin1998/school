@@ -57,9 +57,9 @@ class NewTimetable(Timetable):
                     'encoded': encoded
                 }
                 res = self.s.post('http://61.187.179.66:8924/Logon.do?method=logon', headers=self.headers, data=data)
-                print(res.status_code)
+                print(res.headers)
                 # 登陆成功则为200
-                if res.status_code == 200:
+                if res.headers.get('cache-control') is None:
                     return True
                 else:
                     return False
@@ -79,7 +79,7 @@ class NewTimetable(Timetable):
             # print(ret)
             ret = []  # 节次
             weeks = html.xpath('//tr[1]/th//text()')[1:]  # 星期
-            print(weeks)
+            # print(weeks)
             weeks = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
             for i in rets:
                 i = i.replace('\r\n\t\t\t\t\t\t\t', '').replace('\xa0', '')
@@ -106,15 +106,18 @@ class NewTimetable(Timetable):
                         data += classInfo[i: i + 3]
                         # 处理周数
                         weekList = data[-2].replace('(周)', '').split(',')
+                        # print(weekList)
                         weekListData = []
                         for wl in weekList:
                             # print(wl.split('-'))
                             if len(wl.split('-')) == 2:
                                 for j in range(int(wl.split('-')[0]), int(wl.split('-')[1]) + 1):
                                     weekListData.append(str(j))
+                            else:
+                                weekListData.append(wl)
                             # print(weekListData)
                         data[-2] = ' '.join(weekListData)
-                        print(data)
+                        # print(data)
                         # print(classInfo)
                         weekClass[week] = data
                         classJieci.append(weekClass)
@@ -122,7 +125,7 @@ class NewTimetable(Timetable):
                     # print(weekClass)
                 ret1[jieci] = classJieci
                 dataList.append(ret1)
-            print(dataList)
+            # print(dataList)
             return dataList
         except Exception as e:
             logging.debug(e)
@@ -136,9 +139,11 @@ class NewTimetable(Timetable):
         :return:
         '''
         login = self.login()
+        print(login)
         if login:
             return [self.getTimetable()]
         else:
             return login
 
+# NewTimetable('20174670323', '18759799353').run()
 # NewTimetable('20174670323', '18759799353gjb').run()
