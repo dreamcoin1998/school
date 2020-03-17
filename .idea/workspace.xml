@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a5d59f5-de63-4713-9659-3ed34a4ba406" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/transaction/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewTimetable.log" beforeDir="false" afterPath="$PROJECT_DIR$/NewTimetable.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/school/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/NewTimetable.log" beforeDir="false" afterPath="$PROJECT_DIR$/utils/NewTimetable.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/NewUSCSystemTimetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/NewUSCSystemTimetable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/UscLogin.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/UscLogin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/school/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/school/version.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/version.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transaction/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/transaction/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transaction/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/transaction/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transaction/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/transaction/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transaction/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/transaction/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yonghu/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonghu/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yonghu/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonghu/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,13 +52,13 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Administrator\Desktop\school" />
-      <recent name="$PROJECT_DIR$/school" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Administrator\Desktop\school\school" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\school" />
+      <recent name="$PROJECT_DIR$/school" />
     </key>
   </component>
   <component name="RunDashboard">

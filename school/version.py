@@ -4,7 +4,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('forum/', include('forum.urls')),
-    path('transaction/', include('transaction.urls')),
-    path('auth/', include('yonghu.urls')),
+    path('transaction/', include('transaction.urls')), # 二手交易模块
+    path('auth/', include('yonghu.urls')),             # 登陆验证模块
     path('api/', include('tools.urls')),
 ]
