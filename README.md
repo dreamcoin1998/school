@@ -5,4 +5,4 @@
 
 除了登录接口等少数几个接口之外，均至少需要登陆权限均可调用
 
-[项目API文档地址](https://www.showdoc.cc/dreamcoin?page_id=4070409195522339)
+[项目API文档地址](https://www.showdoc.cc/dreamcoin)
