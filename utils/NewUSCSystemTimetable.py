@@ -144,6 +144,3 @@ class NewTimetable(Timetable):
             return [self.getTimetable()]
         else:
             return login
-
-# NewTimetable('20174670323', '18759799353').run()
-# NewTimetable('20174670323', '18759799353gjb').run()

@@ -1,19 +1,14 @@
 from rest_framework import serializers
-from .models import Commody, ImagePath, Message
+from .models import Commody, Type
+
+class TypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Type
+        fields = '__all__'
+
 
 class CommodySerializer(serializers.ModelSerializer):
     class Meta:
         model = Commody
-        fields = ('name', 'description', 'price', 'read_num', 'create_time', 'type', 'qq', 'wx', 'phone_number', 'replyNum', 'floorNum')
-
-
-class ImagePathSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ImagePath
-        fields = ('imgPath',)
-
-
-class MessageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Message
-        fields = ('msg', 'create_time', 'is_reply', 'floor')
+        fields = '__all__'
+        depth = 2
