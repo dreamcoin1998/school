@@ -10,5 +10,5 @@ class TypeSerializer(serializers.ModelSerializer):
 class CommodySerializer(serializers.ModelSerializer):
     class Meta:
         model = Commody
-        fields = '__all__'
+        fields = ('id', 'name', 'description', 'price', 'create_time', 'type', 'qq', 'wx', 'phone_number', 'yonghu', 'is_end', 'imagePath')
         depth = 2

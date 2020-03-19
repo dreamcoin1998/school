@@ -16,6 +16,8 @@ from .serializers import CommodySerializer, TypeSerializer
 from utils.ReturnCode import ReturnCode
 from django.db.models.fields import exceptions
 from django.db.models import Q
+from images.models import ImagePath
+from django.contrib.contenttypes.models import ContentType
 
 
 class CreateListRetrieveTransaction(mixins.CreateModelMixin,
@@ -34,6 +36,10 @@ class CreateListRetrieveTransaction(mixins.CreateModelMixin,
         else:
             return Commody.objects.filter(is_end=False, is_delete=False)
 
+    # def list(self, request, *args, **kwargs):
+    #     serializer = CommodySerializer(self.get_object(), many=True)
+
+
     def create(self, request, *args, **kwargs):
         '''
         创建商品信息
@@ -47,8 +53,9 @@ class CreateListRetrieveTransaction(mixins.CreateModelMixin,
             type_id = data.get('type_id')
             type_obj = Type.objects.get(pk=int(type_id))
             yonghu_pk = request.session['pk']
+            # yonghu_pk = 'test'
             yonghu_obj = Yonghu.objects.get(pk=yonghu_pk)
-        except exceptions.ObjectDoesNotExist:
+        except KeyError:
             return Response(ReturnCode(1, msg='object do not exists.'))
         try:
             commody = Commody()
@@ -99,7 +106,10 @@ class ListUpdatePersonalTransactions(mixins.ListModelMixin,
         :param kwargs:
         :return:
         '''
-        pk = request.session['pk']
+        try:
+            pk = request.session['pk']
+        except KeyError:
+            return Response(ReturnCode(1, msg='must login.'), status=400)
         yonghu_obj = Yonghu.objects.get(pk=pk)
         commody_obj = yonghu_obj.commody.all()
         serializer = CommodySerializer(commody_obj, many=True)

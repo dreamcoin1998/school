@@ -7,4 +7,5 @@ urlpatterns = [
     path('transaction/', include('transaction.urls')), # 二手交易模块
     path('auth/', include('yonghu.urls')),             # 登陆验证模块
     path('api/', include('tools.urls')),
+    path('images/', include('images.urls'))
 ]
