@@ -12,7 +12,6 @@ class IsOwnerOrReadOnlyInfo(permissions.BasePermission):
         if request.user.is_superuser:
             return True
         # 如果是该用户则放行
-        return True
         try:
             pk = request.session['pk']
             yonghu = Yonghu.objects.get(pk=pk)

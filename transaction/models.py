@@ -1,6 +1,7 @@
 from django.db import models
 from yonghu.models import Yonghu
-from readAndReplyNum.models import ReadAndReplyNum, ImagePath
+from readAndReplyNum.models import ReadAndReplyNum
+from images.models import ImagePath
 from Messages .models import Message
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.fields import exceptions

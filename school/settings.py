@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'transaction',
     'readAndReplyNum',
     'Messages',
+    'images'
 ]
 
 # REST_FRAMEWORK = {

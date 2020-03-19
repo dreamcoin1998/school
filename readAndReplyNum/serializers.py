@@ -1,11 +1,5 @@
 from rest_framework import serializers
-from .models import ReadAndReplyNum, ImagePath
-
-
-class ImagePathSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ImagePath
-        fields = ('imgPath',)
+from .models import ReadAndReplyNum
 
 
 class ReadAndReplyNumSerializer(serializers.ModelSerializer):

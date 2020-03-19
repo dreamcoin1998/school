@@ -13,8 +13,9 @@ class TransactionTestCase(TestCase):
             'qq': '1285338586',
             'wx': '',
             'phone_number': '',
+            'is_end': False
         }
-        res = requests.post('http://127.0.0.1:8000/v1.0/transaction/transactions/', data=data)
+        res = requests.put('http://127.0.0.1:8000/v1.0/transaction/transactions/1/', data=data)
         print(res.text)
         print(self.assertIs(res.status_code, 200))
 TransactionTestCase().test_update_commody()

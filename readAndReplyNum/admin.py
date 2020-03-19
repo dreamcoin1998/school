@@ -1,10 +1,5 @@
 from django.contrib import admin
-from .models import ImagePath, ReadAndReplyNum
-
-# Register your models here.
-@admin.register(ImagePath)
-class ImagePathAdmin(admin.ModelAdmin):
-    list_display = ('imgPath',)
+from .models import ReadAndReplyNum
 
 
 @admin.register(ReadAndReplyNum)

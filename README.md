@@ -1,5 +1,4 @@
-# school
-在南华QQ小程序后台
+# 在南华QQ小程序后台
 
 采用django rest framework构建的api，采用redis+celery做任务队列
 
