@@ -13,6 +13,7 @@ from utils.ReturnCode import ReturnCode
 from yonghu.models import Yonghu
 from django.contrib.contenttypes.models import ContentType
 from transaction.serializers import CommodySerializer
+import json
 
 
 class CreateImagePath(mixins.CreateModelMixin,
@@ -43,3 +44,10 @@ class CreateImagePath(mixins.CreateModelMixin,
         img_path_obj.save()
         serializer = CommodySerializer(self.get_object())
         return Response(ReturnCode(0, data=serializer.data))
+
+
+class GetImagePath:
+    def get_image_path(self, request):
+        imagePathsJson = request.data.get('imagePaths')
+        imagePaths = json.loads(imagePathsJson)
+        return imagePaths

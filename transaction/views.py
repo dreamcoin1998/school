@@ -18,12 +18,16 @@ from django.db.models.fields import exceptions
 from django.db.models import Q
 from images.models import ImagePath
 from django.contrib.contenttypes.models import ContentType
+from utils.getPerson import GetPersonal
+from images.views import GetImagePath
 
 
 class CreateListRetrieveTransaction(mixins.CreateModelMixin,
                                     mixins.ListModelMixin,
                                     mixins.RetrieveModelMixin,
-                                    viewsets.GenericViewSet):
+                                    viewsets.GenericViewSet,
+                                    GetPersonal,
+                                    GetImagePath):
     lookup_field = 'pk'
     serializer_class = CommodySerializer
     permission_classes = [IsOwnerOrReadOnlyInfo]
@@ -35,10 +39,6 @@ class CreateListRetrieveTransaction(mixins.CreateModelMixin,
             return Commody.objects.filter(pk=pk, is_end=False, is_delete=False)
         else:
             return Commody.objects.filter(is_end=False, is_delete=False)
-
-    # def list(self, request, *args, **kwargs):
-    #     serializer = CommodySerializer(self.get_object(), many=True)
-
 
     def create(self, request, *args, **kwargs):
         '''
@@ -52,9 +52,7 @@ class CreateListRetrieveTransaction(mixins.CreateModelMixin,
         try:
             type_id = data.get('type_id')
             type_obj = Type.objects.get(pk=int(type_id))
-            yonghu_pk = request.session['pk']
-            # yonghu_pk = 'test'
-            yonghu_obj = Yonghu.objects.get(pk=yonghu_pk)
+            yonghu_obj = self.get_person(request)
         except KeyError:
             return Response(ReturnCode(1, msg='object do not exists.'))
         try:
@@ -68,12 +66,36 @@ class CreateListRetrieveTransaction(mixins.CreateModelMixin,
             commody.phone_number = data.get('phone_number')
             commody.yonghu = yonghu_obj
             commody.save()
+            imagePaths = self.get_image_path(request)
+            for imagePath in imagePaths:
+                img_path_obj = ImagePath()
+                img_path_obj.content_type = commody
+                img_path_obj.object_id = commody.pk
+                img_path_obj.imgPath = imagePath
+                img_path_obj.save()
             serializer = CommodySerializer(commody)
             return Response(ReturnCode(0, data=serializer.data))
         except exceptions.FieldDoesNotExist:
             return Response(ReturnCode(1, msg='qq wx and phone_number must have at least one.'))
         except exceptions.FieldError:
             return Response(ReturnCode(1, msg='field error.'))
+
+
+class ListCommodyByType(mixins.ListModelMixin,
+                        mixins.RetrieveModelMixin,
+                        viewsets.GenericViewSet):
+    lookup_field = 'pk'
+    serializer_class = CommodySerializer
+    permission_classes = [IsOwnerOrReadOnlyInfo, IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
+
+    def get_queryset(self):
+        if self.request.query_params.get('id'):
+            type = self.request.query_params.get('id')
+            type_obj = Type.objects.get(pk=int(type))
+            return type_obj.commody.all()
+        else:
+            return Commody.objects.all()
 
 
 @csrf_exempt
@@ -147,3 +169,14 @@ class ListUpdatePersonalTransactions(mixins.ListModelMixin,
                 return Response(ReturnCode(1, msg='qq wx and phone_number must have at least one.'))
         else:
             return Response(ReturnCode(1, msg='data invalid.'))
+
+
+class ListType(mixins.ListModelMixin,
+               viewsets.GenericViewSet):
+    lookup_field = 'pk'
+    serializer_class = TypeSerializer
+    permission_classes = [IsOwnerOrReadOnlyInfo, IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
+
+    def get_queryset(self):
+        return Type.objects.all()

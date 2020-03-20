@@ -51,4 +51,3 @@ class IsAuthenticated(permissions.BasePermission):
                 return False
         except Exception as e:
             return False
-
