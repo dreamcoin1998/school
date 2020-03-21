@@ -18,12 +18,8 @@ class Message(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
-    # class Meta:
-    #     abstract = True
-
 
 class MainMessage(Message):
-    # yonghu = models.ForeignKey(Yonghu, on_delete=models.DO_NOTHING, related_name='main_message')
     class Meta:
         ordering = ['create_time']
         verbose_name = '留言'
@@ -35,7 +31,7 @@ class ReplyMessage(Message):
     留言回复类
     '''
     reply_yonghu = models.ForeignKey(Yonghu, on_delete=models.DO_NOTHING, related_name='reply_message')
-    # comment = models.ForeignKey(MainMessage, related_name='reply_message', on_delete=models.DO_NOTHING)
+    # main_message = models.ForeignKey(MainMessage, related_name='reply_message', on_delete=models.DO_NOTHING)
 
     def addReplyYonghuNickName(self):
         '''

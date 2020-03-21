@@ -9,6 +9,8 @@ class MainMessageSerializer(serializers.ModelSerializer):
         depth = 2
 
 
+
+
 class ReplyMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReplyMessage

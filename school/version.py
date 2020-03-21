@@ -8,5 +8,6 @@ urlpatterns = [
     path('auth/', include('yonghu.urls')),             # 登陆验证模块
     path('api/', include('tools.urls')),
     path('images/', include('images.urls')),
-    path('feedback/', include('feedback.urls'))        # 用户反馈
+    path('feedback/', include('feedback.urls')),       # 用户反馈
+    path('messages/', include('Messages.urls')),         # 留言模块
 ]

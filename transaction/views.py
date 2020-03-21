@@ -20,6 +20,7 @@ from images.models import ImagePath
 from django.contrib.contenttypes.models import ContentType
 from utils.getPerson import GetPersonal
 from images.views import GetImagePath
+from readAndReplyNum.views import ReadNumAnd, ReplyNumAdd
 
 
 class CreateListRetrieveTransaction(mixins.CreateModelMixin,
@@ -27,7 +28,8 @@ class CreateListRetrieveTransaction(mixins.CreateModelMixin,
                                     mixins.RetrieveModelMixin,
                                     viewsets.GenericViewSet,
                                     GetPersonal,
-                                    GetImagePath):
+                                    GetImagePath,
+                                    ReadNumAnd):
     lookup_field = 'pk'
     serializer_class = CommodySerializer
     permission_classes = [IsOwnerOrReadOnlyInfo]
@@ -39,6 +41,12 @@ class CreateListRetrieveTransaction(mixins.CreateModelMixin,
             return Commody.objects.filter(pk=pk, is_end=False, is_delete=False)
         else:
             return Commody.objects.filter(is_end=False, is_delete=False)
+
+    def retrieve(self, request, *args, **kwargs):
+        if self.add_read_num():
+            return super().retrieve(self, request, *args, **kwargs)
+        else:
+            return Response(ReturnCode(1, msg='request error.'), status=404)
 
     def create(self, request, *args, **kwargs):
         '''
@@ -66,10 +74,11 @@ class CreateListRetrieveTransaction(mixins.CreateModelMixin,
             commody.phone_number = data.get('phone_number')
             commody.yonghu = yonghu_obj
             commody.save()
+            ct = ContentType.objects.get_for_model(commody)
             imagePaths = self.get_image_path(request)
             for imagePath in imagePaths:
                 img_path_obj = ImagePath()
-                img_path_obj.content_type = commody
+                img_path_obj.content_type = ct
                 img_path_obj.object_id = commody.pk
                 img_path_obj.imgPath = imagePath
                 img_path_obj.save()

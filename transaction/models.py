@@ -37,6 +37,15 @@ class GetReadAndReplyNum():
         except exceptions.ObjectDoesNotExist:
             return 0
 
+    @property
+    def main_floor_num(self):
+        try:
+            ct = ContentType.objects.get_for_model(self)
+            readAndReplyNum = ReadAndReplyNum.objects.get(content_type=ct, object_id=self.pk)
+            return readAndReplyNum.main_floor_num
+        except exceptions.ObjectDoesNotExist:
+            return 0
+
 
 class GetImagePath():
     @property

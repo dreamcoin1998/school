@@ -34,6 +34,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*',]
 
+# cookie超时时间，最好是永远 ^_^ !
+SESSION_COOKIE_AGE = 60*60*600000
+SESSION_SAVE_EVERY_REQUEST = True
+
 
 # Application definition
 

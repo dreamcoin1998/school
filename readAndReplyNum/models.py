@@ -9,6 +9,7 @@ class ReadAndReplyNum(models.Model):
     '''
     read_num = models.PositiveIntegerField(default=0, editable=False, verbose_name='阅读数')
     reply_num = models.PositiveIntegerField(default=0, editable=False, verbose_name='回复数')
+    main_floor_num = models.PositiveIntegerField(default=0, editable=False, verbose_name='主楼数')
     content_type = models.ForeignKey(ContentType, on_delete=models.DO_NOTHING)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
