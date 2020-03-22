@@ -2,11 +2,11 @@ from django.shortcuts import render
 from rest_framework import mixins, viewsets
 from rest_framework.response import Response
 from utils.ReturnCode import ReturnCode
-from .models import MainMessage, ReplyMessage
+from .models import MainMessage, ReplyMessage, Message
 from transaction.models import Commody
 from readAndReplyNum.views import ReplyNumAdd
-from .serializers import ReplyMessageSerializer, MainMessageSerializer
-from utils.permissions import IsOwnerOrReadOnlyInfo
+from .serializers import ReplyMessageSerializer, MainMessageSerializer, MessageSerializer
+from utils.permissions import IsOwnerOrReadOnlyInfo, IsAuthenticated
 from yonghu.views import JSONWebTokenAuthentication, CsrfExemptSessionAuthentication
 from django.contrib.contenttypes.models import ContentType
 from utils.getPerson import GetPersonal
@@ -67,3 +67,16 @@ class ListCreateCommodyReplyMessage(mixins.ListModelMixin,
         obj_id = self.request.query_params.get('id')
         commody_obj = Commody.objects.get(pk=int(obj_id))
         return self.create_reply_message_and_add_reply_num(commody_obj)
+
+
+class ListPersonalMessage(mixins.ListModelMixin,
+                          viewsets.GenericViewSet,
+                          GetPersonal):
+    serializer_class = MessageSerializer
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnlyInfo]
+    authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
+
+    def get_queryset(self):
+        yonghu_obj = self.get_person(self.request)
+        message_obj = yonghu_obj.message.all()
+        return message_obj

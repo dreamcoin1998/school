@@ -2,18 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a5d59f5-de63-4713-9659-3ed34a4ba406" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Messages/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Messages/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Messages/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messages/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messages/migrations/0002_auto_20200318_0007.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messages/migrations/0003_auto_20200318_0038.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messages/migrations/0004_auto_20200318_0043.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messages/migrations/0005_auto_20200322_0423.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messages/migrations/0006_auto_20200322_0424.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Messages/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Messages/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messages/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Messages/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messages/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Messages/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Messages/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Messages/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readAndReplyNum/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/readAndReplyNum/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readAndReplyNum/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/readAndReplyNum/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/school/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/school/version.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/version.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transaction/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/transaction/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transaction/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/transaction/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transaction/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/transaction/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/getPerson.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/getPerson.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,14 +54,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Administrator\Desktop\school\school" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Administrator\Desktop\school\school" />
       <recent name="C:\Users\Administrator\Desktop\school" />
       <recent name="$PROJECT_DIR$/school" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\school\school" />
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
