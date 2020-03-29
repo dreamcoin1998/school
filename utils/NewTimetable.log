@@ -1,0 +1,310 @@
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24271395410df348160c87125b156e4752fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24271395410df3481668e71cd3287113e5fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24271395410df3481621d40cecddf7868ffd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e2433975ffdafeace2a2f4c4f3adb927b55fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e2465b2d6d72da7c1e7ab2302b8e7982b0ffd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e2465b2d6d72da7c1e79a5e597252487245fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e2465b2d6d72da7c1e7ab31389e0727632efd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c28c73ab48027770880b54ac60211122fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c28c73ab48027770968e30b16f016a3afd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c28c73ab480277703423aec3df3dddc1fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24db469caa4ab2b9937d997fb605f44870fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24db469caa4ab2b993c1e95719d0d72d8efd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24db469caa4ab2b993de12b771087322e5fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24db469caa4ab2b9936dcd622518eda50cfd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "GET http://61.187.179.66:8924/jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Resetting dropped connection: 127.0.0.1
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon HTTP/1.1" 500 744
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 127.0.0.1:10809
+DEBUG:urllib3.connectionpool:http://127.0.0.1:10809 "POST http://61.187.179.66:8924/Logon.do?method=logon&flag=sess HTTP/1.1" 500 744
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24892ee80ab181ad469509c206248af097fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24892ee80ab181ad4642b1163a9fc15a86fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24892ee80ab181ad46fbfa526eca7cf260fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24892ee80ab181ad46db94d55d8ed29950fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24892ee80ab181ad46662fe0465022104bfd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24892ee80ab181ad46a19a49fa8264425cfd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c51ff822f758cb66ee583090fc9be834fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c51ff822f758cb664db42f8a7e2094c3fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c51ff822f758cb669cea0e47c48ba112fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c51ff822f758cb663075a6014a8d112cfd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c51ff822f758cb66dffeadb25622ec0afd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c51ff822f758cb66cc4444c578e465b7fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:root:list index out of range
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c51ff822f758cb66a7584ecddaccfdeafd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c51ff822f758cb66d4f8e64e04fa1c35fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff004b28cc6b7bf34e24c51ff822f758cb66f8009ec0d7a48d73fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
