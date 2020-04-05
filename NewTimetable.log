@@ -222,3 +222,12 @@ DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=lo
 DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff0088b7fd9d62d3a2dd4f223f27104af50a41f200bf1f05e513fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
 DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
 DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff0088b7fd9d62d3a2dd1b53c34baca2472a0c256713804cae34fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 200 None
