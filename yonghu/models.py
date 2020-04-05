@@ -18,6 +18,10 @@ class Yonghu(models.Model):
     is_auth = models.BooleanField(default=False, verbose_name='是否认证')
     is_auth_new = models.BooleanField(default=False, verbose_name='是否认证(新系统)')
 
+    class Meta:
+        verbose_name = '用户'
+        verbose_name_plural = verbose_name
+
 
 class UscInfo(models.Model):
     UserName = models.CharField(max_length=16, verbose_name='校园网用户名', unique=True, null=True)

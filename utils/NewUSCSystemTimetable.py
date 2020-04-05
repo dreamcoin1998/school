@@ -33,6 +33,7 @@ class NewTimetable(Timetable):
             # 登录校园网，首先获取传输参数encode
             res = self.s.post('http://61.187.179.66:8924/Logon.do?method=logon&flag=sess', headers=self.headers)
             dataStr = res.text
+            print(dataStr)
             if dataStr == 'no':
                 return False
             else:
@@ -65,7 +66,7 @@ class NewTimetable(Timetable):
                     return False
         except Exception as e:
             logging.debug(e)
-            print(e)
+            print('login error:', e)
             return False
 
     # 爬取课表并且解析处理
@@ -75,11 +76,12 @@ class NewTimetable(Timetable):
             url = 'http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do'
             res = self.s.post(url, headers=self.headers, data={'rq': '2020-02-11'})
             html = etree.HTML(res.text)
+            print(html)
             rets = html.xpath('//tr/th//text()')[8:-1]
             # print(rets)
             ret = []  # 节次
             weeks = html.xpath('//tr[1]/th//text()')[1:]  # 星期
-            print(weeks)
+            # print(weeks)
             weeks = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
             for i in rets:
                 i = i.replace('\r\n\t\t\t\t\t\t\t', '').replace('\xa0', '').replace('\n\t\t\t\t\t\t\t', '')
@@ -133,11 +135,11 @@ class NewTimetable(Timetable):
                     # print(weekClass)
                 ret1[jieci] = classJieci
                 dataList.append(ret1)
-            print(dataList)
+            # print(dataList)
             return dataList
         except Exception as e:
             logging.debug(e)
-            print(e)
+            print('timetable error: ', e)
             return False
 
     def run(self):

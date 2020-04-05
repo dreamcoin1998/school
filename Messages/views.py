@@ -28,14 +28,21 @@ class ListCreateCommodyMainMessage(mixins.ListModelMixin,
     def get_queryset(self):
         obj_id = self.request.query_params.get('id')
         if obj_id:
-            commody_obj = Commody.objects.get(pk=int(obj_id))
+            try:
+            # 修复bug，这里用get如果找不到会报错 2020.04.05
+                commody_obj = Commody.objects.get(pk=int(obj_id))
+            except exceptions.ObjectDoesNotExist:
+                return []
             ct = ContentType.objects.get_for_model(commody_obj)
             return MainMessage.objects.filter(content_type=ct, object_id=commody_obj.pk, is_delete=False)
         return []
 
     def create(self, request, *args, **kwargs):
         obj_id = self.request.query_params.get('id')
-        commody_obj = Commody.objects.get(pk=int(obj_id))
+        try:
+            commody_obj = Commody.objects.get(pk=int(obj_id))
+        except exceptions.ObjectDoesNotExist:
+            return Response(ReturnCode(1, msg='transaction object do not exists.'), status=400)
         return self.create_main_message_and_add_main_reply_num(commody_obj)
 
 
