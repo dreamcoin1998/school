@@ -61,7 +61,10 @@ class ListCreateCommodyReplyMessage(mixins.ListModelMixin,
         obj_id = self.request.query_params.get('id')
         floor = self.request.query_params.get('floor')
         if obj_id:
-            commody_obj = Commody.objects.get(pk=int(obj_id))
+            try:
+                commody_obj = Commody.objects.get(pk=int(obj_id))
+            except exceptions.ObjectDoesNotExist:
+                return []
             ct = ContentType.objects.get_for_model(commody_obj)
             if floor is None:
                 return ReplyMessage.objects.filter(content_type=ct, object_id=commody_obj.pk, is_delete=False)
@@ -72,7 +75,10 @@ class ListCreateCommodyReplyMessage(mixins.ListModelMixin,
 
     def create(self, request, *args, **kwargs):
         obj_id = self.request.query_params.get('id')
-        commody_obj = Commody.objects.get(pk=int(obj_id))
+        try:
+            commody_obj = Commody.objects.get(pk=int(obj_id))
+        except exceptions.ObjectDoesNotExist:
+            return Response(ReturnCode(1, msg='commody object do not exists.'))
         return self.create_reply_message_and_add_reply_num(commody_obj)
 
 
