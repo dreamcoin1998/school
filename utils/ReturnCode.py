@@ -1,3 +1,6 @@
+"""
+'修改状态码': '2020.04.15'
+"""
 class Code:
     def __init__(self, code, msg=None):
         self.code = code
@@ -8,6 +11,8 @@ class Code:
             return 'request ok.'
         elif self.code == 1:
             return 'request error.'
+        elif self.code == 4003:
+            return 'No Access.'
 
 
 def ReturnCode(code, msg=None, data=None):

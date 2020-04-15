@@ -4,7 +4,7 @@ from .views import ListPersonalCreateFeedback
 
 
 router = DefaultRouter()
-router.register('feedback', ListPersonalCreateFeedback, base_name='feedback')
+router.register('feedback', ListPersonalCreateFeedback, basename='feedback')
 
 
 urlpatterns = [

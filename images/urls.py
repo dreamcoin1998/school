@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from .views import CreateImagePath
 
 router = DefaultRouter()
-router.register('images', CreateImagePath, base_name='images')
+router.register('images', CreateImagePath, basename='images')
 
 
 urlpatterns = [

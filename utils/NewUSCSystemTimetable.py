@@ -76,7 +76,7 @@ class NewTimetable(Timetable):
             url = 'http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do'
             res = self.s.post(url, headers=self.headers, data={'rq': '2020-02-11'})
             html = etree.HTML(res.text)
-            print(html)
+            # print(html)
             rets = html.xpath('//tr/th//text()')[8:-1]
             # print(rets)
             ret = []  # 节次
@@ -156,4 +156,4 @@ class NewTimetable(Timetable):
             return login
 
 
-NewTimetable('20174670323', '18759799353gjb').run()
+# NewTimetable('20174670323', '18759799353gjb').run()

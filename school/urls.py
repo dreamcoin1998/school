@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from . import settings
 from django.conf.urls.static import static
+from rest_framework_swagger.views import get_swagger_view
 
+schema_view = get_swagger_view(title='School API')
 
 urlpatterns = [
+    path('doc/', schema_view),
     path('admin/', admin.site.urls),
     path('v1.0/', include('school.version')), # api版本号
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

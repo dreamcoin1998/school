@@ -4,9 +4,9 @@ from .views import ListCreateCommodyMainMessage, ListCreateCommodyReplyMessage, 
 
 
 router = DefaultRouter()
-router.register('main_message', ListCreateCommodyMainMessage, base_name='main_message')
-router.register('reply_message', ListCreateCommodyReplyMessage, base_name='reply_message')
-router.register('personal', ListPersonalMessage, base_name='personal')
+router.register('main_message', ListCreateCommodyMainMessage, basename='main_message')
+router.register('reply_message', ListCreateCommodyReplyMessage, basename='reply_message')
+router.register('personal', ListPersonalMessage, basename='personal')
 
 
 urlpatterns = [

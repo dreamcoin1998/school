@@ -52,12 +52,15 @@ class YonghuInfo(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
     authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
 
     def get_queryset(self):
-        print(self.kwargs.get('pk'))
-        if self.kwargs.get('pk'):
-            pk = self.kwargs['pk']
-        else:
-            pk = self.request.session['pk']
-        return Yonghu.objects.filter(pk=pk)
+        try:
+            # print(self.kwargs.get('pk'))
+            if self.kwargs.get('pk'):
+                pk = self.kwargs['pk']
+            else:
+                pk = self.request.session['pk']
+            return Yonghu.objects.filter(pk=pk)
+        except KeyError:
+            return []
 
 
 class Authentication(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):

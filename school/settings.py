@@ -32,12 +32,61 @@ QQ_APPID = '1110027966'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*',]
+ALLOWED_HOSTS = ['*']
 
 # cookie超时时间，最好是永远 ^_^ !
 SESSION_COOKIE_AGE = 60*60*600000
 SESSION_SAVE_EVERY_REQUEST = True
 
+# 用redis做缓存配置
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/0',
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PICKLE_VERSION": -1,
+            "SOCKET_CONNECT_TIMEOUT": 5,
+            "SOCKET_TIMEOUT": 5,
+            # "CLIENT_CLASS": "django_redis.client.HerdClient",
+            # "PARSER_CLASS": "redis.connection.HiredisParser"
+        },
+    },
+    'sessions': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/0',
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PICKLE_VERSION": -1,
+            "SOCKET_CONNECT_TIMEOUT": 5,
+            "SOCKET_TIMEOUT": 5,
+            # "CLIENT_CLASS": "django_redis.client.HerdClient",
+            # "PARSER_CLASS": "redis.connection.HiredisParser"
+        },
+    },
+}
+
+# 爬虫设置
+# 默认IP每秒最大访问频率
+MAX_IP_FREQUENT = 10
+# 默认封禁IP时间 5 秒
+BLOCK_IP_TIME = 5
+
+# DRF关于缓存的拓展
+REST_FRAMEWORK_EXTENSIONS = {
+    # 缓存时间
+    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 60,
+    # 缓存存储
+    'DEFAULT_USE_CACHE': 'default',
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+
+REDIS_TIMEOUT = 7*24*60*60
+CUBES_REDIS_TIMEOUT = 60*60
+NEVER_REDIS_TIMEOUT = 365*24*60*60
 
 # Application definition
 
@@ -76,6 +125,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'utils.middlewares.antiSpiders.AntiSpider', # 反爬中间件
 ]
 
 ROOT_URLCONF = 'school.urls'
@@ -213,7 +263,7 @@ BROKER_URL = config.BROKER_URL
 #celery结果返回，可用于跟踪结果
 CELERY_RESULT_BACKEND = config.CELERY_RESULT_BACKEND
 # tasks.py文件所在位置
-CELERY_IMPORTS = ('yonghu.tasks', )
+CELERY_IMPORTS = ('school.tasks', )
 #celery时区设置，使用settings中TIME_ZONE同样的时区
 CELERY_TIMEZONE = TIME_ZONE
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'

@@ -1,9 +1,7 @@
-from django.shortcuts import render
 from rest_framework import viewsets, mixins
 from .serializers import FeedbackSerializer
 from utils.permissions import IsAuthenticated, IsOwnerOrReadOnlyInfo
 from yonghu.views import JSONWebTokenAuthentication, CsrfExemptSessionAuthentication
-from yonghu.models import Yonghu
 from rest_framework.response import Response
 from utils.ReturnCode import ReturnCode
 from utils.getPerson import GetPersonal
