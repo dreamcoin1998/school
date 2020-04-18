@@ -95,12 +95,21 @@ class NewTimetable(Timetable):
                 ret1 = {}  # 格式 {节次： 课时}
                 classJieci = []
                 for indexWeeks, week in enumerate(weeks):
-                    className = html.xpath(
-                        '//tr[%s]/td[%s]/div[2]/text()[1]' % (str(index + 2), (indexWeeks + 1)))
+                    # className = html.xpath(
+                    #     '//tr[%s]/td[%s]/div[2]/text()[1]' % (str(index + 2), (indexWeeks + 1)))
                     # print(className)
-                    classInfo = html.xpath(
-                        '//tr[%s]/td[%s]/div[2]/font/text()[1]' % (str(index + 2), (indexWeeks + 1)))
+                    # classInfo = html.xpath(
+                    #     '//tr[%s]/td[%s]/div[2]/font/text()[1]' % (str(index + 2), (indexWeeks + 1)))
+                    classes = html.xpath(
+                        '//tr[%s]/td[%s]/div[1]//text()' % (str(index + 2), (indexWeeks + 1))
+                    )
+                    # print(classes)
+                    classes = [i for i in classes if i != '---------------------' and i != '&nbspO']
                     i = 0
+                    className = classes[::4]
+                    # print(className)
+                    classInfo = [k for i, k in enumerate(classes) if i % 4 != 0]
+                    # print(classInfo)
                     if classInfo != []:
                         classInfo[1] = classInfo[1][:-11]
                     # print(classInfo)
@@ -108,13 +117,14 @@ class NewTimetable(Timetable):
                         if cN == '\xa0':
                             continue
                         weekClass = {}
-                        # print(id(cN))
+                         # print(id(cN))
                         data = []
                         # print(id(data), cN)
                         data.append(cN)
                         data.append('none')
                         data += classInfo[i: i + 3]
                         # 处理周数
+                        # print(data[-2])
                         weekList = data[-2].replace('(周)', '').split(',')
                         # print(weekList)
                         weekListData = []
@@ -135,7 +145,7 @@ class NewTimetable(Timetable):
                     # print(weekClass)
                 ret1[jieci] = classJieci
                 dataList.append(ret1)
-            # print(dataList)
+            print(dataList)
             return dataList
         except Exception as e:
             logging.debug(e)
@@ -156,4 +166,4 @@ class NewTimetable(Timetable):
             return login
 
 
-# NewTimetable('20174670323', '18759799353gjb').run()
+NewTimetable('20174670323', '18759799353gjb').run()

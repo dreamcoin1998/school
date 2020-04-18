@@ -19,12 +19,19 @@ class ReadNumAnd:
         如果不存在session,设置一个事务增加阅读数，乐观锁，循环三次查看read_num == read_num_new - 1，
         否则返回False
         '''
-        path_info = self.request.session.get(self.request.get_full_path())
-        print(self.request.path_info)
-        if path_info:
+
+        '''
+        修改自dreamcoin于 2020.04.16 (改变session的维护方式)
+        '''
+        # path_info = self.request.session.get(self.request.get_full_path())
+        path_info = self.request.get_full_path()
+        obj_session = self.request.session.get('has_read') if self.request.session.get('has_read') else ''
+        # print(self.request.path_info)
+        if path_info in obj_session:
             return True
         else:
-            self.request.session[self.request.get_full_path()] = '1'
+            # self.request.session[self.request.get_full_path()] = '1'
+            self.request.session['has_read'] += self.request.get_full_path()
             obj = self.get_object()
             ct = ContentType.objects.get_for_model(obj)
             sid = transaction.savepoint()
