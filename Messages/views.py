@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from rest_framework import mixins, viewsets
 from rest_framework.response import Response
 from utils.ReturnCode import ReturnCode
-from .models import MainMessage, ReplyMessage, Message
+from .models import MainMessage, ReplyMessage
 from transaction.models import Commody
 from readAndReplyNum.views import ReplyNumAdd
 from .serializers import ReplyMessageSerializer, MainMessageSerializer, MessageSerializer
@@ -10,7 +9,6 @@ from utils.permissions import IsOwnerOrReadOnlyInfo, IsAuthenticated
 from yonghu.views import JSONWebTokenAuthentication, CsrfExemptSessionAuthentication
 from django.contrib.contenttypes.models import ContentType
 from utils.getPerson import GetPersonal
-from yonghu.models import Yonghu
 from django.db.models.fields import exceptions
 
 
