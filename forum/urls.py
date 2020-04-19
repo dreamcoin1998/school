@@ -9,3 +9,4 @@ router.register('post', ListCreatePost, basename='post')
 
 urlpatterns = [
 ] + router.urls
+

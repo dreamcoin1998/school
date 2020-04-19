@@ -123,7 +123,7 @@ def searchCommodyByNameOrDescription(request):
 
 class ListUpdatePersonalTransactions(mixins.ListModelMixin,
                                      mixins.UpdateModelMixin,
-                             viewsets.GenericViewSet):
+                                     viewsets.GenericViewSet):
     lookup_field = 'pk'
     serializer_class = CommodySerializer
     permission_classes = [IsOwnerOrReadOnlyInfo, IsAuthenticated]

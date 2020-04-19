@@ -1,10 +1,9 @@
 from django.db import models
 from yonghu.models import Yonghu
-from readAndReplyNum.models import ReadAndReplyNum
-from images.models import ImagePath
-from Messages .models import Message
-from django.contrib.contenttypes.models import ContentType
 from django.db.models.fields import exceptions
+from readAndReplyNum.getReadAndReplyNum import GetReadAndReplyNum
+from images.getImagePath import GetImagePath
+
 
 
 class Type(models.Model):
@@ -18,61 +17,7 @@ class Type(models.Model):
         verbose_name_plural = verbose_name
 
 
-class GetReadAndReplyNum():
-    @property
-    def read_num(self):
-        try:
-            ct =ContentType.objects.get_for_model(self)
-            readAndReplyNum = ReadAndReplyNum.objects.get(content_type=ct, object_id=self.pk)
-            return readAndReplyNum.read_num
-        except exceptions.ObjectDoesNotExist:
-            return 0
 
-    @property
-    def reply_num(self):
-        try:
-            ct = ContentType.objects.get_for_model(self)
-            readAndReplyNum = ReadAndReplyNum.objects.get(content_type=ct, object_id=self.pk)
-            return readAndReplyNum.reply_num
-        except exceptions.ObjectDoesNotExist:
-            return 0
-
-    @property
-    def main_floor_num(self):
-        try:
-            ct = ContentType.objects.get_for_model(self)
-            readAndReplyNum = ReadAndReplyNum.objects.get(content_type=ct, object_id=self.pk)
-            return readAndReplyNum.main_floor_num
-        except exceptions.ObjectDoesNotExist:
-            return 0
-
-
-class GetImagePath():
-    @property
-    def imagePath(self):
-        try:
-            ct = ContentType.objects.get_for_model(self)
-            imgPath_objs = ImagePath.objects.filter(content_type=ct, object_id=self.pk)
-            res = []
-            for imgPath_obj in imgPath_objs:
-                res.append(imgPath_obj.imgPath)
-            return res
-        except exceptions.ObjectDoesNotExist:
-            return []
-
-
-class GetMessage():
-    @property
-    def message(self):
-        try:
-            ct = ContentType.objects.get_for_model(self)
-            message_objs = Message.objects.filter(content_type=ct, object_id=self.pk)
-            res = []
-            for message_obj in message_objs:
-                res.append(message_obj)
-            return res
-        except exceptions.ObjectDoesNotExist:
-            return []
 
 
 class Commody(models.Model, GetReadAndReplyNum, GetImagePath):

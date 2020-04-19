@@ -160,3 +160,4 @@ class ListPersonalMessage(mixins.ListModelMixin,
         yonghu_obj = self.get_person(self.request)
         message_obj = yonghu_obj.message.all()
         return message_obj
+
