@@ -1,19 +1,17 @@
 from django.db import models
 from yonghu.models import Yonghu
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
-from Messages.models import MainMessage,Message,ReplyMessage
 from readAndReplyNum.getReadAndReplyNum import GetReadAndReplyNum
-from images.getlmagePath import GetImagePath
-# Create your models here.
-class Post(models.Model,GetReadAndReplyNum,GetImagePath):
+from images.getImagePath import GetImagePath
+
+
+class Post(models.Model, GetReadAndReplyNum, GetImagePath):
     '''
     发表帖子
     '''
-    title = models.CharField(max_length=30,verbose_name='帖子标题')
+    title = models.CharField(max_length=30, verbose_name='帖子标题')
     content = models.TextField(verbose_name='帖子内容')
-    yonghu = models.ForeignKey(Yonghu, on_delete=models.CASCADE,verbose_name='发帖人')
-    created_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
+    yonghu = models.ForeignKey(Yonghu, on_delete=models.CASCADE, verbose_name='发帖人')
+    created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
     is_deleted = models.BooleanField(default=False, verbose_name='是否删除')
 
     def __str__(self):
@@ -23,6 +21,3 @@ class Post(models.Model,GetReadAndReplyNum,GetImagePath):
         ordering = ['-created_time']
         verbose_name = '发表帖子'
         verbose_name_plural = verbose_name
-
-class PostMessage(Message,models.Model):
-    pass
