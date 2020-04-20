@@ -45,9 +45,9 @@ class ListCreatePost(mixins.CreateModelMixin,
     def get_queryset(self):
         if self.kwargs.get('pk'):
             pk = self.kwargs.get('pk')
-            return Post.objects.filter(pk=pk,is_delete=False)
+            return Post.objects.filter(pk=pk,is_deleted=False)
         else:
-            return Post.objects.filter(is_delete=False)
+            return Post.objects.filter(is_deleted=False)
 
     def retrieve(self, request, *args, **kwargs):
         if self.add_read_num():
@@ -122,9 +122,9 @@ class ListPostByType(mixins.ListModelMixin,
         if self.request.query_params.get('id'):
             type = self.request.query_params.get('id')
             type_obj = PostType.objects.get(pk=int(type))
-            return type_obj.post.filter(is_delete=False)
+            return type_obj.post.filter(is_deleted=False)
         else:
-            return Post.objects.filter(is_delete=False)
+            return Post.objects.filter(is_deleted=False)
 
 @csrf_exempt
 @api_view()
@@ -150,7 +150,7 @@ class PostListType(mixins.ListModelMixin,
     authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
 
     def get_queryset(self):
-        return PostType.objects.filter(is_delete=False)
+        return PostType.objects.filter(is_deleted=False)
 
 
 

@@ -30,6 +30,7 @@ class ReadNumAnd:
             return True
         else:
             # self.request.session[self.request.get_full_path()] = '1'
+            self.request.session['has_read'] = obj_session
             self.request.session['has_read'] += self.request.get_full_path()
             obj = self.get_object()
             ct = ContentType.objects.get_for_model(obj)
