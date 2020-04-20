@@ -1,6 +1,10 @@
 from rest_framework import serializers
-from .models import Post
+from .models import Post,PostType
 
+class PostTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PostType
+        fields = '__all__'
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
