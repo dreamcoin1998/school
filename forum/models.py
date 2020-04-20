@@ -24,5 +24,3 @@ class Post(models.Model,GetReadAndReplyNum,GetImagePath):
         verbose_name = '发表帖子'
         verbose_name_plural = verbose_name
 
-class PostMessage(Message,models.Model):
-    pass
