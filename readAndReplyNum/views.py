@@ -29,6 +29,8 @@ class ReadNumAnd:
         if path_info in obj_session:
             return True
         else:
+            '''2020.04.21'''
+            self.request.session['has_read'] = obj_session
             # self.request.session[self.request.get_full_path()] = '1'
             self.request.session['has_read'] += self.request.get_full_path()
             obj = self.get_object()
