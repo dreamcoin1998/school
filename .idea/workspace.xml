@@ -4,6 +4,10 @@
     <list default="true" id="8a5d59f5-de63-4713-9659-3ed34a4ba406" name="Default Changelist" comment="">
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Messages/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Messages/views.py" afterDir="false" />
+=======
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 =======
       <change afterPath="$PROJECT_DIR$/Messages/getMessage.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/images/getImagePath.py" afterDir="false" />
@@ -13,6 +17,7 @@
       <change beforePath="$PROJECT_DIR$/transaction/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/transaction/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/transaction/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/transaction/views.py" afterDir="false" />
 >>>>>>> 4eb7845025e61927b367367ab0ac8117faf53c48
+>>>>>>> 462307cd752b64822dd04d17a18416271bcb7d49
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,15 +70,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Administrator\Desktop\school" />
-      <recent name="$PROJECT_DIR$/school" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\school\readAndReplyNum" />
+      <recent name="C:\Users\Administrator\Desktop\school\images" />
       <recent name="C:\Users\Administrator\Desktop\school\school" />
       <recent name="C:\Users\Administrator\Desktop\school\yonghu" />
       <recent name="C:\Users\Administrator\Desktop\school\tasks" />
-      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\school" />
+      <recent name="$PROJECT_DIR$/school" />
     </key>
   </component>
   <component name="RunDashboard">
