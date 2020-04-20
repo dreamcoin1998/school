@@ -6,13 +6,12 @@ from utils.permissions import IsAuthenticated, IsOwnerOrReadOnlyInfo, CreateOrRe
 from utils import code2Session
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import mixins, viewsets
-from Messages.serializers import MainMessageSerializer,MessageSerializer,ReplyMessageSerializer
 from rest_framework.response import Response
 from utils.ReturnCode import ReturnCode
-from .models import Post
+from .models import Post,PostType
 from yonghu.models import Yonghu
 from django.db.models.fields import exceptions
-from .serializers import PostSerializer
+from .serializers import PostSerializer,PostTypeSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
@@ -24,8 +23,10 @@ from .serializers import PostSerializer
 from utils.ReturnCode import ReturnCode
 from images.models import ImagePath
 from utils.getPerson import GetPersonal
-from images.views import GetImagePath
+from images.getImagePath import GetImagePath
 from readAndReplyNum.views import ReadNumAnd, ReplyNumAdd
+from Messages.getMessage import GetMessage
+from django.db.models import Q
 # Create your views here.
 
 class ListCreatePost(mixins.CreateModelMixin,
@@ -34,7 +35,8 @@ class ListCreatePost(mixins.CreateModelMixin,
                                     viewsets.GenericViewSet,
                                     GetPersonal,
                                     GetImagePath,
-                                    ReadNumAnd):
+                                    ReadNumAnd,
+                                    GetMessage):
     lookup_field = 'pk'
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnlyInfo]
@@ -43,9 +45,9 @@ class ListCreatePost(mixins.CreateModelMixin,
     def get_queryset(self):
         if self.kwargs.get('pk'):
             pk = self.kwargs.get('pk')
-            return Post.objects.filter(pk=pk,is_delete=False)
+            return Post.objects.filter(pk=pk,is_deleted=False)
         else:
-            return Post.objects.filter(is_delete=False)
+            return Post.objects.filter(is_deleted=False)
 
     def retrieve(self, request, *args, **kwargs):
         if self.add_read_num():
@@ -61,7 +63,7 @@ class ListCreatePost(mixins.CreateModelMixin,
         try:
             yonghu_obj = self.get_person(request)
         except KeyError:
-            return Response(ReturnCode(1, msg='object do not exists.'))
+            return Response(ReturnCode(1, msg='object does not exists.'))
         try:
             post = Post()
             post.title = data.get('title')
@@ -77,87 +79,78 @@ class ListCreatePost(mixins.CreateModelMixin,
                 img_path_obj.object_id = post.pk
                 img_path_obj.imgPath = imagePath
                 img_path_obj.save()
+            Messages = self.get_message(request)
+            for Message in Messages:
+                message_obj = Message()
+                message_obj.content_type = ct
+                message_obj.object_id = post.pk
+                message_obj.Message = Message
+                message_obj.save()
             serializer = PostSerializer(post)
             return Response(ReturnCode(0, data=serializer.data))
         except exceptions.FieldError:
             return Response(ReturnCode(1, msg='field error.'))
 
-class ListCreatePostMainMessage(mixins.ListModelMixin,
-                                       mixins.CreateModelMixin,
-                                       viewsets.GenericViewSet,
-                                       ReplyNumAdd):
-    '''
-    返回或创建主楼评论
-    '''
-    serializer_class = MainMessageSerializer
-    permission_classes = [IsOwnerOrReadOnlyInfo]
-    authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
-
-    def get_queryset(self):
-        obj_id = self.request.query_params.get('id')
-        if obj_id:
-            try:
-                # 修复bug，这里用get如果找不到会报错 2020.04.05
-                post_obj = post.objects.get(pk=int(obj_id))
-            except exceptions.ObjectDoesNotExist:
-                return []
-            ct = ContentType.objects.get_for_model(post_obj)
-            return MainMessage.objects.filter(content_type=ct, object_id=post_obj.pk, is_delete=False)
-        return []
-
-    def create(self, request, *args, **kwargs):
-        obj_id = self.request.query_params.get('id')
-        try:
-            post_obj = post.objects.get(pk=int(obj_id))
-        except exceptions.ObjectDoesNotExist:
-            return Response(ReturnCode(1, msg='post object does not exists.'), status=400)
-        return self.create_main_message_and_add_main_reply_num(post_obj)
-
-class ListCreatePostReplyMessage(mixins.ListModelMixin,
-                                        mixins.CreateModelMixin,
-                                        viewsets.GenericViewSet,
-                                        ReplyNumAdd):
-    '''
-    返回或创建楼中楼评论
-    '''
-    serializer_class = ReplyMessageSerializer
-    permission_classes = [IsOwnerOrReadOnlyInfo]
-    authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
-
-    def get_queryset(self):
-        obj_id = self.request.query_params.get('id')
-        floor = self.request.query_params.get('floor')
-        if obj_id:
-            try:
-                post_obj = Post.objects.get(pk=int(obj_id))
-            except exceptions.ObjectDoesNotExist:
-                return []
-            ct = ContentType.objects.get_for_model(post_obj)
-            if floor is None:
-                return ReplyMessage.objects.filter(content_type=ct, object_id=post_obj.pk, is_delete=False)
-            else:
-                return ReplyMessage.objects.filter(content_type=ct, object_id=post_obj.pk, floor=int(floor),
-                                                       is_delete=False)
+    def delete(self, request, *args, **kwargs):
+        '''
+        删除帖子
+        '''
+        post_obj = self.get_object()
+        data = request.data.copy()
+        if data.get('is_delete'):
+            data.pop('is_delete')
+        if data.get('create_time'):
+            data.pop('create_time')
+        serializer = PostSerializer(post_obj, data=data)
+        if serializer.is_valid():
+            return Response(ReturnCode(0, msg='success.', data=serializer.data))
         else:
-            return []
+            return Response(ReturnCode(1, msg='data invalid.'))
 
-    def create(self, request, *args, **kwargs):
-        obj_id = self.request.query_params.get('id')
-        try:
-            post_obj = Post.objects.get(pk=int(obj_id))
-        except exceptions.ObjectDoesNotExist:
-            return Response(ReturnCode(1, msg='post object does not exists.'))
-        return self.create_reply_message_and_add_reply_num(post_obj)
-
-class ListPersonalMessage(mixins.ListModelMixin,
-                              viewsets.GenericViewSet,
-                              GetPersonal):
-    serializer_class = MessageSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnlyInfo]
+class ListPostByType(mixins.ListModelMixin,
+                        mixins.RetrieveModelMixin,
+                        viewsets.GenericViewSet):
+    '''
+    按分类
+    '''
+    lookup_field = 'pk'
+    serializer_class = PostSerializer
+    permission_classes = [IsOwnerOrReadOnlyInfo]
     authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
 
     def get_queryset(self):
-        yonghu_obj = self.get_person(self.request)
-        message_obj = yonghu_obj.message.all()
-        return message_obj
+        if self.request.query_params.get('id'):
+            type = self.request.query_params.get('id')
+            type_obj = PostType.objects.get(pk=int(type))
+            return type_obj.post.filter(is_deleted=False)
+        else:
+            return Post.objects.filter(is_deleted=False)
+
+@csrf_exempt
+@api_view()
+def searchPostByNameOrDescription(request):
+        '''
+        通过名字和关键字查询
+        :param request:
+        :return:
+        '''
+        query_set = request.query_params.get('q')
+        post_obj = Post.objects.filter(Q(name__icontains=query_set) | Q(description__icontains=query_set))
+        serializer = PostSerializer(post_obj, many=True)
+        return Response(ReturnCode(0, data=serializer.data))
+
+class PostListType(mixins.ListModelMixin,
+                viewsets.GenericViewSet):
+    '''
+    帖子分类
+    '''
+    lookup_field = 'pk'
+    serializer_class = PostTypeSerializer
+    permission_classes = [IsOwnerOrReadOnlyInfo, IsAuthenticated]
+    authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
+
+    def get_queryset(self):
+        return PostType.objects.filter(is_deleted=False)
+
+
 
