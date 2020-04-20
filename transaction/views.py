@@ -102,9 +102,9 @@ class ListCommodyByType(mixins.ListModelMixin,
         if self.request.query_params.get('id'):
             type = self.request.query_params.get('id')
             type_obj = Type.objects.get(pk=int(type))
-            return type_obj.commody.all()
+            return type_obj.commody.filter(is_delete=False, is_end=False)
         else:
-            return Commody.objects.all()
+            return Commody.objects.filter(is_delete=False, is_end=False)
 
 
 @csrf_exempt
@@ -117,6 +117,7 @@ def searchCommodyByNameOrDescription(request):
     '''
     query_set = request.query_params.get('q')
     commody_obj = Commody.objects.filter(Q(name__icontains=query_set) | Q(description__icontains=query_set))
+    commody_obj = commody_obj.filter(is_delete=False, is_end=False)
     serializer = CommodySerializer(commody_obj, many=True)
     return Response(ReturnCode(0, data=serializer.data))
 
@@ -155,6 +156,9 @@ class ListUpdatePersonalTransactions(mixins.ListModelMixin,
         :return:
         '''
         commody_obj = self.get_object()
+        # 如果是已经删除或者是已经结束的商品返回报错
+        if not commody_obj.is_delete:
+            return Response(ReturnCode(1, msg='have already delete.'))
         data = request.data.copy()
         type_id = data.get('type_id')
         # 删除参数中指定的字段，防止框架根据参数自动修改用户不能修改的字段
@@ -188,4 +192,4 @@ class ListType(mixins.ListModelMixin,
     authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
 
     def get_queryset(self):
-        return Type.objects.all()
+        return Type.objects.filter(is_delete=False, is_end=False)
