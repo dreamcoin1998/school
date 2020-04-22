@@ -27,6 +27,7 @@ from images.getImagePath import GetImagePath
 from readAndReplyNum.views import ReadNumAnd, ReplyNumAdd
 from Messages.getMessage import GetMessage
 from django.db.models import Q
+from readAndReplyNum.getReadAndReplyNum import GetReadAndReplyNum
 # Create your views here.
 
 class ListCreatePost(mixins.CreateModelMixin,
@@ -36,7 +37,8 @@ class ListCreatePost(mixins.CreateModelMixin,
                                     GetPersonal,
                                     GetImagePath,
                                     ReadNumAnd,
-                                    GetMessage):
+                                    GetMessage,
+                                    GetReadAndReplyNum):
     lookup_field = 'pk'
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnlyInfo]
@@ -61,14 +63,17 @@ class ListCreatePost(mixins.CreateModelMixin,
         '''
         data = request.data.copy()
         try:
+            type_id = data.get('type_id')
+            type_obj = PostType.objects.get(pk=int(type_id))
             yonghu_obj = self.get_person(request)
         except KeyError:
-            return Response(ReturnCode(1, msg='object does not exists.'))
+            return Response(ReturnCode(1, msg='object do not exists.'))
         try:
             post = Post()
             post.title = data.get('title')
             post.content = data.get('content')
             post.create_time = data.get('create_time')
+            post.type = type_obj
             post.yonghu = yonghu_obj
             post.save()
             ct = ContentType.objects.get_for_model(post)
@@ -91,27 +96,76 @@ class ListCreatePost(mixins.CreateModelMixin,
         except exceptions.FieldError:
             return Response(ReturnCode(1, msg='field error.'))
 
+    def post_detail_and_message_detail(self):
+        '''
+        获取帖子信息和帖子评论信息
+        :return:
+        '''
+        if self.kwargs.get('pk'):
+            pk = self.kwargs.get('pk')
+            return Post.objects.filter(pk=pk, is_delete=False)
+        else:
+            return Post.objects.filter(is_delete=False)
+        post_obj = post.objects.filter(pk=pk)
+        message_obj = post_obj.message.all()
+        return message_obj
+
+    def post_list(self, request, *args, **kwargs):
+        '''
+        获取指定用户发表帖子
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        try:
+            pk = request.session['pk']
+        except KeyError:
+            return Response(ReturnCode(1, msg='must login'),status=400)
+        yonghu_obj = Yonghu.objects.get(pk=pk)
+        post_obj = yonghu_obj.post.all()
+        serializer = PostSerializer(post_obj,many=True)
+        return Response(ReturnCode(0, data=serializer.data))
+
+    def post_reply_and_like(self):
+        '''
+        用户得到回复和点赞信息
+        :return:
+        '''
+        pass
+
+
+
+
+    def post_message_list(self):
+        '''
+        获取用户评论列表
+        :return:
+        '''
+        yonghu_obj = self.get_person(self.request)
+        message_obj = yonghu_obj.message.all()
+        return message_obj
+
+
     def delete(self, request, *args, **kwargs):
         '''
-        删除帖子
+        删除帖子和评论
         '''
-        post_obj = self.get_object()
         data = request.data.copy()
-        if data.get('is_delete'):
-            data.pop('is_delete')
-        if data.get('create_time'):
-            data.pop('create_time')
-        serializer = PostSerializer(post_obj, data=data)
-        if serializer.is_valid():
-            return Response(ReturnCode(0, msg='success.', data=serializer.data))
-        else:
-            return Response(ReturnCode(1, msg='data invalid.'))
+        post = Post()
+        try:
+            pk = request.session['pk']
+        except KeyError:
+            return Response(ReturnCode(1, msg='must login'),status=400)
+        yonghu_obj = Yonghu.objects.get(pk=pk)
+        return yonghu_obj.post.delete(object_id=post.pk)
+
 
 class ListPostByType(mixins.ListModelMixin,
                         mixins.RetrieveModelMixin,
                         viewsets.GenericViewSet):
     '''
-    按分类
+    按分类搜索
     '''
     lookup_field = 'pk'
     serializer_class = PostSerializer
@@ -128,14 +182,14 @@ class ListPostByType(mixins.ListModelMixin,
 
 @csrf_exempt
 @api_view()
-def searchPostByNameOrDescription(request):
+def searchPostByNameOrContent(request):
         '''
         通过名字和关键字查询
         :param request:
         :return:
         '''
         query_set = request.query_params.get('q')
-        post_obj = Post.objects.filter(Q(name__icontains=query_set) | Q(description__icontains=query_set))
+        post_obj = Post.objects.filter(Q(name__icontains=query_set) | Q(content__icontains=query_set))
         serializer = PostSerializer(post_obj, many=True)
         return Response(ReturnCode(0, data=serializer.data))
 
@@ -151,6 +205,8 @@ class PostListType(mixins.ListModelMixin,
 
     def get_queryset(self):
         return PostType.objects.filter(is_deleted=False)
+
+
 
 
 
