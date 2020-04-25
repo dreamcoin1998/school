@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from utils.ReturnCode import ReturnCode
 from .models import MainMessage, ReplyMessage
 from transaction.models import Commody
-from readAndReplyNum.views import ReplyNumAdd
+from readAndReplyNumAndLikes.views import ReplyNumAdd
 from .serializers import ReplyMessageSerializer, MainMessageSerializer, MessageSerializer
 from utils.permissions import IsOwnerOrReadOnlyInfo, IsAuthenticated
 from yonghu.views import JSONWebTokenAuthentication, CsrfExemptSessionAuthentication

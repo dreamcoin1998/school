@@ -1,9 +1,8 @@
 from django.db import models
 from yonghu.models import Yonghu
 from django.db.models.fields import exceptions
-from readAndReplyNum.getReadAndReplyNum import GetReadAndReplyNum
 from images.getImagePath import GetImagePath
-
+from readAndReplyNumAndLikes.getReadAndReplyNumLikes import GetReadAndReplyAndLikesNum
 
 
 class Type(models.Model):
@@ -20,7 +19,7 @@ class Type(models.Model):
 
 
 
-class Commody(models.Model, GetReadAndReplyNum, GetImagePath):
+class Commody(models.Model, GetReadAndReplyAndLikesNum, GetImagePath):
     '''
     商品信息类
     '''

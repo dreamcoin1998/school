@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('readAndReplyNum', '0002_delete_imagepath'),
+        ('readAndReplyNumAndLikes', '0002_delete_imagepath'),
     ]
 
     operations = [

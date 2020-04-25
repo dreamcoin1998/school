@@ -8,5 +8,5 @@ class PostTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'content', 'created_time', 'is_deleted')
+    list_display = ('title', 'content', 'created_time', 'is_deleted', 'type')
 

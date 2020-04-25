@@ -20,7 +20,7 @@ from images.models import ImagePath
 from django.contrib.contenttypes.models import ContentType
 from utils.getPerson import GetPersonal
 from images.views import GetImagePath
-from readAndReplyNum.views import ReadNumAnd, ReplyNumAdd
+from readAndReplyNumAndLikes.views import ReadNumAnd, ReplyNumAdd
 
 
 class CreateListRetrieveTransaction(mixins.CreateModelMixin,

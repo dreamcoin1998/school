@@ -24,10 +24,10 @@ from utils.ReturnCode import ReturnCode
 from images.models import ImagePath
 from utils.getPerson import GetPersonal
 from images.getImagePath import GetImagePath
-from readAndReplyNum.views import ReadNumAnd, ReplyNumAdd
+from readAndReplyNumAndLikes.views import ReadNumAnd, ReplyNumAdd
 from Messages.getMessage import GetMessage
 from django.db.models import Q
-from readAndReplyNum.getReadAndReplyNum import GetReadAndReplyNum
+from readAndReplyNumAndLikes.getReadAndReplyNumLikes import GetReadAndReplyAndLikesNum
 # Create your views here.
 
 class ListCreatePost(mixins.CreateModelMixin,
@@ -38,7 +38,7 @@ class ListCreatePost(mixins.CreateModelMixin,
                                     GetImagePath,
                                     ReadNumAnd,
                                     GetMessage,
-                                    GetReadAndReplyNum):
+                                    GetReadAndReplyAndLikesNum):
     lookup_field = 'pk'
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnlyInfo]
@@ -96,6 +96,14 @@ class ListCreatePost(mixins.CreateModelMixin,
         except exceptions.FieldError:
             return Response(ReturnCode(1, msg='field error.'))
 
+    def index(self):
+        '''
+        默认列表
+        :return:
+        '''
+        post = Post()
+        return post.objects.all
+
     def post_detail_and_message_detail(self):
         '''
         获取帖子信息和帖子评论信息
@@ -127,12 +135,20 @@ class ListCreatePost(mixins.CreateModelMixin,
         serializer = PostSerializer(post_obj,many=True)
         return Response(ReturnCode(0, data=serializer.data))
 
-    def post_reply_and_like(self):
+    def post_reply_and_like(self, request, *args, **kwargs):
         '''
         用户得到回复和点赞信息
         :return:
         '''
-        pass
+        post = Post()
+        try:
+            pk = request.session['pk']
+        except KeyError:
+            return Response(ReturnCode(1, msg='must login'), status=400)
+        post_obj = post.objects.filter(pk=pk)
+        message_obj = post_obj.message.all()
+        return message_obj.reply_message
+
 
 
 
@@ -159,6 +175,7 @@ class ListCreatePost(mixins.CreateModelMixin,
             return Response(ReturnCode(1, msg='must login'),status=400)
         yonghu_obj = Yonghu.objects.get(pk=pk)
         return yonghu_obj.post.delete(object_id=post.pk)
+        return yonghu_obj.message.delete(object_id=message.pk)
 
 
 class ListPostByType(mixins.ListModelMixin,

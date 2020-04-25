@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from utils.ReturnCode import ReturnCode
 from transaction.models import Commody
 from Messages.models import MainMessage, ReplyMessage
-from .models import ReadAndReplyNum
+from .models import ReadAndReplyNum,LikeDetail,Likes
 
 
 class ReadNumAnd:
@@ -162,3 +162,52 @@ class ReplyNumAdd:
                 num += 1
                 transaction.savepoint_rollback(sid)
             return Response(ReturnCode(1, msg='create message error.'))
+
+    @transaction.atomic
+    class LikesAdd:
+        def like_record(self,request):
+            yonghu = request.yonghu
+            content_type = request.GET.get('content_type')
+            object_id = request.GET.get('object_id')
+            is_liked = request.GET.get('is_liked')
+            content_type = ContentType.objects.get(model=content_type)
+
+            if is_liked == True:
+                like_detail, created = LikeDetail.objects.get_or_create(content_type,object_id=object_id,yonghu=yonghu)
+                #准备进行点赞
+                if created:
+                    #可以点赞
+                    likes, created = Likes.objects.get_or_create(content_type,object_id=object_id)
+                    obj = self.get_object()
+                    ct = ContentType.objects.get_for_model(obj)
+                    sid = transaction.savepoint()
+                    num = 0
+                    while num < 3:
+                        like_num = obj.like_num
+                        likes_obj = Likes()
+                        likes_obj.content_type = ct
+                        likes_obj.object_id = obj.pk
+                        likes.like_num += 1
+                        likes.save()
+                        like_num_new = obj.like_num
+                        if like_num == like_num_new - 1:
+                            return True
+                        else:
+                            num += 1
+                            transaction.savepoint_rollback(sid)
+                        return False
+                        return Response(ReturnCode(0))
+                    else:
+                        return Response(ReturnCode(1, msg='already liked it'))
+                else:
+                    #准备取消点赞
+                    if LikeDetail.objects.filter(content_type, object_id=object_id,
+                                                            yonghu=yonghu).exist():
+                        like_detail = LikeDetail.objects.get(content_type, object_id=object_id,yonghu=yonghu)
+                        like_detail.delete()
+                        likes, created = Likes.objects.get_or_create(content_type,object_id=object_id)
+                        likes.like_num -= 1
+                        likes.save()
+                        return Response(ReturnCode(0))
+                    else:
+                        return Response(ReturnCode(1, msg='does not exist'))

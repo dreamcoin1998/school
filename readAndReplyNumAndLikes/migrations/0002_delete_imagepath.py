@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('readAndReplyNum', '0001_initial'),
+        ('readAndReplyNumAndLikes', '0001_initial'),
     ]
 
     operations = [

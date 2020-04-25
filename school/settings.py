@@ -104,7 +104,7 @@ INSTALLED_APPS = [
     'djcelery',
     'forum',
     'transaction',
-    'readAndReplyNum',
+    'readAndReplyNumAndLikes',
     'Messages',
     'images',
     'feedback',
