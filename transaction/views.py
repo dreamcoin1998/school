@@ -124,7 +124,8 @@ def searchCommodyByNameOrDescription(request):
 
 class ListUpdatePersonalTransactions(mixins.ListModelMixin,
                                      mixins.UpdateModelMixin,
-                                     viewsets.GenericViewSet):
+                                     viewsets.GenericViewSet,
+                                     GetPersonal):
     lookup_field = 'pk'
     serializer_class = CommodySerializer
     permission_classes = [IsOwnerOrReadOnlyInfo, IsAuthenticated]
@@ -139,10 +140,9 @@ class ListUpdatePersonalTransactions(mixins.ListModelMixin,
         :return:
         '''
         try:
-            pk = request.session['pk']
+            yonghu_obj = self.get_person(request)
         except KeyError:
             return Response(ReturnCode(1, msg='must login.'), status=400)
-        yonghu_obj = Yonghu.objects.get(pk=pk)
         commody_obj = yonghu_obj.commody.all()
         serializer = CommodySerializer(commody_obj, many=True)
         return Response(ReturnCode(0, data=serializer.data))
