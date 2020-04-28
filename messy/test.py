@@ -1,29 +1,58 @@
-import random
-random.randint
-def main():
-    n = int(input())
-    count = 0
-    bianDic = {}
-    while count < n * 6:
-        if count % 6 == 0 and count != 0:
-            # print(bianDic.values())
-            if set(bianDic.values()) == set([4, 4, 4]) or set(bianDic.values()) == set([4, 8]) or set(bianDic.values()) == set([12]):
-                print('POSSIBLE')
-            else:
-                print('IMPOSSIBLE')
-            bianDic = {}
-        l1, l2 = input().split(' ')
-        if bianDic.get(l1):
-            bianDic[l1] += 1
+class Queue:
+    def __init__(self):
+        self._queue = []
+        self.print_info = []
+
+    def operation(self, type):
+        if type.startswith('PUSH'):
+            self.push(type)
+        elif type == 'TOP':
+            self.top()
+        elif type == 'POP':
+            self.pop()
+        elif type == 'SIZE':
+            self.size()
+        elif type == 'CLEAR':
+            self.clear()
+
+    def push(self, type):
+        num = type.split(' ')[1]
+        self._queue.append(num)
+
+    def top(self):
+        if not self._queue:
+            # print(-1)
+            self.print_info.append("-1")
         else:
-            bianDic[l1] = 1
-        if bianDic.get(l2):
-            bianDic[l2] += 1
+            # print(self._queue[0])
+            self.print_info.append(self._queue[0])
+
+    def pop(self):
+        if not self._queue:
+            # print(-1)
+            self.print_info.append("-1")
         else:
-            bianDic[l2] = 1
-        count += 1
-    if set(bianDic.values()) == set([4, 4, 4]) or set(bianDic.values()) == set([4, 8]) or set(bianDic.values()) == set([12]):
-        print('POSSIBLE')
-    else:
-        print('IMPOSSIBLE')
-main()
+            # print(self._queue[0])
+            # self.print_info.append(self._queue[0])
+            self._queue = self._queue[1:]
+            self._queue.pop()
+
+    def size(self):
+        # print(len(self._queue))
+        self.print_info.append(str(len(self._queue)))
+
+    def clear(self):
+        self._queue.clear()
+
+    def run(self):
+        grourp = int(input())
+        for _ in range(grourp):
+            op_nums = int(input())
+            for _ in range(op_nums):
+                operation_type = input()
+                self.operation(operation_type)
+        # print(self.print_info)
+        for s in self.print_info:
+            print(str(s))
+
+Queue().run()

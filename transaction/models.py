@@ -5,7 +5,6 @@ from readAndReplyNum.getReadAndReplyNum import GetReadAndReplyNum
 from images.getImagePath import GetImagePath
 
 
-
 class Type(models.Model):
     type_name = models.CharField(max_length=20, verbose_name='类型')
 
@@ -15,9 +14,6 @@ class Type(models.Model):
     class Meta:
         verbose_name = '商品类型'
         verbose_name_plural = verbose_name
-
-
-
 
 
 class Commody(models.Model, GetReadAndReplyNum, GetImagePath):

@@ -107,6 +107,7 @@ class ListCreatePost(mixins.CreateModelMixin,
         else:
             return Response(ReturnCode(1, msg='data invalid.'))
 
+
 class ListPostByType(mixins.ListModelMixin,
                         mixins.RetrieveModelMixin,
                         viewsets.GenericViewSet):
