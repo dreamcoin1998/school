@@ -1,4 +1,4 @@
-from .UniversityLogin import UniversityLogin
+from utils.timetable.UniversityLogin import UniversityLogin
 import logging
 
 

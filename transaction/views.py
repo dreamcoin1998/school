@@ -1,26 +1,20 @@
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins
-from utils.permissions import IsOwnerOrReadOnlyInfo
-from utils.permissions import IsAuthenticated, IsOwnerOrReadOnlyInfo, CreateOrReadOnlyInfo
-from utils import code2Session
+from utils.permissions.permissions import IsAuthenticated, IsOwnerOrReadOnlyInfo
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-from rest_framework.authentication import SessionAuthentication
-from django.contrib.auth.backends import ModelBackend
-from yonghu.models import Yonghu
 from yonghu.views import CsrfExemptSessionAuthentication
 from .models import Commody, Type
 from .serializers import CommodySerializer, TypeSerializer
-from utils.ReturnCode import ReturnCode
+from utils.returnCode.ReturnCode import ReturnCode
 from django.db.models.fields import exceptions
 from django.db.models import Q
 from images.models import ImagePath
 from django.contrib.contenttypes.models import ContentType
 from utils.getPerson import GetPersonal
 from images.views import GetImagePath
-from readAndReplyNumAndLikes.views import ReadNumAnd, ReplyNumAdd
+from readAndReplyNumAndLikes.views import ReadNumAnd
 
 
 class CreateListRetrieveTransaction(mixins.CreateModelMixin,

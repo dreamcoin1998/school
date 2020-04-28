@@ -1,6 +1,4 @@
-import  requests
-import re
-from utils.UscLogin import UscLogin
+from utils.timetable.UscLogin import UscLogin
 
 
 class Usc(UscLogin):

@@ -1,10 +1,10 @@
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
-from utils.Timetable import Timetable
-from utils.ReturnCode import ReturnCode
+from utils.timetable.Timetable import Timetable
+from utils.returnCode.ReturnCode import ReturnCode
 from rest_framework.response import Response
 from yonghu.models import Yonghu
-from utils.NewUSCSystemTimetable import NewTimetable
+from utils.timetable.NewUSCSystemTimetable import NewTimetable
 
 
 @csrf_exempt

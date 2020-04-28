@@ -4,19 +4,17 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import UscInfo, Yonghu, NewUSCINFO
 from .serializers import YonghuSerializer
-from django.contrib.auth import get_user_model
-from rest_framework import viewsets, mixins, generics
-from utils.permissions import IsOwnerOrReadOnlyInfo
-from utils.permissions import IsAuthenticated
-from utils import code2Session
-from django.contrib.auth import authenticate, login, logout
+from rest_framework import viewsets, mixins
+from utils.permissions.permissions import IsOwnerOrReadOnlyInfo
+from utils.permissions.permissions import IsAuthenticated
+from utils.login import code2Session
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import SessionAuthentication
 from school import settings
-from utils.ReturnCode import ReturnCode
-from utils.UniversityLogin import UniversityLogin
+from utils.returnCode.ReturnCode import ReturnCode
+from utils.timetable.UniversityLogin import UniversityLogin
 from django.contrib.auth.backends import ModelBackend
-from utils.UscLogin import UscLogin
+from utils.timetable.UscLogin import UscLogin
 
 
 class MyYonghuBackend(ModelBackend):

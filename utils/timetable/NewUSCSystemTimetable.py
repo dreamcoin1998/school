@@ -1,4 +1,4 @@
-from utils.Timetable import Timetable
+from utils.timetable.Timetable import Timetable
 import requests
 import random
 from lxml import etree
