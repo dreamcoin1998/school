@@ -12,9 +12,9 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import SessionAuthentication
 from school import settings
 from utils.returnCode.ReturnCode import ReturnCode
-from utils.timetable.UniversityLogin import UniversityLogin
+from utils.uscSystem.UniversityLogin import UniversityLogin
 from django.contrib.auth.backends import ModelBackend
-from utils.timetable.UscLogin import UscLogin
+from utils.uscSystem.UscLogin import UscLogin
 
 
 class MyYonghuBackend(ModelBackend):
