@@ -9,7 +9,7 @@ class PostTypeSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('title','content','created_time','is_deleted','read_num')
+        fields = ('title','content','created_time','is_deleted','read_num','type')
         depth = 2
 
 
