@@ -1,4 +1,4 @@
-from .UniversityLogin import UniversityLogin
+from utils.uscSystem.UniversityLogin import UniversityLogin
 import logging
 
 

@@ -1,11 +1,10 @@
 from django.http.response import HttpResponseForbidden
-from rest_framework.response import Response
+
 try:
     from django.utils.deprecation import MiddlewareMixin  # Django 1.10.x
 except ImportError:
     MiddlewareMixin = object
 from django.core.cache import cache
-from utils.ReturnCode import ReturnCode
 from school.settings import MAX_IP_FREQUENT, BLOCK_IP_TIME
 
 

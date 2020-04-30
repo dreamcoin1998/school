@@ -1,4 +1,4 @@
-from utils.Timetable import Timetable
+from utils.uscSystem.Timetable import Timetable
 import requests
 import random
 from lxml import etree
@@ -153,7 +153,7 @@ class NewTimetable(Timetable):
             return dataList
         except Exception as e:
             logging.debug(e)
-            print('timetable error: ', e)
+            print('uscSystem error: ', e)
             return False
 
     def run(self):
