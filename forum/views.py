@@ -72,7 +72,6 @@ class ListCreatePost(mixins.CreateModelMixin,
             post = Post()
             post.title = data.get('title')
             post.content = data.get('content')
-            post.create_time = data.get('create_time')
             post.type = type_obj
             post.yonghu = yonghu_obj
             post.save()
@@ -84,39 +83,24 @@ class ListCreatePost(mixins.CreateModelMixin,
                 img_path_obj.object_id = post.pk
                 img_path_obj.imgPath = imagePath
                 img_path_obj.save()
-            Messages = self.get_message(request)
-            for Message in Messages:
-                message_obj = Message()
-                message_obj.content_type = ct
-                message_obj.object_id = post.pk
-                message_obj.Message = Message
-                message_obj.save()
             serializer = PostSerializer(post)
             return Response(ReturnCode(0, data=serializer.data))
         except exceptions.FieldError:
             return Response(ReturnCode(1, msg='field error.'))
 
-    def index(self):
-        '''
-        默认列表
-        :return:
-        '''
-        post = Post()
-        return post.objects.all
-
-    def post_detail_and_message_detail(self):
-        '''
-        获取帖子信息和帖子评论信息
-        :return:
-        '''
-        if self.kwargs.get('pk'):
-            pk = self.kwargs.get('pk')
-            return Post.objects.filter(pk=pk, is_delete=False)
-        else:
-            return Post.objects.filter(is_delete=False)
-        post_obj = post.objects.filter(pk=pk)
-        message_obj = post_obj.message.all()
-        return message_obj
+    # def post_detail_and_message_detail(self):
+    #     '''
+    #     获取帖子信息和帖子评论信息
+    #     :return:
+    #     '''
+    #     if self.kwargs.get('pk'):
+    #         pk = self.kwargs.get('pk')
+    #         return Post.objects.filter(pk=pk, is_delete=False)
+    #     else:
+    #         return Post.objects.filter(is_delete=False)
+    #     post_obj = post.objects.filter(pk=pk)
+    #     message_obj = post_obj.message.all()
+    #     return message_obj
 
     def post_list(self, request, *args, **kwargs):
         '''
