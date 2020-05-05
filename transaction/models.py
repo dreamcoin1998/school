@@ -4,6 +4,7 @@ from django.db.models.fields import exceptions
 from images.getImagePath import GetImagePath
 from readAndReplyNumAndLikes.getReadAndReplyNumLikes import GetReadAndReplyAndLikesNum
 
+
 class Type(models.Model):
     type_name = models.CharField(max_length=20, verbose_name='类型')
 

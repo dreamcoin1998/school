@@ -1,4 +1,3 @@
-from django.conf.urls import url
 from django.urls import path
 from . import views
 from rest_framework.routers import DefaultRouter
@@ -20,6 +19,6 @@ router.register('yonghu_yz_new', AuthenticationV2, basename='yonghu_yz_new')   #
 urlpatterns = [
     path('api_login/', obtain_jwt_token),            # jwt认证
     path('api-token-refresh/', refresh_jwt_token),   # jwt刷新
-    path('yonghu_logout', views.logout),             # 注销登录
+    path('yonghu_logout', views.logout_view),        # 注销登录
     path('qq_login', views.qq_login),                # QQ登录
 ] + router.urls
