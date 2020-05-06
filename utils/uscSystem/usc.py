@@ -1,5 +1,7 @@
+from billiard.sharedctypes import copy
 from utils.uscSystem.NewUSCSystemTimetable import NewTimetable
 from lxml import etree
+from school import config
 
 
 class Usc(NewTimetable):
@@ -10,6 +12,19 @@ class Usc(NewTimetable):
             return self.check_score_link
         else:
             raise AttributeError('type object "%s" has no attribute "%s"' % (self, item))
+
+    @staticmethod
+    def set_default_args(data):
+        # 加载默认参数
+        default_args = copy(config.USC_ARGS)
+        # 未传参数则直接使用默认参数
+        if data is None:
+            return default_args
+        for query in default_args.keys():
+            # 如果用户参数重写了参数则使用用户参数
+            if query in data:
+                default_args[query] = data[query]
+        return default_args
 
     def parse_score(self, data):
         '''
@@ -47,16 +62,8 @@ class Usc(NewTimetable):
         1. 登录
         2. 根据登录接口解析出成绩
         '''
+        data = self.set_default_args(data)
         if self.login():
             return self.parse_score(data)
         else:
             return False
-
-
-# data = {
-#     'kksj': '2019-2020-1',
-#     'kcxz': '',
-#     'kcmc': '',
-#     'xsfs': 'all'
-# }
-# Usc('20174670323', '18759799353gjb').check_score(data)
