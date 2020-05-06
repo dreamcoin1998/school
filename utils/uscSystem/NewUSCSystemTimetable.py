@@ -33,7 +33,7 @@ class NewTimetable(Timetable):
             # 登录校园网，首先获取传输参数encode
             res = self.s.post('http://61.187.179.66:8924/Logon.do?method=logon&flag=sess', headers=self.headers)
             dataStr = res.text
-            print(dataStr)
+            # print(dataStr)
             if dataStr == 'no':
                 return False
             else:
@@ -50,7 +50,7 @@ class NewTimetable(Timetable):
                         encoded = encoded + code[i:len(code)]
                         i = len(code)
                     i += 1
-                print(encoded)
+                # print(encoded)
                 # 校园网登录
                 data = {
                     'userAccount': self.UserName,
