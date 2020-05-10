@@ -12,6 +12,8 @@ class ReadNumAnd:
     @transaction.atomic
     def add_read_num(self):
         '''
+        添加阅读数
+
         如果存在session，返回True,
         如果不存在session,设置一个事务增加阅读数，乐观锁，循环三次查看read_num == read_num_new - 1，
         否则返回False
@@ -27,7 +29,7 @@ class ReadNumAnd:
             return True
         else:
             '''2020.04.21'''
-            self.request.session['has_read'] = obj_session
+            # self.request.session['has_read'] = obj_session
             # self.request.session[self.request.get_full_path()] = '1'
             self.request.session['has_read'] = obj_session
             self.request.session['has_read'] += self.request.get_full_path()
@@ -35,6 +37,7 @@ class ReadNumAnd:
             ct = ContentType.objects.get_for_model(obj)
             sid = transaction.savepoint()
             num = 0
+            # 乐观锁，放置多个进程修改同一个数据
             while num < 3:
                 read_num = obj.read_num
                 try:
@@ -47,6 +50,7 @@ class ReadNumAnd:
                 read_and_reply_num_obj.read_num += 1
                 read_and_reply_num_obj.save()
                 read_num_new = obj.read_num
+                # 检查是否有其他的进程已经修改了这个字段
                 if read_num == read_num_new - 1:
                     return True
                 else:
