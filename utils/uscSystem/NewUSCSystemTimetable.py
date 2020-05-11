@@ -101,11 +101,11 @@ class NewTimetable(Timetable):
                     # classInfo = html.xpath(
                     #     '//tr[%s]/td[%s]/div[2]/font/text()[1]' % (str(index + 2), (indexWeeks + 1)))
                     clses = html.xpath(
-                        '//tr[%s]/td[%s]/div[1]//text()' % (str(index + 2), (indexWeeks + 1))
+                        '//tr[%s]/td[%s]/div[1]//text()' % (str(index + 2), (indexWeeks + 2))
                     )
                     # print(classes)
                     classes = [i for i in clses if not i.startswith('---') and i != '&nbspO']
-                    print(classes)
+                    # print(classes)
                     # for i in clses:
                     #     print(i)
                     i = 0
@@ -123,11 +123,11 @@ class NewTimetable(Timetable):
                         data = []
                         # print(id(data), cN)
                         data.append(cN)
-                        print(i)
+                        # print(i)
                         data += classInfo[i: i + 2]
                         data.append('none')
                         # 处理周数
-                        print(data)
+                        # print(data)
                         weekList = data[-3].replace('(周)', '').split(',')
                         # print(weekList)
                         weekListData = []
@@ -170,4 +170,4 @@ class NewTimetable(Timetable):
             return login
 
 
-# NewTimetable('20174670323', '18759799353gjb').run()
+NewTimetable('20174670323', '18759799353gjb').run()

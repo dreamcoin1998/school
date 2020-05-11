@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a5d59f5-de63-4713-9659-3ed34a4ba406" name="Default Changelist" comment="">
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Messages/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Messages/views.py" afterDir="false" />
-=======
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-=======
-      <change afterPath="$PROJECT_DIR$/Messages/getMessage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/getImagePath.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readAndReplyNum/getReadAndReplyNum.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/school/version.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/version.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transaction/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/transaction/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transaction/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/transaction/views.py" afterDir="false" />
->>>>>>> 4eb7845025e61927b367367ab0ac8117faf53c48
->>>>>>> 462307cd752b64822dd04d17a18416271bcb7d49
+      <change beforePath="$PROJECT_DIR$/NewTimetable.log" beforeDir="false" afterPath="$PROJECT_DIR$/NewTimetable.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/uscSystem/NewTimetable.log" beforeDir="false" afterPath="$PROJECT_DIR$/utils/uscSystem/NewTimetable.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/uscSystem/NewUSCSystemTimetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/uscSystem/NewUSCSystemTimetable.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,12 +16,9 @@
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
-<<<<<<< HEAD
-=======
   <component name="FavoritesManager">
     <favorites_list name="school" />
   </component>
->>>>>>> 4eb7845025e61927b367367ab0ac8117faf53c48
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -54,11 +39,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-<<<<<<< HEAD
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/winenv" />
-=======
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
->>>>>>> 4eb7845025e61927b367367ab0ac8117faf53c48
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -70,16 +51,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Administrator\Desktop\school\readAndReplyNum" />
-      <recent name="C:\Users\Administrator\Desktop\school\images" />
-      <recent name="C:\Users\Administrator\Desktop\school\school" />
-      <recent name="C:\Users\Administrator\Desktop\school\yonghu" />
-      <recent name="C:\Users\Administrator\Desktop\school\tasks" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Administrator\Desktop\school" />
       <recent name="$PROJECT_DIR$/school" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\school\school" />
+      <recent name="C:\Users\Administrator\Desktop\school\yonghu" />
+      <recent name="C:\Users\Administrator\Desktop\school\tasks" />
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -94,7 +74,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Python.NewUSCSystemTimetable (1)">
+    <configuration name="NewUSCSystemTimetable (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="school" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils/uscSystem" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/uscSystem/NewUSCSystemTimetable.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="NewUSCSystemTimetable" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="school" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -138,28 +139,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="UniversityLogin" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="school" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/UniversityLogin.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="school" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -181,7 +160,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="usc" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="school" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -189,12 +168,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/yonghu" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils/uscSystem" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/yonghu/views.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/uscSystem/usc.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -228,11 +206,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.NewUSCSystemTimetable (1)" />
+        <item itemvalue="Python.usc" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.NewUSCSystemTimetable" />
         <item itemvalue="Python.Timetable" />
-        <item itemvalue="Python.views" />
-        <item itemvalue="Python.UniversityLogin" />
       </list>
     </recent_temporary>
   </component>
