@@ -10,12 +10,37 @@ from yonghu.views import JSONWebTokenAuthentication, CsrfExemptSessionAuthentica
 from django.contrib.contenttypes.models import ContentType
 from utils.getPerson import GetPersonal
 from django.db.models.fields import exceptions
+from school import config
 
 
-class ListCreateCommodyMainMessage(mixins.ListModelMixin,
+class GetObjectType:
+    def get_object_instance(self):
+        '''
+        获取评论信息对应的类的实例，是帖子还是商品
+        :return:
+        '''
+        obj_type = self.request.query_params.get('type')
+        obj_id = self.request.query_params.get('id')
+        if not obj_id:
+            return None
+        obj_type = obj_type.lower()
+        try:
+            # 从配置文件里面获取具体的类
+            obj_type = eval(config.OBJ_TYPE[obj_type])
+        except KeyError:
+            return None
+        try:
+            obj = obj_type.objects.get(pk=int(obj_id))
+        except exceptions.ObjectDoesNotExist:
+            return None
+        return obj
+
+
+class ListCreateMainMessage(mixins.ListModelMixin,
                         mixins.CreateModelMixin,
                         viewsets.GenericViewSet,
-                        ReplyNumAdd):
+                        ReplyNumAdd,
+                        GetObjectType):
     '''
     返回或创建主楼评论
     '''
@@ -24,30 +49,24 @@ class ListCreateCommodyMainMessage(mixins.ListModelMixin,
     authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
 
     def get_queryset(self):
-        obj_id = self.request.query_params.get('id')
-        if obj_id:
-            try:
-            # 修复bug，这里用get如果找不到会报错 2020.04.05
-                commody_obj = Commody.objects.get(pk=int(obj_id))
-            except exceptions.ObjectDoesNotExist:
-                return []
-            ct = ContentType.objects.get_for_model(commody_obj)
-            return MainMessage.objects.filter(content_type=ct, object_id=commody_obj.pk, is_delete=False)
-        return []
+        obj = self.get_object_instance()
+        if obj is None:
+            return []
+        ct = ContentType.objects.get_for_model(obj)
+        return MainMessage.objects.filter(content_type=ct, object_id=obj.pk, is_delete=False)
 
     def create(self, request, *args, **kwargs):
-        obj_id = self.request.query_params.get('id')
-        try:
-            commody_obj = Commody.objects.get(pk=int(obj_id))
-        except exceptions.ObjectDoesNotExist:
-            return Response(ReturnCode(1, msg='transaction object do not exists.'), status=400)
-        return self.create_main_message_and_add_main_reply_num(commody_obj)
+        obj = self.get_object_instance()
+        if obj is None:
+            return Response(ReturnCode(1, msg='object do not exists.'), status=400)
+        return self.create_main_message_and_add_main_reply_num(obj)
 
 
-class ListCreateCommodyReplyMessage(mixins.ListModelMixin,
+class ListCreateReplyMessage(mixins.ListModelMixin,
                                    mixins.CreateModelMixin,
                                     viewsets.GenericViewSet,
-                                    ReplyNumAdd):
+                                    ReplyNumAdd,
+                                    GetObjectType):
     '''
     返回或创建楼中楼评论
     '''
@@ -56,28 +75,21 @@ class ListCreateCommodyReplyMessage(mixins.ListModelMixin,
     authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
 
     def get_queryset(self):
-        obj_id = self.request.query_params.get('id')
         floor = self.request.query_params.get('floor')
-        if obj_id:
-            try:
-                commody_obj = Commody.objects.get(pk=int(obj_id))
-            except exceptions.ObjectDoesNotExist:
-                return []
-            ct = ContentType.objects.get_for_model(commody_obj)
-            if floor is None:
-                return ReplyMessage.objects.filter(content_type=ct, object_id=commody_obj.pk, is_delete=False)
-            else:
-                return ReplyMessage.objects.filter(content_type=ct, object_id=commody_obj.pk, floor=int(floor), is_delete=False)
-        else:
+        obj = self.get_object_instance()
+        if obj is None:
             return []
+        ct = ContentType.objects.get_for_model(obj)
+        if floor is None:
+            return ReplyMessage.objects.filter(content_type=ct, object_id=obj.pk, is_delete=False)
+        else:
+            return ReplyMessage.objects.filter(content_type=ct, object_id=obj.pk, floor=int(floor), is_delete=False)
 
     def create(self, request, *args, **kwargs):
-        obj_id = self.request.query_params.get('id')
-        try:
-            commody_obj = Commody.objects.get(pk=int(obj_id))
-        except exceptions.ObjectDoesNotExist:
-            return Response(ReturnCode(1, msg='commody object do not exists.'))
-        return self.create_reply_message_and_add_reply_num(commody_obj)
+        obj = self.get_object_instance()
+        if obj is None:
+            return Response(ReturnCode(1, msg='object do not exists.'))
+        return self.create_reply_message_and_add_reply_num(obj)
 
 
 class ListPersonalMessage(mixins.ListModelMixin,
