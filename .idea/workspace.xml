@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8a5d59f5-de63-4713-9659-3ed34a4ba406" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewTimetable.log" beforeDir="false" afterPath="$PROJECT_DIR$/NewTimetable.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/uscSystem/NewTimetable.log" beforeDir="false" afterPath="$PROJECT_DIR$/utils/uscSystem/NewTimetable.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/uscSystem/NewUSCSystemTimetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/uscSystem/NewUSCSystemTimetable.py" afterDir="false" />
     </list>
@@ -25,11 +24,6 @@
         <option value="Python Script" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>code</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -74,7 +68,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.NewUSCSystemTimetable (1)">
+  <component name="RunManager" selected="Python.main">
     <configuration name="NewUSCSystemTimetable (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="school" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -117,7 +111,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Timetable" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="school" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -125,12 +119,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../jd-reserve-flash-sale" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/Timetable.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../jd-reserve-flash-sale/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -206,11 +199,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.NewUSCSystemTimetable (1)" />
         <item itemvalue="Python.usc" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.NewUSCSystemTimetable" />
-        <item itemvalue="Python.Timetable" />
       </list>
     </recent_temporary>
   </component>
