@@ -36,3 +36,11 @@ USC_ARGS = {
     'kcmc': '',
     'xsfs': 'all'
 }
+
+'''
+评论信息所对应的类
+'''
+OBJ_TYPE = {
+    'commody': 'Commody',
+    'post': 'Post'
+}

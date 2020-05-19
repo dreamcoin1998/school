@@ -15,8 +15,9 @@ class Usc(NewTimetable):
 
     @staticmethod
     def set_default_args(data):
-        # 加载默认参数
-        default_args = copy(config.USC_ARGS)
+        # 加载默认参数，复制一个新的字典，防止修改配置
+        default_args = config.USC_ARGS.copy()
+        print(default_args is config.USC_ARGS)
         # 未传参数则直接使用默认参数
         if data is None:
             return default_args
@@ -62,8 +63,13 @@ class Usc(NewTimetable):
         1. 登录
         2. 根据登录接口解析出成绩
         '''
+        # 参数校验
         data = self.set_default_args(data)
         if self.login():
             return self.parse_score(data)
         else:
             return False
+
+
+# data = Usc('20174670323', '18759799353gjb').check_score(None)
+# print(data)

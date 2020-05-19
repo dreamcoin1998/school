@@ -8,6 +8,7 @@ from utils.getPerson import GetPersonal
 from .models import Feedback
 from images.models import ImagePath
 from images.views import GetImagePath
+from django.contrib.contenttypes.models import ContentType
 
 
 class ListPersonalCreateFeedback(mixins.ListModelMixin,
@@ -46,13 +47,15 @@ class ListPersonalCreateFeedback(mixins.ListModelMixin,
             feedback_obj.status = status
             feedback_obj.yonghu = yonghu_obj
             feedback_obj.save()
+            feedback = ContentType.objects.get_for_model(feedback_obj)
             for imagepath in imagePaths:
                 imgPath_obj = ImagePath()
                 imgPath_obj.imgPath = imagepath
-                imgPath_obj.content_type = feedback_obj
+                imgPath_obj.content_type = feedback
                 imgPath_obj.object_id = feedback_obj.pk
                 imgPath_obj.save()
             serializer = FeedbackSerializer(feedback_obj)
             return Response(ReturnCode(0, data=serializer.data))
-        except Exception:
+        except Exception as e:
+            print(e)
             return Response(ReturnCode(1, msg='field error.'))
