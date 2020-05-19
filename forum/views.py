@@ -19,6 +19,7 @@ from readAndReplyNumAndLikes.views import ReadNumAnd
 from Messages.getMessage import GetMessage
 from django.db.models import Q
 from readAndReplyNumAndLikes.getReadAndReplyNumLikes import GetReadAndReplyAndLikesNum
+from Message.serializers import MessageSerializer
 # Create your views here.
 
 class ListCreatePost(mixins.CreateModelMixin,
@@ -79,19 +80,16 @@ class ListCreatePost(mixins.CreateModelMixin,
         except exceptions.FieldError:
             return Response(ReturnCode(1, msg='field error.'))
 
-    # def post_detail_and_message_detail(self):
-    #     '''
-    #     获取帖子信息和帖子评论信息
-    #     :return:
-    #     '''
-    #     if self.kwargs.get('pk'):
-    #         pk = self.kwargs.get('pk')
-    #         return Post.objects.filter(pk=pk, is_delete=False)
-    #     else:
-    #         return Post.objects.filter(is_delete=False)
-    #     post_obj = post.objects.filter(pk=pk)
-    #     message_obj = post_obj.message.all()
-    #     return message_obj
+class PostAndYonghuDetail(mixins.CreateModelMixin,
+                                    mixins.ListModelMixin,
+                                    mixins.RetrieveModelMixin,
+                                    viewsets.GenericViewSet,
+                                    GetPersonal,
+                                    GetImagePath,
+                                    ReadNumAnd,
+                                    GetMessage,
+                                    GetReadAndReplyAndLikesNum):
+
 
     def post_list(self, request, *args, **kwargs):
         '''
@@ -110,32 +108,33 @@ class ListCreatePost(mixins.CreateModelMixin,
         serializer = PostSerializer(post_obj,many=True)
         return Response(ReturnCode(0, data=serializer.data))
 
-    def post_reply_and_like(self, request, *args, **kwargs):
-        '''
-        用户得到回复和点赞信息
-        :return:
-        '''
-        post = Post()
-        try:
-            pk = request.session['pk']
-        except KeyError:
-            return Response(ReturnCode(1, msg='must login'), status=400)
-        post_obj = post.objects.filter(pk=pk)
-        message_obj = post_obj.message.all()
-        return message_obj.reply_message
+    # def post_reply_and_like(self, request, *args, **kwargs):
+    #     '''
+    #     用户得到回复和点赞信息
+    #     :return:
+    #     '''
+    #     post = Post()
+    #     try:
+    #         pk = request.session['pk']
+    #     except KeyError:
+    #         return Response(ReturnCode(1, msg='must login'), status=400)
+    #     post_obj = post.objects.filter(pk=pk)
+    #     message_obj = post_obj.message.all()
+    #     return message_obj.reply_message
 
 
 
 
 
-    def post_message_list(self):
-        '''
-        获取用户评论列表
-        :return:
-        '''
-        yonghu_obj = self.get_person(self.request)
-        message_obj = yonghu_obj.message.all()
-        return message_obj
+    # def post_message_list(self):
+    #     '''
+    #     获取用户评论列表
+    #     :return:
+    #     '''
+    #     yonghu_obj = self.get_person(self.request)
+    #     message_obj = yonghu_obj.message.all()
+    #     serializer = MessageSerializer(message_obj, many=True)
+    #     return Response(ReturnCode(0, data=serializer.data))
 
 
     def delete(self, request, *args, **kwargs):
@@ -150,7 +149,6 @@ class ListCreatePost(mixins.CreateModelMixin,
             return Response(ReturnCode(1, msg='must login'),status=400)
         yonghu_obj = Yonghu.objects.get(pk=pk)
         return yonghu_obj.post.delete(object_id=post.pk)
-        return yonghu_obj.message.delete(object_id=message.pk)
 
 
 
