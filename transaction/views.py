@@ -137,7 +137,7 @@ class ListUpdatePersonalTransactions(mixins.ListModelMixin,
             yonghu_obj = self.get_person(request)
         except KeyError:
             return Response(ReturnCode(1, msg='must login.'), status=400)
-        commody_obj = yonghu_obj.commody.all()
+        commody_obj = yonghu_obj.commody.filter(is_delete=False, is_end=False)
         serializer = CommodySerializer(commody_obj, many=True)
         return Response(ReturnCode(0, data=serializer.data))
 
@@ -151,7 +151,7 @@ class ListUpdatePersonalTransactions(mixins.ListModelMixin,
         '''
         commody_obj = self.get_object()
         # 如果是已经删除或者是已经结束的商品返回报错
-        if not commody_obj.is_delete:
+        if commody_obj.is_delete:
             return Response(ReturnCode(1, msg='have already delete.'))
         data = request.data.copy()
         type_id = data.get('type_id')
@@ -186,4 +186,4 @@ class ListType(mixins.ListModelMixin,
     authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
 
     def get_queryset(self):
-        return Type.objects.filter(is_delete=False, is_end=False)
+        return Type.objects.all()
