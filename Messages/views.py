@@ -28,10 +28,9 @@ class GetObjectType:
         try:
             # 从配置文件里面获取具体的类
             obj_type = eval(config.OBJ_TYPE[obj_type])
+            obj = obj_type.objects.get(pk=int(obj_id))
         except KeyError:
             return None
-        try:
-            obj = obj_type.objects.get(pk=int(obj_id))
         except exceptions.ObjectDoesNotExist:
             return None
         return obj
