@@ -80,7 +80,7 @@ class ListCreatePost(mixins.CreateModelMixin,
         except exceptions.FieldError:
             return Response(ReturnCode(1, msg='field error.'))
 
-class PostAndYonghuDetail(mixins.CreateModelMixin,
+class ListPostByYonghu(mixins.CreateModelMixin,
                                     mixins.ListModelMixin,
                                     mixins.RetrieveModelMixin,
                                     viewsets.GenericViewSet,
@@ -89,68 +89,50 @@ class PostAndYonghuDetail(mixins.CreateModelMixin,
                                     ReadNumAnd,
                                     GetMessage,
                                     GetReadAndReplyAndLikesNum):
+    def get_queryset(self):
+        try:
+            yonghu_obj = self.get_person(self.request)
+        except KeyError:
+            return Response(ReturnCode(1, msg='must login.'), status=400)
+        post_obj = yonghu_obj.post.all()
+        serializer = PostSerializer(post_obj, many=True)
+        return Response(ReturnCode(0, data=serializer.data))
 
-
-    def post_list(self, request, *args, **kwargs):
+    def update(self, request, *args, **kwargs):
         '''
-        获取指定用户发表帖子
+        更新帖子
         :param request:
         :param args:
         :param kwargs:
         :return:
         '''
-        try:
-            pk = request.session['pk']
-        except KeyError:
-            return Response(ReturnCode(1, msg='must login'),status=400)
-        yonghu_obj = Yonghu.objects.get(pk=pk)
-        post_obj = yonghu_obj.post.all()
-        serializer = PostSerializer(post_obj,many=True)
-        return Response(ReturnCode(0, data=serializer.data))
-
-    # def post_reply_and_like(self, request, *args, **kwargs):
-    #     '''
-    #     用户得到回复和点赞信息
-    #     :return:
-    #     '''
-    #     post = Post()
-    #     try:
-    #         pk = request.session['pk']
-    #     except KeyError:
-    #         return Response(ReturnCode(1, msg='must login'), status=400)
-    #     post_obj = post.objects.filter(pk=pk)
-    #     message_obj = post_obj.message.all()
-    #     return message_obj.reply_message
-
-
-
-
-
-    # def post_message_list(self):
-    #     '''
-    #     获取用户评论列表
-    #     :return:
-    #     '''
-    #     yonghu_obj = self.get_person(self.request)
-    #     message_obj = yonghu_obj.message.all()
-    #     serializer = MessageSerializer(message_obj, many=True)
-    #     return Response(ReturnCode(0, data=serializer.data))
-
-
-    def delete(self, request, *args, **kwargs):
-        '''
-        删除帖子和评论
-        '''
+        post_obj = self.get_object()
+        # 如果是已经删除或者是已经结束的商品返回报错
+        if not post_obj.is_delete:
+            return Response(ReturnCode(1, msg='have already delete.'))
         data = request.data.copy()
-        post = Post()
-        try:
-            pk = request.session['pk']
-        except KeyError:
-            return Response(ReturnCode(1, msg='must login'),status=400)
-        yonghu_obj = Yonghu.objects.get(pk=pk)
-        return yonghu_obj.post.delete(object_id=post.pk)
-
-
+        type_id = data.get('type_id')
+        # 删除参数中指定的字段，防止框架根据参数自动修改用户不能修改的字段
+        if data.get('is_delete'):
+            data.pop('is_delete')
+        if data.get('create_time'):
+            data.pop('create_time')
+        serializer = CommodySerializer(commody_obj, data=data)
+        if serializer.is_valid():
+            try:
+                if type_id:
+                    try:
+                        type_new = Type.objects.get(pk=int(type_id))
+                    except exceptions.ObjectDoesNotExist:
+                        return Response(ReturnCode(1, msg='type objects do not exist.'))
+                    commody_obj.type = type_new
+                    commody_obj.save()
+                serializer.save()
+                return Response(ReturnCode(0, msg='success.', data=serializer.data))
+            except exceptions.FieldDoesNotExist:
+                return Response(ReturnCode(1, msg='qq wx and phone_number must have at least one.'))
+        else:
+            return Response(ReturnCode(1, msg='data invalid.'))
 
 class ListPostByType(mixins.ListModelMixin,
                         mixins.RetrieveModelMixin,
