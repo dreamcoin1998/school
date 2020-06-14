@@ -117,16 +117,16 @@ class ListPostByYonghu(mixins.CreateModelMixin,
             data.pop('is_delete')
         if data.get('create_time'):
             data.pop('create_time')
-        serializer = CommodySerializer(commody_obj, data=data)
+        serializer = PostSerializer(post_obj, data=data)
         if serializer.is_valid():
             try:
                 if type_id:
                     try:
-                        type_new = Type.objects.get(pk=int(type_id))
+                        type_new = PostType.objects.get(pk=int(type_id))
                     except exceptions.ObjectDoesNotExist:
                         return Response(ReturnCode(1, msg='type objects do not exist.'))
-                    commody_obj.type = type_new
-                    commody_obj.save()
+                    post_obj.type = type_new
+                    post_obj.save()
                 serializer.save()
                 return Response(ReturnCode(0, msg='success.', data=serializer.data))
             except exceptions.FieldDoesNotExist:

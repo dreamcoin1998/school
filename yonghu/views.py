@@ -7,7 +7,7 @@ from .serializers import YonghuSerializer
 from rest_framework import viewsets, mixins
 from utils.permissions.permissions import IsOwnerOrReadOnlyInfo
 from utils.permissions.permissions import IsAuthenticated
-from utils.login import code2Session
+from utils.login import code2Session,code2sessionWeiXin
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import SessionAuthentication
 from school import settings
@@ -181,6 +181,43 @@ def qq_login(request):
             request.session['pk'] = openid
             return Response(ReturnCode(0, data=serializer.data), status=200)
         return Response(ReturnCode(1, msg='登录失败，请重新登录'), status=status.HTTP_400_BAD_REQUEST)
+
+def wx_login(request):
+    '''
+
+    :param request:
+    :return:
+    '''
+    code = request.data.get('code')
+    userInfo = request.data.get('userInfo')
+    if type('code') != type('str'):
+        return Response(ReturnCode(1, msg='code错误'), status=status.HTTP_400_BAD_REQUEST)
+    else:
+        res = code2sessionWeiXin.c2s_wx(settings.wx_APPID, code)
+    if res.get('errcode') == 0:
+        openid = res.get('openid')
+        userInfo['openid'] = openid
+        user = Yonghu.object.filter(openid=openid)
+        #不存在用户
+        if len('user') == 0:
+            serializer = YonghuSerializer(data=userInfo)
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                return Response(ReturnCode(1, msg=serializer.errors, status=status.HTTP_400_BAD_REQUEST))
+        else:
+            serializer = YonghuSerializer(user[0], data=userInfo)
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                return Response(ReturnCode(1, msg=serializer.errors, status=status.HTTP_400_BAD_REQUEST))
+            request.session['pk'] = openid
+            return Response(ReturnCode(0, status=200))
+        return Response(ReturnCode(1, msg='登陆失败', status=status.HTTP_400_BAD_REQUEST))
+
+
+
+
 
 
 @csrf_exempt
