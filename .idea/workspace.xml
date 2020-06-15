@@ -3,8 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="8a5d59f5-de63-4713-9659-3ed34a4ba406" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NewTimetable.log" beforeDir="false" afterPath="$PROJECT_DIR$/NewTimetable.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forum/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messy/text_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/messy/text_text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/school/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/school/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/login/code2Session.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/login/code2Session.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonghu/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonghu/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yonghu/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonghu/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

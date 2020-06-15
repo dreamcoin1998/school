@@ -4,6 +4,7 @@
 ### django APP秘钥
 SECRET_KEY = '-qhsgt6r3a4lb1*181+hl141#o@7@am29wa8v$^@dgp(1e)=yj'
 QQ_SECRET = 'B5T4EEMD2MHnmGyX'
+wx_SECRET = 'e39369c9d39feabc58771b1caddf0961'
 
 ### mysql 配置
 MYSQL_HOST = 'cdb-07n3b91f.gz.tencentcdb.com'

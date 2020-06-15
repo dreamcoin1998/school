@@ -184,6 +184,42 @@ def qq_login(request):
 
 
 @csrf_exempt
+@api_view(["POST"])
+def wx_login(request):
+    '''
+
+    :param request:
+    :return:
+    '''
+    code = request.data.get('code')
+    userInfo = request.data.get('userInfo')
+    if type('code') != type('str'):
+        return Response(ReturnCode(1, msg='code错误'), status=status.HTTP_400_BAD_REQUEST)
+    else:
+        res = code2Session.c2s_wx(settings.wx_APPID, code)
+    if res.get('errcode') == 0:
+        openid = res.get('openid')
+        userInfo['openid'] = openid
+        user = Yonghu.objects.filter(openid=openid)
+        #不存在用户
+        if len('user') == 0:
+            serializer = YonghuSerializer(data=userInfo)
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                return Response(ReturnCode(1, msg=serializer.errors), status=status.HTTP_400_BAD_REQUEST)
+        else:
+            serializer = YonghuSerializer(user[0], data=userInfo)
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                return Response(ReturnCode(1, msg=serializer.errors), status=status.HTTP_400_BAD_REQUEST)
+            request.session['pk'] = openid
+            return Response(ReturnCode(0), status=200)
+        return Response(ReturnCode(1, msg='登陆失败'), status=status.HTTP_400_BAD_REQUEST)
+
+
+@csrf_exempt
 @api_view()
 def logout_view(request):
     '''
