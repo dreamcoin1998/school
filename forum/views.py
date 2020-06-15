@@ -19,7 +19,7 @@ from readAndReplyNumAndLikes.views import ReadNumAnd
 from Messages.getMessage import GetMessage
 from django.db.models import Q
 from readAndReplyNumAndLikes.getReadAndReplyNumLikes import GetReadAndReplyAndLikesNum
-# Create your views here.
+
 
 class ListCreatePost(mixins.CreateModelMixin,
                                     mixins.ListModelMixin,
