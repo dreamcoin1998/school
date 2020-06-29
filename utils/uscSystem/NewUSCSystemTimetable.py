@@ -58,7 +58,7 @@ class NewTimetable(Timetable):
                     'encoded': encoded
                 }
                 res = self.s.post('http://61.187.179.66:8924/Logon.do?method=logon', headers=self.headers, data=data)
-                print(res.headers)
+                # print(res.headers)
                 # 登陆成功则为200
                 if res.headers.get('cache-control') is None:
                     return True
@@ -66,7 +66,7 @@ class NewTimetable(Timetable):
                     return False
         except Exception as e:
             logging.debug(e)
-            print('login error:', e)
+            # print('login error:', e)
             return False
 
     # 爬取课表并且解析处理
@@ -136,7 +136,7 @@ class NewTimetable(Timetable):
                     # print(weekClass)
                 ret1[jieci] = classJieci
                 dataList.append(ret1)
-            print(dataList)
+            # print(dataList)
             return dataList
         except Exception as e:
             logging.debug(e)
@@ -150,11 +150,11 @@ class NewTimetable(Timetable):
         :return:
         '''
         login = self.login()
-        print(login)
+        # print(login)
         if login:
             return [self.getTimetable()]
         else:
             return login
 
 
-NewTimetable('20174670323', '18759799353gjb').run()
+# NewTimetable('20174670323', '18759799353gjb').run()

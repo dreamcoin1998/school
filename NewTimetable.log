@@ -1252,3 +1252,180 @@ DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=lo
 DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff00401b9432396ad7dd7ab6139078804ab4d32a2929d1a89eb3fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
 DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
 DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff001df910a6ef72a91c39bc552272200835dc97937da4290f9bfd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+ERROR:django.request:Internal Server Error: /v1.0/auth/wx_login
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\cache.py", line 32, in _decorator
+    return method(self, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\cache.py", line 81, in get
+    client=client)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\client\default.py", line 201, in get
+    raise ConnectionInterrupted(connection=client, parent=e)
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. 由于目标计算机积极拒绝，无法连接。.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\utils\deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Administrator\Desktop\school\utils\middlewares\antiSpiders.py", line 57, in process_request
+    elif self._verification_ip_in_blacklist(ip_address):
+  File "C:\Users\Administrator\Desktop\school\utils\middlewares\antiSpiders.py", line 28, in _verification_ip_in_blacklist
+    info = cache.get(ip_address)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\cache.py", line 39, in _decorator
+    raise e.parent
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\client\default.py", line 199, in get
+    value = client.get(key)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\client.py", line 976, in get
+    return self.execute_command('GET', name)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\client.py", line 673, in execute_command
+    connection.send_command(*args)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\connection.py", line 585, in send_packed_command
+    self.connect()
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. 由于目标计算机积极拒绝，无法连接。.
+ERROR:django.request:Internal Server Error: /v1.0/auth/yonghu_info/
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\cache.py", line 32, in _decorator
+    return method(self, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\cache.py", line 81, in get
+    client=client)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\client\default.py", line 201, in get
+    raise ConnectionInterrupted(connection=client, parent=e)
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. 由于目标计算机积极拒绝，无法连接。.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\utils\deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Administrator\Desktop\school\utils\middlewares\antiSpiders.py", line 57, in process_request
+    elif self._verification_ip_in_blacklist(ip_address):
+  File "C:\Users\Administrator\Desktop\school\utils\middlewares\antiSpiders.py", line 28, in _verification_ip_in_blacklist
+    info = cache.get(ip_address)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\cache.py", line 39, in _decorator
+    raise e.parent
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\client\default.py", line 199, in get
+    value = client.get(key)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\client.py", line 976, in get
+    return self.execute_command('GET', name)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\client.py", line 673, in execute_command
+    connection.send_command(*args)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\connection.py", line 585, in send_packed_command
+    self.connect()
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. 由于目标计算机积极拒绝，无法连接。.
+ERROR:django.request:Internal Server Error: /v1.0/auth/yonghu_info/
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\cache.py", line 32, in _decorator
+    return method(self, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\cache.py", line 81, in get
+    client=client)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\client\default.py", line 201, in get
+    raise ConnectionInterrupted(connection=client, parent=e)
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 10061 connecting to 127.0.0.1:6379. 由于目标计算机积极拒绝，无法连接。.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\utils\deprecation.py", line 93, in __call__
+    response = self.process_request(request)
+  File "C:\Users\Administrator\Desktop\school\utils\middlewares\antiSpiders.py", line 57, in process_request
+    elif self._verification_ip_in_blacklist(ip_address):
+  File "C:\Users\Administrator\Desktop\school\utils\middlewares\antiSpiders.py", line 28, in _verification_ip_in_blacklist
+    info = cache.get(ip_address)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\cache.py", line 39, in _decorator
+    raise e.parent
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django_redis\client\default.py", line 199, in get
+    value = client.get(key)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\client.py", line 976, in get
+    return self.execute_command('GET', name)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\client.py", line 673, in execute_command
+    connection.send_command(*args)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\connection.py", line 585, in send_packed_command
+    self.connect()
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\redis\connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. 由于目标计算机积极拒绝，无法连接。.
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.weixin.qq.com:443
+DEBUG:urllib3.connectionpool:https://api.weixin.qq.com:443 "GET /sns/jscode2session?appid=wxef282571c30a328e&secret=e39369c9d39feabc58771b1caddf0961&js_code=011EP0Ui0zENQq1NRDSi0NH5Ui0EP0UZ&grant_type=authorization_code HTTP/1.1" 200 82
+ERROR:django.request:Internal Server Error: /v1.0/auth/wx_login
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\django\views\generic\base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\rest_framework\views.py", line 507, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+  File "C:\Users\Administrator\Desktop\school\winenv\lib\site-packages\rest_framework\views.py", line 422, in finalize_response
+    % type(response)
+AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<class 'NoneType'>`
+INFO:django.utils.autoreload:C:\Users\Administrator\Desktop\school\yonghu\views.py changed, reloading.
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff001df910a6ef72a91c4a844a38b6cfed55eeeff1c2b022eb99fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+INFO:django.utils.autoreload:C:\Users\Administrator\Desktop\school\yonghu\views.py changed, reloading.
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff001df910a6ef72a91c4a844a38b6cfed55fc9e399fadce9508fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.weixin.qq.com:443
+DEBUG:urllib3.connectionpool:https://api.weixin.qq.com:443 "GET /sns/jscode2session?appid=wxef282571c30a328e&secret=e39369c9d39feabc58771b1caddf0961&js_code=081O8Drv037MIg1gujsv0DYHrv0O8Dr1&grant_type=authorization_code HTTP/1.1" 200 82
+WARNING:django.request:Bad Request: /v1.0/auth/wx_login
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff001df910a6ef72a91cd57f34d39ee2848460f4ff17257a8dacfd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff001df910a6ef72a91c5840ea619afbd1c60b3fbc1f2c5bd19ffd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff001df910a6ef72a91c5840ea619afbd1c64852e91cf008b194fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/xskb/xskb_list.do HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTP connection (1): 61.187.179.66:8924
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon&flag=sess HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /Logon.do?method=logon HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/xk/LoginToXk?method=jwxt&ticqzket=53cc469f827e38078274b49f0fa61fa68c0c7581b231a71d11ba537b20b5ff001df910a6ef72a91ca720d193606329b5905d40ba2cac81c7fd4efd0b4b786c022a246c44339929c4b6829586e43594117e8a0e47b2c0379f716b9d2e3536a4627fa58a7354730d6ada9115e985e20f4c HTTP/1.1" 302 0
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "GET /jsxsd/framework/xsMain.jsp HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:http://61.187.179.66:8924 "POST /jsxsd/kscj/cjcx_list HTTP/1.1" 200 None
+INFO:django.utils.autoreload:D:\重要项目文件夹\school\utils\uscSystem\usc.py changed, reloading.

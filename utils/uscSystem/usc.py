@@ -17,7 +17,7 @@ class Usc(NewTimetable):
     def set_default_args(data):
         # 加载默认参数，复制一个新的字典，防止修改配置
         default_args = config.USC_ARGS.copy()
-        print(default_args is config.USC_ARGS)
+        # print(default_args is config.USC_ARGS)
         # 未传参数则直接使用默认参数
         if data is None:
             return default_args
@@ -34,9 +34,13 @@ class Usc(NewTimetable):
         '''
         res = self.s.post(self.check_score_link, headers=self.headers, data=data)
         html = etree.HTML(res.text)
+        # ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14']
+        # 每一科的在第几行
         order_num = html.xpath('//div/table//tr/td[1]/text()')
+        # print(order_num)
         score_data = []
         '''
+        每一科的成绩有很多个字段，以下是所截取的字段
         字段属性：
         4 = 课程名称
         6 = 成绩
@@ -51,7 +55,7 @@ class Usc(NewTimetable):
                 # index是从2开始，order_num是从1开始
                 class_field = html.xpath('//div/table//tr[%s]/td[%s]/text()' % (str(int(index) + 1), list_index))[0]
                 # 将\t \n 替换为'',注意格式
-                class_field = class_field.replace('\n', '').replace('\t', '')
+                class_field = class_field.replace('\n', '').replace('\t', '').replace('\r', '')
                 class_info.append(class_field)
             score_data.append(class_info)
         # print(score_data)
@@ -71,5 +75,6 @@ class Usc(NewTimetable):
             return False
 
 
-# data = Usc('20174670323', '18759799353gjb').check_score(None)
-# print(data)
+if __name__ == '__main__':
+    data = Usc('20174670323', '18759799353gjb').check_score(None)
+    print(data)

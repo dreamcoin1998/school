@@ -3,13 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="8a5d59f5-de63-4713-9659-3ed34a4ba406" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forum/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewTimetable.log" beforeDir="false" afterPath="$PROJECT_DIR$/NewTimetable.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forum/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/forum/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messy/text_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/messy/text_text.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/school/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/school/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/school/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/login/code2Session.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/login/code2Session.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yonghu/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonghu/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/uscSystem/NewTimetable.log" beforeDir="false" afterPath="$PROJECT_DIR$/utils/uscSystem/NewTimetable.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/uscSystem/NewUSCSystemTimetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/uscSystem/NewUSCSystemTimetable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/uscSystem/score.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/uscSystem/usc.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/uscSystem/usc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yonghu/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/yonghu/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,7 +38,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../qpg" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -51,15 +50,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Administrator\Desktop\school" />
-      <recent name="$PROJECT_DIR$/school" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Administrator\Desktop\school\school" />
       <recent name="C:\Users\Administrator\Desktop\school\yonghu" />
       <recent name="C:\Users\Administrator\Desktop\school\tasks" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\重要项目文件夹\school" />
+      <recent name="C:\Users\Administrator\Desktop\school" />
+      <recent name="$PROJECT_DIR$/school" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -74,7 +74,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.usc">
     <configuration name="NewUSCSystemTimetable (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="school" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -205,9 +205,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.usc" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.NewUSCSystemTimetable (1)" />
-        <item itemvalue="Python.usc" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.NewUSCSystemTimetable" />
       </list>

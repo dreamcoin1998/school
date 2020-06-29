@@ -3,7 +3,6 @@ from django.contrib.contenttypes.models import ContentType
 from rest_framework import mixins, viewsets
 from rest_framework.response import Response
 from .models import Post,PostType
-from yonghu.models import Yonghu
 from django.db.models.fields import exceptions
 from .serializers import PostTypeSerializer
 from django.views.decorators.csrf import csrf_exempt
@@ -79,6 +78,7 @@ class ListCreatePost(mixins.CreateModelMixin,
         except exceptions.FieldError:
             return Response(ReturnCode(1, msg='field error.'))
 
+
 class ListPostByYonghu(mixins.CreateModelMixin,
                                     mixins.ListModelMixin,
                                     mixins.RetrieveModelMixin,
@@ -133,6 +133,7 @@ class ListPostByYonghu(mixins.CreateModelMixin,
         else:
             return Response(ReturnCode(1, msg='data invalid.'))
 
+
 class ListPostByType(mixins.ListModelMixin,
                         mixins.RetrieveModelMixin,
                         viewsets.GenericViewSet):
@@ -152,6 +153,7 @@ class ListPostByType(mixins.ListModelMixin,
         else:
             return Post.objects.filter(is_deleted=False)
 
+
 @csrf_exempt
 @api_view()
 def searchPostByNameOrContent(request):
@@ -165,6 +167,7 @@ def searchPostByNameOrContent(request):
         serializer = PostSerializer(post_obj, many=True)
         return Response(ReturnCode(0, data=serializer.data))
 
+
 class PostListType(mixins.ListModelMixin,
                 viewsets.GenericViewSet):
     '''
@@ -177,8 +180,3 @@ class PostListType(mixins.ListModelMixin,
 
     def get_queryset(self):
         return PostType.objects.filter(is_deleted=False)
-
-
-
-
-
