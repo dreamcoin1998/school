@@ -4,3 +4,6 @@ school/config.py
 ### 各种虚拟环境
 venv/
 winenv/
+
+### 各种log文件
+utils/uscSystem/*.log
