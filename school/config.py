@@ -1,6 +1,21 @@
 # 项目各密码配置文件
 # 放置于项目根目录下
 
+### 当前环境，可选项为pro(生产)或者是dev（开发）或者是test
+CURRENT_ENV = 'dev'
+
+### 不同环境配置项
+ENV_CONFIG = {
+    "pro": {
+        'DEBUG': False,
+        'MYSQL_DATABASE_NAME': 'school'
+    },
+    "dev": {
+        'DEBUG': True,
+        'MYSQL_DATABASE_NAME': 'test_school'
+    }
+}
+
 ### django APP秘钥
 SECRET_KEY = '-qhsgt6r3a4lb1*181+hl141#o@7@am29wa8v$^@dgp(1e)=yj'
 QQ_SECRET = 'B5T4EEMD2MHnmGyX'

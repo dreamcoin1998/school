@@ -32,7 +32,7 @@ QQ_APPID = '1110027966'
 wx_APPID = 'wxef282571c30a328e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config.ENV_CONFIG[config.CURRENT_ENV]["DEBUG"]
 
 ALLOWED_HOSTS = ['*']
 
@@ -160,12 +160,13 @@ WSGI_APPLICATION = 'school.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
+
 # Mysql数据库配置
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'school',
-        'NAME': 'test_school',
+        'NAME': config.ENV_CONFIG[config.CURRENT_ENV]["MYSQL_DATABASE_NAME"],
         'USER': config.MYSQL_USER,
         'PASSWORD': config.MYSQL_PASSWORD,
         'HOST': config.MYSQL_HOST,
