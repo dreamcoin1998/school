@@ -2,8 +2,7 @@ school/config.py
 venv/
 winenv/
 utils/uscSystem/*.log
-./.idea
-./py3env
-./__py
-*/__pycache__
-./messy
+.idea
+py3env
+*__pycache__
+messy
