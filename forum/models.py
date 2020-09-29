@@ -17,6 +17,7 @@ class PostType(models.Model):
         verbose_name = '帖子类型'
         verbose_name_plural = verbose_name
 
+
 class Post(models.Model, GetReadAndReplyAndLikesNum, GetImagePath):
     '''
     发表帖子

@@ -28,11 +28,13 @@ SECRET_KEY = config.SECRET_KEY
 QQ_SECRET = config.QQ_SECRET
 wx_SECRET = config.wx_SECRET
 ### QQ 小程序APPID
-QQ_APPID = '1110027966'
-wx_APPID = 'wxef282571c30a328e'
+QQ_APPID = config.QQ_APPID
+wx_APPID = config.wx_APPID
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config.ENV_CONFIG[config.CURRENT_ENV]["DEBUG"]
+# 当前环境
+CURRENT_ENV = "development"
+DEBUG = config.ENV_CONFIG[CURRENT_ENV]["DEBUG"]
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,10 +44,11 @@ SESSION_SAVE_EVERY_REQUEST = True
 
 # 用redis做缓存配置
 
+SERVER_REDIS = "www.gaoblog.cn:6379"
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/0',
+        'LOCATION': f'redis://{SERVER_REDIS}/0',
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "PICKLE_VERSION": -1,
@@ -57,7 +60,7 @@ CACHES = {
     },
     'sessions': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/0',
+        'LOCATION': f'redis://{SERVER_REDIS}/0',
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "PICKLE_VERSION": -1,
@@ -100,7 +103,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_swagger',
+    # 'rest_framework_swagger',
     # 'snippets',
     'yonghu',
     'djcelery',
@@ -166,11 +169,11 @@ WSGI_APPLICATION = 'school.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config.ENV_CONFIG[config.CURRENT_ENV]["MYSQL_DATABASE_NAME"],
-        'USER': config.MYSQL_USER,
-        'PASSWORD': config.MYSQL_PASSWORD,
-        'HOST': config.MYSQL_HOST,
-        'PORT': config.MYSQL_PORT
+        'NAME': config.ENV_CONFIG[CURRENT_ENV]["MYSQL_DATABASE_NAME"],
+        'USER': config.ENV_CONFIG[CURRENT_ENV]["MYSQL_USER"],
+        'PASSWORD': config.ENV_CONFIG[CURRENT_ENV]["MYSQL_PASSWORD"],
+        'HOST': config.ENV_CONFIG[CURRENT_ENV]["MYSQL_HOST"],
+        'PORT': config.ENV_CONFIG[CURRENT_ENV]["MYSQL_PORT"]
     }
 }
 
