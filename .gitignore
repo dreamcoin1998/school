@@ -1,9 +1,9 @@
-### 核心配置文件，存在密码密钥等保密项，需要保密
 school/config.py
-
-### 各种虚拟环境
 venv/
 winenv/
-
-### 各种log文件
 utils/uscSystem/*.log
+./.idea
+./py3env
+./__py
+*/__pycache__
+./messy

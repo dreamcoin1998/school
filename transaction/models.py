@@ -1,8 +1,8 @@
 from django.db import models
 from yonghu.models import Yonghu
 from django.db.models.fields import exceptions
-from images.getImagePath import GetImagePath
-from readAndReplyNumAndLikes.getReadAndReplyNumLikes import GetReadAndReplyAndLikesNum
+from utils.getImagePath import GetImagePath
+from utils.uscSystem.getReadAndReplyNumLikes import GetReadAndReplyAndLikesNum
 
 
 class Type(models.Model):

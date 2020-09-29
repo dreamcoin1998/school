@@ -2,8 +2,8 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import images.getImagePath
-import readAndReplyNumAndLikes.getReadAndReplyNumLikes
+import utils.getImagePath
+import utils.uscSystem.getReadAndReplyNumLikes
 
 
 class Migration(migrations.Migration):
@@ -30,6 +30,6 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': '发表帖子',
                 'ordering': ['-created_time'],
             },
-            bases=(models.Model, readAndReplyNumAndLikes.getReadAndReplyNumLikes.GetReadAndReplyAndLikesNum, images.getImagePath.GetImagePath),
+            bases=(models.Model, utils.uscSystem.getReadAndReplyNumLikes.GetReadAndReplyAndLikesNum, utils.getImagePath.GetImagePath),
         ),
     ]

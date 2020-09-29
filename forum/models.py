@@ -1,7 +1,7 @@
 from django.db import models
 from yonghu.models import Yonghu
-from readAndReplyNumAndLikes.getReadAndReplyNumLikes import GetReadAndReplyAndLikesNum
-from images.getImagePath import GetImagePath
+from utils.uscSystem.getReadAndReplyNumLikes import GetReadAndReplyAndLikesNum
+from utils.getImagePath import GetImagePath
 
 
 class PostType(models.Model):
