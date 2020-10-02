@@ -3,6 +3,7 @@ import requests
 import random
 from lxml import etree
 import logging
+import re
 
 
 class NewTimetable(Timetable):
@@ -69,67 +70,77 @@ class NewTimetable(Timetable):
             # print('login error:', e)
             return False
 
+    def _solve_jieci(self, rets):
+        """处理节次 课程对应是第几节取出来"""
+        ret = []  # 节次
+        for i in rets:
+            i = i.replace('\r\n\t\t\t\t\t\t\t', '').replace('\xa0', '').replace('\n\t\t\t\t\t\t\t', '')
+            if not i.endswith('节'):
+                continue
+            ret.append(i)
+        return ret
+
+    def _solve_single_double_week(self, part_sub, step=1):
+        """单双周处理方式"""
+        weekListData = []
+        if len(part_sub.split('-')) == 2:
+            for j in range(int(part_sub.split('-')[0]), int(part_sub.split('-')[1]) + 1, step):
+                weekListData.append(str(j))
+        else:
+            weekListData.append(part_sub)
+        return weekListData
+
+    def _solve_week_data(self, data):
+        """处理周数，将课程对应的周次取出来"""
+        weekListData = []
+        for part in data.split(","):
+            # 如果匹配不到，返回原来的字符串，如果匹配到，则返回的字符串与原来的字符串不同
+            if part != re.sub(r"\(周\)", "", part):
+                part_sub = re.sub(r"\(周\)", "", part)
+                weekListData += self._solve_single_double_week(part_sub)
+            elif part != re.sub(r"\(单周\)", "", part):
+                part_sub = re.sub(r"\(单周\)", "", part)
+                weekListData += self._solve_single_double_week(part_sub, step=2)
+            elif part != re.sub(r"\(双周\)", "", part):
+                part_sub = re.sub(r"\(双周\)", "", part)
+                weekListData += self._solve_single_double_week(part_sub, step=2)
+        return weekListData
+
     # 爬取课表并且解析处理
     def getTimetable(self):
-        # 课表链接
         try:
+            # 课表链接
             url = 'http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do'
             res = self.s.post(url, headers=self.headers, data={'rq': '2020-02-11'})
             html = etree.HTML(res.text)
-            # print(html)
             rets = html.xpath('//tr/th//text()')[8:-1]
-            # print(rets)
-            ret = []  # 节次
-            # weeks = html.xpath('//tr[1]/th//text()')[1:]  # 星期
-            # print(weeks)
+            ret = self._solve_jieci(rets)
             weeks = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-            for i in rets:
-                i = i.replace('\r\n\t\t\t\t\t\t\t', '').replace('\xa0', '').replace('\n\t\t\t\t\t\t\t', '')
-                if not i.endswith('节'):
-                    continue
-                ret.append(i)
-            # print(ret)
             dataList = []
             for index, jieci in enumerate(ret):
-                # print(jieci)
                 ret1 = {}  # 格式 {节次： 课时}
                 classJieci = []
                 for indexWeeks, week in enumerate(weeks):
-                    # 2020.05.11 高俊斌，下面这里indexWeeks要加二，不然前端会出错
-                    clses = html.xpath(
+                    # 下面这里indexWeeks要加二，不然前端会出错
+                    the_class_info = html.xpath(
                         '//tr[%s]/td[%s]/div[1]//text()' % (str(index + 2), (indexWeeks + 2))
                     )
-                    classes = [i for i in clses if not i.startswith('---') and i != '&nbspO']
-                    i = 0
-                    className = classes[::3]
+                    # ['UML软件建模', '3-9(周)', '【环安楼】8-410', '----------------------', '建筑消防工程', '8-11(周)', '【南华楼】1-614']
+                    # 或者是['\xa0']或者[]
+                    classes = [i for i in the_class_info if not i.startswith('---') and i != '&nbspO']
+                    className = classes[::3]  # 获取课程名称
                     classInfo = [k for i, k in enumerate(classes) if i % 3 != 0]
+                    i = 0
                     for indexClassName, cN in enumerate(className):
                         if cN == '\xa0':
                             continue
                         weekClass = {}
                         data = []
-                        # print(id(data), cN)
                         data.append(cN)
-                        # print(i)
                         data += classInfo[i: i + 2]
                         data.append('none')
-                        # 处理周数
-                        # print(data)
-                        weekList = data[-3].replace('(周)', '').split(',')
-                        # print(weekList)
-                        weekListData = []
-                        for wl in weekList:
-                            if len(wl.split('-')) == 2:
-                                # print(wl, classes)
-                                for j in range(int(wl.split('-')[0]), int(wl.split('-')[1]) + 1):
-                                    # print(j)
-                                    weekListData.append(str(j))
-                            else:
-                                weekListData.append(wl)
-                            # print(weekListData)
+                        weekListData = self._solve_week_data(data[-3])
                         data[-3] = ' '.join(weekListData)
-                        # print(data)
-                        # print(classInfo)
                         weekClass[week] = data
                         classJieci.append(weekClass)
                         i += 2

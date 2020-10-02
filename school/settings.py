@@ -44,7 +44,8 @@ SESSION_SAVE_EVERY_REQUEST = True
 
 # 用redis做缓存配置
 
-SERVER_REDIS = "www.gaoblog.cn:6379"
+# SERVER_REDIS = "www.gaoblog.cn:6379"
+SERVER_REDIS = "127.0.0.1:6379"
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',

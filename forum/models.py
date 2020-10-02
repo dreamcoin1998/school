@@ -25,7 +25,7 @@ class Post(models.Model, GetReadAndReplyAndLikesNum, GetImagePath):
     title = models.CharField(max_length=30, verbose_name='帖子标题')
     type = models.ForeignKey(PostType, on_delete=models.DO_NOTHING)
     content = models.TextField(verbose_name='帖子内容')
-    yonghu = models.ForeignKey(Yonghu, on_delete=models.DO_NOTHING, verbose_name='发帖人')
+    yonghu = models.CharField(max_length=128, verbose_name="发帖人")
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
     is_deleted = models.BooleanField(default=False, verbose_name='是否删除')
 
@@ -36,8 +36,15 @@ class Post(models.Model, GetReadAndReplyAndLikesNum, GetImagePath):
     def __str__(self):
         return self.title
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        yonghu_objs = Yonghu.objects.filter(openid=self.yonghu)
+        if yonghu_objs:
+            super(Post, self).save()
+        else:
+            raise ValueError("the yonghu objects (openid: %s) dont exists." % self.yonghu)
+
     class Meta:
         ordering = ['-created_time']
         verbose_name = '发表帖子'
         verbose_name_plural = verbose_name
-
