@@ -14,7 +14,7 @@ class NewTimetable(Timetable):
     1.登录校园网
     2.携带session爬取课表数据
     '''
-    def __init__(self, UserName, Password):
+    def __init__(self, username, password):
         logging.basicConfig(filename='NewTimetable.log', level=logging.DEBUG)
         User_Agent = [
             'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Mobile Safari/537.36',
@@ -25,8 +25,8 @@ class NewTimetable(Timetable):
         ]
         self.headers = {'User-Agent': random.choice(User_Agent)}
         self.s = requests.Session()
-        self.UserName = UserName
-        self.Password = Password
+        self.username = username
+        self.password = password
 
     # 登录校园网
     def login(self):
@@ -40,7 +40,7 @@ class NewTimetable(Timetable):
             else:
                 scode = dataStr.split('#')[0]
                 sxh = dataStr.split('#')[1]
-                code = self.UserName + '%%%' + self.Password
+                code = self.username + '%%%' + self.password
                 encoded = ''
                 i = 0
                 while i < len(code):
@@ -54,8 +54,8 @@ class NewTimetable(Timetable):
                 # print(encoded)
                 # 校园网登录
                 data = {
-                    'userAccount': self.UserName,
-                    'userPassword': self.Password,
+                    'userAccount': self.username,
+                    'userPassword': self.password,
                     'encoded': encoded
                 }
                 res = self.s.post('http://61.187.179.66:8924/Logon.do?method=logon', headers=self.headers, data=data)
@@ -108,8 +108,16 @@ class NewTimetable(Timetable):
 
     # 爬取课表并且解析处理
     def getTimetable(self):
+        """
+        爬取数据，分析数据，格式化数据，返回数据格式
+        :return:
+
+        [
+            ['1一2节', 'Monday', 'UML软件建模', '3-9(周)', '【环安楼】8-410', 'none'],
+            ['1一2节', 'Monday', 'UML软件建模', '3-9(周)', '【环安楼】8-410', 'none']
+        ]
+        """
         try:
-            # 课表链接
             url = 'http://61.187.179.66:8924/jsxsd/xskb/xskb_list.do'
             res = self.s.post(url, headers=self.headers, data={'rq': '2020-02-11'})
             html = etree.HTML(res.text)
@@ -117,10 +125,10 @@ class NewTimetable(Timetable):
             ret = self._solve_jieci(rets)
             weeks = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
             dataList = []
-            for index, jieci in enumerate(ret):
-                ret1 = {}  # 格式 {节次： 课时}
-                classJieci = []
+            for index, section in enumerate(ret):
+                # section -> '1一2节'
                 for indexWeeks, week in enumerate(weeks):
+                    # week -> Monday
                     # 下面这里indexWeeks要加二，不然前端会出错
                     the_class_info = html.xpath(
                         '//tr[%s]/td[%s]/div[1]//text()' % (str(index + 2), (indexWeeks + 2))
@@ -134,20 +142,13 @@ class NewTimetable(Timetable):
                     for indexClassName, cN in enumerate(className):
                         if cN == '\xa0':
                             continue
-                        weekClass = {}
-                        data = []
-                        data.append(cN)
+                        data = [cN]
                         data += classInfo[i: i + 2]
                         data.append('none')
                         weekListData = self._solve_week_data(data[-3])
                         data[-3] = ' '.join(weekListData)
-                        weekClass[week] = data
-                        classJieci.append(weekClass)
+                        dataList.append([section, week] + data)
                         i += 2
-                    # print(weekClass)
-                ret1[jieci] = classJieci
-                dataList.append(ret1)
-            # print(dataList)
             return dataList
         except Exception as e:
             logging.debug(e)
@@ -161,11 +162,7 @@ class NewTimetable(Timetable):
         :return:
         '''
         login = self.login()
-        # print(login)
         if login:
             return [self.getTimetable()]
         else:
             return login
-
-
-# NewTimetable('20174670323', '18759799353gjb').run()
