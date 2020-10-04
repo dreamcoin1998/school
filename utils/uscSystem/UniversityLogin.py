@@ -8,7 +8,7 @@ class UniversityLogin:
     '''
     登录学校教务在线,作为身份认证
     用子类UscLogin
-    尽量不要用这个类
+    不要用这个类
     '''
     def __init__(self, UserName, Password):
         logging.basicConfig(filename='UscLogin.log', level=logging.DEBUG)

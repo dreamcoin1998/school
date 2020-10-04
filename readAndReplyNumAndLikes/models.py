@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from yonghu.models import Yonghu
+from yonghu.models import QQUser, WXUser, APPUser
 
-# Create your models here.
+
 class ReadAndReplyNum(models.Model):
     '''
     阅读数和回复数
@@ -19,6 +19,7 @@ class ReadAndReplyNum(models.Model):
         verbose_name = '阅读和回复数'
         verbose_name_plural = verbose_name
 
+
 class Likes(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.DO_NOTHING)
     object_id = models.PositiveIntegerField()
@@ -30,10 +31,10 @@ class Likes(models.Model):
         verbose_name_plural = verbose_name
 
 
-
 class LikeDetail(models.Model):
-    likes = models.ForeignKey(Likes,on_delete=models.DO_NOTHING)
-    yonghu = models.ForeignKey(Yonghu, on_delete=models.DO_NOTHING, verbose_name='点赞者')
+    likes = models.ForeignKey(Likes, on_delete=models.DO_NOTHING)
+    user = models.CharField(max_length=255, verbose_name="点赞用户ID", null=True)
+    platform = models.CharField(max_length=10, verbose_name="平台", null=True)
     is_liked = models.BooleanField(default=False, verbose_name='是否点赞')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='点赞时间')
 

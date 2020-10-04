@@ -2,8 +2,7 @@
 from django.db import models
 
 
-class Yonghu(models.Model):
-    openid = models.CharField(max_length=64, unique=True, primary_key=True)
+class UserCommon(models.Model):
     nickName = models.CharField(max_length=64, verbose_name='昵称', null=True)
     GENDER = (
         (0, '未知'),
@@ -19,14 +18,44 @@ class Yonghu(models.Model):
     is_auth_new = models.BooleanField(default=False, verbose_name='是否认证(新系统)')
 
     class Meta:
-        verbose_name = '用户'
+        abstract = True
+        verbose_name = "通用用户"
         verbose_name_plural = verbose_name
+
+
+class QQUser(UserCommon):
+    openid = models.CharField(max_length=64, unique=True, primary_key=True)
+
+    class Meta:
+        verbose_name = 'QQ用户'
+        verbose_name_plural = verbose_name
+
+
+class WXUser(UserCommon):
+    openid = models.CharField(max_length=64, unique=True, primary_key=True)
+
+    class Meta:
+        verbose_name = '微信用户'
+        verbose_name_plural = verbose_name
+
+
+class APPUser(UserCommon):
+    email = models.EmailField(verbose_name="邮箱地址", unique=True)
+    phone = models.CharField(max_length=11, verbose_name="电话号码", unique=True, null=True)
+    password = models.CharField(max_length=50, verbose_name="密码")
+
+    class Meta:
+        verbose_name = '电话号码'
+        verbose_name_plural = verbose_name
+        indexes = [models.Index(fields=['email'])]
 
 
 class UscInfo(models.Model):
     UserName = models.CharField(max_length=16, verbose_name='校园网用户名', unique=True, null=True)
     Password = models.CharField(max_length=32, verbose_name='校园网密码', null=True)
-    user = models.OneToOneField(Yonghu, on_delete=models.DO_NOTHING, verbose_name='所关联用户', related_name='usc')
+    QQUser = models.CharField(max_length=255, verbose_name='QQ用户ID', null=True, db_index=True)
+    WXUser = models.CharField(max_length=255, verbose_name='微信用户ID', null=True, db_index=True)
+    APPUser = models.CharField(max_length=255, verbose_name='APP用户ID', null=True, db_index=True)
 
     class Meta:
         verbose_name = '南华大学教务在线用户信息'
@@ -36,8 +65,9 @@ class UscInfo(models.Model):
 class NewUSCINFO(models.Model):
     UserName = models.CharField(max_length=16, verbose_name='校园网用户名', unique=True, null=True)
     Password = models.CharField(max_length=32, verbose_name='校园网密码', null=True)
-    user = models.OneToOneField(Yonghu, on_delete=models.DO_NOTHING, verbose_name='所关联用户', related_name='uscNew')
-
+    QQUser = models.CharField(max_length=255, verbose_name='QQ用户ID', null=True, db_index=True)
+    WXUser = models.CharField(max_length=255, verbose_name='微信用户ID', null=True, db_index=True)
+    APPUser = models.CharField(max_length=255, verbose_name='APP用户ID', null=True, db_index=True)
 
     class Meta:
         verbose_name = '南华大学新版教务在线用户信息'

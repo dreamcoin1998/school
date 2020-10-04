@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from utils.uscSystem.Timetable import Timetable
 from utils.returnCode.ReturnCode import ReturnCode
 from rest_framework.response import Response
-from yonghu.models import Yonghu
+from yonghu.models import QQUser
 from utils.uscSystem.NewUSCSystemTimetable import NewTimetable
 from utils.getPerson import GetPersonal
 from utils.uscSystem.usc import Usc
@@ -20,7 +20,7 @@ def timeTable(request):
     timename = request.query_params.get('TimeName')
     openid = request.query_params.get('openid')
     print(timename)
-    user = Yonghu.objects.get(pk=openid)
+    user = QQUser.objects.get(pk=openid)
     print(user)
     if user.is_auth:
         usc = user.usc
@@ -41,7 +41,7 @@ def getTimetable(request):
     openid = request.data.get('openid')
     assert openid is not None, 'openid is None'
     print(openid)
-    user = Yonghu.objects.get(pk=openid)
+    user = QQUser.objects.get(pk=openid)
     if user.is_auth_new:
         uscNew = user.uscNew
         result = NewTimetable(uscNew.UserName, uscNew.Password).run()

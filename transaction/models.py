@@ -1,5 +1,5 @@
 from django.db import models
-from yonghu.models import Yonghu
+from yonghu.models import QQUser, WXUser, APPUser
 from django.db.models.fields import exceptions
 from utils.getImagePath import GetImagePath
 from utils.uscSystem.getReadAndReplyNumLikes import GetReadAndReplyAndLikesNum
@@ -28,7 +28,8 @@ class Commody(models.Model, GetReadAndReplyAndLikesNum, GetImagePath):
     qq = models.CharField(max_length=15, verbose_name='QQ号', default='', null=True, blank=True)
     wx = models.CharField(max_length=25, verbose_name='微信号', default='', null=True, blank=True)
     phone_number = models.CharField(max_length=11, verbose_name='电话号码', default='', null=True, blank=True)
-    yonghu = models.ForeignKey(Yonghu, on_delete=models.DO_NOTHING, related_name='commody')
+    user = models.CharField(max_length=255, verbose_name="发表用户", null=True)
+    platform = models.CharField(max_length=10, verbose_name="平台", null=True)
     is_end = models.BooleanField(default=False, verbose_name='是否结束')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 

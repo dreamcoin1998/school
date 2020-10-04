@@ -15,6 +15,6 @@ class Code:
             return 'No Access.'
 
 
-def ReturnCode(code, msg=None, data=None):
+def ReturnCode(code, msg=None, data=None, token=None):
     status = Code(code, msg=msg)
-    return {'code': status.code, 'msg': status.msg, 'data': data}
+    return {'code': status.code, 'msg': status.msg, 'data': data, 'token': token}
