@@ -22,5 +22,5 @@ urlpatterns = [
     path('yonghu_logout', views.logout_view),        # 注销登录
     path('qq_login', views.qq_login),                # QQ登录
     path('wx_login', views.wx_login),                # 微信登陆
-    path('login/', views.LoginAPIView),              # 各平台登录集合
+    path('login/', views.LoginAPIView.as_view(), name="login"),  # 各平台登录集合
 ] + router.urls

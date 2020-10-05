@@ -45,7 +45,7 @@ class APPUser(UserCommon):
     password = models.CharField(max_length=50, verbose_name="密码")
 
     class Meta:
-        verbose_name = '电话号码'
+        verbose_name = 'APP用户'
         verbose_name_plural = verbose_name
         indexes = [models.Index(fields=['email'])]
 

@@ -183,14 +183,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # jwt接口验证
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'yonghu.views.jwt_response_payload_handler',
-    'JWT_ALLOW_REFRESH': True
+    # 'JWT_RESPONSE_PAYLOAD_HANDLER': 'yonghu.views.jwt_response_payload_handler',
+    'JWT_PAYLOAD_HANDLER': 'utils.jwt_auth.authentication.jwt_payload_handler',
+    'JWT_ALLOW_REFRESH': True,
+    "JWT_AUTH_HEADER_PREFIX": "usc"
 }
 
 AUTHENTICATION_BACKENDS = (
-    "utils.authentications.MyYonghuBackend",
-    "utils.authentications.JWTModelBackend"
-    "django.contrib.auth.backends.ModelBackend"
+    "django.contrib.auth.backends.ModelBackend",
 )
 
 REST_FRAMEWORK = {
@@ -198,17 +198,37 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 5,
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ),
     # 配置默认的认证方式 base:账号密码验证
     # session：session_id认证
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # drf的这一阶段主要是做验证,middleware的auth主要是设置session和user到request对象
         # 默认的验证是按照验证列表从上到下的验证
+        'utils.jwt_auth.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         # 'rest_framework.authentication.SessionAuthentication',
-        'utils.authentications.JSONWebTokenAuthentication',
     )
+}
+
+##########
+# PLATFORM
+##########
+
+PLATFORM = {
+    "QQ": {
+        "model": "QQUser",
+        "serializer": "QQUserSerializer"
+    },
+    "WX": {
+        "model": "WXUser",
+        "serializer": "WXUserSerializer"
+    },
+    "APP": {
+        "model": "APPUser",
+        "serializer": "APPUserSerializer"
+    }
 }
 
 # Internationalization-

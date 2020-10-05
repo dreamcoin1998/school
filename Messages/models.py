@@ -18,6 +18,9 @@ class Message(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
     is_delete = models.BooleanField(default=False, verbose_name='是否删除')
 
+    class Meta:
+        abstract = True
+
 
 class MainMessage(Message):
     class Meta:
