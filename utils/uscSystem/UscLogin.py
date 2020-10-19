@@ -3,12 +3,12 @@ import logging
 
 
 class UscLogin(UniversityLogin):
-    '''
+    """
     登录南华大学教务在线，需要encode,username,password
     1.首先解析encode
     2.登录
-    '''
-    def UscLoginNew(self):
+    """
+    def usc_login(self):
         try:
             # 登录校园网，首先获取传输参数encode
             res = self.s.post('http://61.187.179.66:8924/Logon.do?method=logon&flag=sess', headers=self.headers)

@@ -8,3 +8,4 @@ py3env
 *.pyc
 messy
 *.log
+test/

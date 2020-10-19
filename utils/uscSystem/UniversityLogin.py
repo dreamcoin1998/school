@@ -24,7 +24,7 @@ class UniversityLogin:
         self.UserName = UserName
         self.Password = Password
 
-    def UscLogin(self):
+    def usc_login(self):
         self.s.get('http://jwzx.usc.edu.cn/')
         res = self.s.get('http://jwzx.usc.edu.cn/Core/verify_code.ashx?')
         Code = IdentifiVerify(res)

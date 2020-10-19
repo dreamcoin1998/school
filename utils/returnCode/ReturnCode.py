@@ -1,6 +1,8 @@
 """
 '修改状态码': '2020.04.15'
 """
+
+
 class Code:
     def __init__(self, code, msg=None):
         self.code = code

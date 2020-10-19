@@ -11,7 +11,7 @@ from yonghu import models
 from yonghu import serializers
 
 
-def jwt_payload_handler(user_data, platform="QQ"):
+def jwt_payload_handler(user_data, platform):
     if user_data.get("openid"):
         user_id = user_data["openid"]
     else:
@@ -101,8 +101,9 @@ class JSONWebTokenAuthentication(BaseJSONWebTokenAuthentication):
         return token[1]
 
 
-def get_platform_user(platform="QQ"):
+def get_platform_user(platform):
     try:
+        platform = platform if platform else settings.DEFAULT_PLATFORM
         user_model_class_name = PLATFORM[platform]["model"]
         user_serializer_class_name = PLATFORM[platform]["serializer"]
     except KeyError:

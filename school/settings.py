@@ -195,6 +195,10 @@ AUTHENTICATION_BACKENDS = (
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    'DEFAULT_VERSION': 'v1.0',
+    'VERSION_PARAM': 'version',
+    'ALLOWED_VERSIONS': ['v1.0', 'v2.0'],
     'PAGE_SIZE': 5,
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
@@ -230,6 +234,7 @@ PLATFORM = {
         "serializer": "APPUserSerializer"
     }
 }
+DEFAULT_PLATFORM = "QQ"
 
 # Internationalization-
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
