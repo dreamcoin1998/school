@@ -15,7 +15,8 @@ from utils.uscSystem.UniversityLogin import UniversityLogin
 from utils.uscSystem.UscLogin import UscLogin
 from rest_framework_jwt.serializers import jwt_payload_handler, jwt_encode_handler
 from utils.jwt_auth.authentication import JSONWebTokenAuthentication, CsrfExemptSessionAuthentication
-from utils.jwt_auth.authentication import get_platform_user
+from utils.jwt_auth.authentication import get_platform_user, RefreshJwtSerializers
+from rest_framework_jwt.views import JSONWebTokenAPIView
 
 
 class QQUserInfo(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
@@ -175,6 +176,19 @@ class LoginAPIView(APIView):
         if self.user_data is None or self.token is None:
             return Response(ReturnCode(1, msg=self.error), status=self.status_code)
         return Response(ReturnCode(0, data=self.user_data, token=self.token), status=200)
+
+
+class RefreshJSONWebToken(JSONWebTokenAPIView):
+    serializer_class = RefreshJwtSerializers
+    
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        
+        if serializer.is_valid():
+            user_data = serializer.object.get("user_data")
+            token = serializer.object.get("token")
+            return Response(ReturnCode(0, data=user_data, token=token))
+        return Response(ReturnCode(1, msg=serializer.errors), status=400)
 
 
 @csrf_exempt

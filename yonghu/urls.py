@@ -2,7 +2,6 @@ from django.urls import path
 from . import views
 from rest_framework.routers import DefaultRouter
 from .views import QQUserInfo, Authentication, AuthenticationV2
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 
 # yonghu_update = YonghuInfo.as_view({
@@ -17,6 +16,6 @@ router.register('user-auth-v2', AuthenticationV2, basename='user_auth_v2')   # �
 
 
 urlpatterns = [
-    path('api-token-refresh/', refresh_jwt_token),   # jwt刷新
-    path('login/', views.LoginAPIView.as_view(), name="login"),  # 各平台登录集合
+    path('api-token-refresh/', views.RefreshJSONWebToken.as_view()),   # jwt刷新
+    path('api-token-auth/', views.LoginAPIView.as_view(), name="login"),  # 各平台登录集合
 ] + router.urls

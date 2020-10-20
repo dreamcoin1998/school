@@ -180,13 +180,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+##############
 # jwt接口验证
+##############
+
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+    # 可以每个月登陆一次，最长可以一年不登陆
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=30),
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=360),
     # 'JWT_RESPONSE_PAYLOAD_HANDLER': 'yonghu.views.jwt_response_payload_handler',
     'JWT_PAYLOAD_HANDLER': 'utils.jwt_auth.authentication.jwt_payload_handler',
     'JWT_ALLOW_REFRESH': True,
-    "JWT_AUTH_HEADER_PREFIX": "usc"
+    "JWT_AUTH_HEADER_PREFIX": "usc",
+    "JWT_ISSUER": "usc-school"
 }
 
 AUTHENTICATION_BACKENDS = (
