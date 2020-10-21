@@ -55,7 +55,7 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
 
 
 class JSONWebTokenAuthentication(BaseJSONWebTokenAuthentication):
-
+    """JWT验证"""
     def get_authorization_header(self, request):
         try:
             auth = request.META.get('HTTP_AUTHORIZATION').split()

@@ -13,32 +13,54 @@ from school import settings
 from utils.returnCode import ReturnCode
 from utils.uscSystem.UniversityLogin import UniversityLogin
 from utils.uscSystem.UscLogin import UscLogin
-from rest_framework_jwt.serializers import jwt_payload_handler, jwt_encode_handler
+from rest_framework_jwt.serializers import jwt_payload_handler, jwt_encode_handler, jwt_decode_handler
 from utils.jwt_auth.authentication import JSONWebTokenAuthentication, CsrfExemptSessionAuthentication
 from utils.jwt_auth.authentication import get_platform_user, RefreshJwtSerializers
 from rest_framework_jwt.views import JSONWebTokenAPIView
 
 
-class QQUserInfo(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
+class GetOrUpdateUserInfo(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
     """
     获取或更新用户信息
     list: http://hostname/auth/yonghu_info/[pk] GET # pk不带获取当前用户，带的话获取指定用户
     update: http://hostname/auth/yonghu_info/pk/ PUT # pk必须带
     """
     lookup_field = 'pk'
-    serializer_class = QQUserSerializer
+    serializer_class = None
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnlyInfo)
     authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
 
     def get_queryset(self):
-        try:
-            if self.kwargs.get('pk'):
-                pk = self.kwargs['pk']
-            else:
-                pk = self.request.session['pk']
-            return QQUser.objects.filter(pk=pk)
-        except KeyError:
+        user = self.request.user
+        if user is None:
             return []
+        return user
+
+    def initial_serializer(self):
+        # 获取token，从token获取platform
+        token = self.request.auth
+        payload = jwt_decode_handler(token)
+        platform = payload.get("platform")
+        _, user_serializer = get_platform_user(platform)
+        # 初始化serializer
+        self.serializer_class = user_serializer
+
+    def list(self, request, *args, **kwargs):
+        # 初始化serializer_class
+        self.initial_serializer()
+        user_obj = self.get_object()
+        serializer = self.get_serializer(user_obj)
+        return Response(ReturnCode.ResponseCode(data=serializer.data))
+
+    def update(self, request, *args, **kwargs):
+        # 初始化serializer_class
+        self.initial_serializer()
+        user_obj = self.get_object()
+        serializer = self.get_serializer(data=user_obj)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(ReturnCode.ResponseCode(data=serializer.validated_data))
+        return Response(ReturnCode.UpdateUserInfoFailResponse(msg=serializer.errors))
 
 
 class Authentication(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):

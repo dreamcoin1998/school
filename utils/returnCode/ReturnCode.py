@@ -80,3 +80,9 @@ class LoginFailResponse(ResponseCode):
     """登陆失败"""
     code = 2003
     msg = "login failed."
+
+
+class UpdateUserInfoFailResponse(ResponseCode):
+    """更新用户信息失败"""
+    code = 2004
+    msg = "Update user info failed."
