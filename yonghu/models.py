@@ -43,6 +43,7 @@ class APPUser(UserCommon):
     email = models.EmailField(verbose_name="邮箱地址", unique=True)
     phone = models.CharField(max_length=11, verbose_name="电话号码", unique=True, null=True)
     password = models.CharField(max_length=50, verbose_name="密码")
+    is_active = models.BooleanField(default=False, verbose_name="激活状态")
 
     class Meta:
         verbose_name = 'APP用户'

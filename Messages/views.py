@@ -1,6 +1,6 @@
 from rest_framework import mixins, viewsets
 from rest_framework.response import Response
-from utils.returnCode.ReturnCode import ReturnCode
+from utils.returnCode import ReturnCode
 from .models import MainMessage, ReplyMessage
 from transaction.models import Commody
 from forum.models import Post

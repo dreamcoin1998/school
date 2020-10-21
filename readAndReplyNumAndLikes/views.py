@@ -3,7 +3,7 @@ from django.db import transaction
 from django.contrib.contenttypes.models import ContentType
 from yonghu.models import QQUser
 from rest_framework.response import Response
-from utils.returnCode.ReturnCode import ReturnCode
+from utils.returnCode import ReturnCode
 from Messages.models import MainMessage, ReplyMessage
 from .models import ReadAndReplyNum,LikeDetail,Likes
 

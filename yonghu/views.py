@@ -15,8 +15,9 @@ from utils.uscSystem.UniversityLogin import UniversityLogin
 from utils.uscSystem.UscLogin import UscLogin
 from rest_framework_jwt.serializers import jwt_payload_handler, jwt_encode_handler, jwt_decode_handler
 from utils.jwt_auth.authentication import JSONWebTokenAuthentication, CsrfExemptSessionAuthentication
-from utils.jwt_auth.authentication import get_platform_user, RefreshJwtSerializers
+from utils.jwt_auth.authentication import get_platform_user
 from rest_framework_jwt.views import JSONWebTokenAPIView
+from utils.jwt_auth.serializers import RefreshJwtSerializers
 
 
 class GetOrUpdateUserInfo(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):

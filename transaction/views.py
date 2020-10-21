@@ -7,7 +7,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from yonghu.views import CsrfExemptSessionAuthentication
 from .models import Commody, Type
 from .serializers import CommodySerializer, TypeSerializer
-from utils.returnCode.ReturnCode import ReturnCode
+from utils.returnCode import ReturnCode
 from django.db.models.fields import exceptions
 from django.db.models import Q
 from images.models import ImagePath

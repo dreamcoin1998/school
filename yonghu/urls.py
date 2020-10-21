@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from rest_framework.routers import DefaultRouter
-from .views import QQUserInfo, Authentication, AuthenticationV2
+from .views import Authentication, AuthenticationV2, GetOrUpdateUserInfo
 
 
 # yonghu_update = YonghuInfo.as_view({
@@ -10,7 +10,7 @@ from .views import QQUserInfo, Authentication, AuthenticationV2
 
 
 router = DefaultRouter()
-router.register('user-info', QQUserInfo, basename='user_info')             # 获取或更新QQ用户信息
+router.register('user-info', GetOrUpdateUserInfo, basename='user_info')             # 获取或更新QQ用户信息
 router.register('user-auth', Authentication, basename='user_auth')             # 账号身份认证
 router.register('user-auth-v2', AuthenticationV2, basename='user_auth_v2')   # 新系统账号身份认证
 
