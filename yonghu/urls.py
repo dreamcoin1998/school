@@ -17,5 +17,5 @@ router.register('user-auth-v2', AuthenticationV2, basename='user_auth_v2')   # �
 
 urlpatterns = [
     path('api-token-refresh/', views.RefreshJSONWebToken.as_view()),   # jwt刷新
-    path('api-token-auth/', views.LoginAPIView.as_view(), name="login"),  # 各平台登录集合
+    path('api-token-auth/', views.LoginAPIView.as_view(), name="login"),  # 各平台登录接口
 ] + router.urls

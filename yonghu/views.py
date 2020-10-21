@@ -10,7 +10,7 @@ from utils.permissions.permissions import IsOwnerOrReadOnlyInfo
 from utils.permissions.permissions import IsAuthenticated
 from utils.login import code2Session
 from school import settings
-from utils.returnCode.ReturnCode import ReturnCode
+from utils.returnCode import ReturnCode
 from utils.uscSystem.UniversityLogin import UniversityLogin
 from utils.uscSystem.UscLogin import UscLogin
 from rest_framework_jwt.serializers import jwt_payload_handler, jwt_encode_handler
@@ -81,11 +81,11 @@ class Authentication(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet):
                 usc_info.save()
                 user.is_auth = True
                 user.save()
-                return Response(ReturnCode(0, data=serializer.data), status=200)
+                return Response(ReturnCode.ResponseCode(data=serializer.data), status=200)
             else:
-                return Response(ReturnCode(1, msg='登录失败'), status=400)
+                return Response(ReturnCode.AuthenticateErrorResponse(), status=400)
         else:
-            return Response(ReturnCode(1, msg='请勿重复验证'), status=status.HTTP_400_BAD_REQUEST)
+            return Response(ReturnCode.ReAuthErrorResponse(), status=400)
 
 
 class AuthenticationV2(Authentication):
@@ -174,8 +174,8 @@ class LoginAPIView(APIView):
         self._login()
         self._create_token()
         if self.user_data is None or self.token is None:
-            return Response(ReturnCode(1, msg=self.error), status=self.status_code)
-        return Response(ReturnCode(0, data=self.user_data, token=self.token), status=200)
+            return Response(ReturnCode.LoginFailResponse(msg=self.error), status=self.status_code)
+        return Response(ReturnCode.ResponseCode(data=self.user_data, token=self.token), status=200)
 
 
 class RefreshJSONWebToken(JSONWebTokenAPIView):
@@ -187,8 +187,8 @@ class RefreshJSONWebToken(JSONWebTokenAPIView):
         if serializer.is_valid():
             user_data = serializer.object.get("user_data")
             token = serializer.object.get("token")
-            return Response(ReturnCode(0, data=user_data, token=token))
-        return Response(ReturnCode(1, msg=serializer.errors), status=400)
+            return Response(ReturnCode.ResponseCode(data=user_data, token=token))
+        return Response(ReturnCode.TokenRefreshExpiredResponse(msg=serializer.errors), status=400)
 
 
 @csrf_exempt
@@ -200,4 +200,4 @@ def logout_view(request):
     :return:
     """
     request.session.clear()
-    return Response(ReturnCode(0), status=status.HTTP_200_OK)
+    return Response(ReturnCode.ResponseCode(), status=status.HTTP_200_OK)
