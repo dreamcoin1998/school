@@ -115,6 +115,7 @@ class AuthenticationV2(Authentication):
     """使用新教务系统验证"""
     usc_info_class = NewUSCINFO
     usc_login_class = UscLogin
+    versioning_class = "v2.0"
 
 
 class LoginAPIView(APIView):
