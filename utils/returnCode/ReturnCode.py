@@ -3,7 +3,7 @@
 """
 
 
-class ResponseCode:
+class ResponseCode(dict):
 
     code = 0
     msg = "ok."
@@ -16,8 +16,6 @@ class ResponseCode:
             self.total = total
         self.kwargs = kwargs
         self.msg = self.msg if msg is None else self.msg
-
-    def __repr__(self):
         resp = {
             "code": self.code,
             "msg": self.msg,
@@ -25,7 +23,14 @@ class ResponseCode:
             "total": self.total,
         }
         resp.update(self.kwargs)
-        return resp
+        self.data = resp
+        super(ResponseCode, self).__init__(self.data)
+
+    def __setitem__(self, key, value):
+        self.data[key] = value
+
+    def __getitem__(self, item):
+        return self.data[item]
 
 
 class NotLoginResponse(ResponseCode):

@@ -48,11 +48,20 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
         return  # To not perform the csrf check previously happening
 
 
+def parse_jwt_token(jwt_token):
+    """验证jwt前缀是否合法"""
+    token = jwt_token.split(" ")
+    auth_header_prefix = settings.JWT_AUTH["JWT_AUTH_HEADER_PREFIX"].lower()
+    if len(token) != 2 or token[0].lower() != auth_header_prefix:
+        return None
+    return token[1]
+
+
 class JSONWebTokenAuthentication(BaseJSONWebTokenAuthentication):
     """JWT验证"""
     def get_authorization_header(self, request):
         try:
-            auth = request.META.get('HTTP_AUTHORIZATION').split()
+            auth = request.META.get('HTTP_AUTHORIZATION')
             return auth
         except AttributeError as e:
             return None
@@ -76,7 +85,7 @@ class JSONWebTokenAuthentication(BaseJSONWebTokenAuthentication):
         if auth is None:
             return None
         # 自定义校验规则：auth_header_prefix token
-        token = self.parse_jwt_token(auth)
+        token = parse_jwt_token(auth)
         if token is None:
             return None
         try:
@@ -84,21 +93,13 @@ class JSONWebTokenAuthentication(BaseJSONWebTokenAuthentication):
             payload = jwt_decode_handler(token)
         except jwt.ExpiredSignature:
             raise AuthenticationFailed('token已过期')
-        except jwt.exceptions:
+        except jwt.exceptions.DecodeError:
             raise AuthenticationFailed('非法用户')
         # payload => user
         user = self.authenticate_credentials(payload)
         if user is None:
             return None
         return user, token
-
-    def parse_jwt_token(self, jwt_token):
-        """验证jwt前缀是否合法"""
-        token = jwt_token.split()
-        auth_header_prefix = settings.JWT_AUTH["JWT_AUTH_HEADER_PREFIX"].lower()
-        if len(token) != 2 or token[0].lower() != auth_header_prefix:
-            return None
-        return token[1]
 
 
 def get_platform_user(platform):

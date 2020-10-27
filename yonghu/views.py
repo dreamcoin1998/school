@@ -3,19 +3,17 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import UscInfo, NewUSCINFO, QQUser, WXUser
-from .serializers import QQUserSerializer, WXUserSerializer
+from .models import UscInfo, NewUSCINFO, QQUser
+from .serializers import QQUserSerializer
 from rest_framework import viewsets, mixins
 from utils.permissions.permissions import IsOwnerOrReadOnlyInfo
 from utils.permissions.permissions import IsAuthenticated
-from utils.login import code2Session
-from school import settings
 from utils.returnCode import ReturnCode
 from utils.uscSystem.UniversityLogin import UniversityLogin
 from utils.uscSystem.UscLogin import UscLogin
 from rest_framework_jwt.serializers import jwt_payload_handler, jwt_encode_handler, jwt_decode_handler
 from utils.jwt_auth.authentication import JSONWebTokenAuthentication, CsrfExemptSessionAuthentication
-from utils.jwt_auth.authentication import get_platform_user
+from utils.jwt_auth.authentication import get_platform_user, parse_jwt_token
 from rest_framework_jwt.views import JSONWebTokenAPIView
 from utils.jwt_auth.serializers import RefreshJwtSerializers
 
@@ -26,7 +24,7 @@ class GetOrUpdateUserInfo(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet
     list: http://hostname/auth/yonghu_info/[pk] GET # pk不带获取当前用户，带的话获取指定用户
     update: http://hostname/auth/yonghu_info/pk/ PUT # pk必须带
     """
-    lookup_field = 'pk'
+    # lookup_field = "pk"
     serializer_class = None
     permission_classes = (IsAuthenticated, IsOwnerOrReadOnlyInfo)
     authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
@@ -49,14 +47,14 @@ class GetOrUpdateUserInfo(mixins.UpdateModelMixin, viewsets.ReadOnlyModelViewSet
     def list(self, request, *args, **kwargs):
         # 初始化serializer_class
         self.initial_serializer()
-        user_obj = self.get_object()
+        user_obj = request.user
         serializer = self.get_serializer(user_obj)
         return Response(ReturnCode.ResponseCode(data=serializer.data))
 
     def update(self, request, *args, **kwargs):
         # 初始化serializer_class
         self.initial_serializer()
-        user_obj = self.get_object()
+        user_obj = request.user
         serializer = self.get_serializer(data=user_obj)
         if serializer.is_valid():
             serializer.save()
@@ -129,58 +127,12 @@ class LoginAPIView(APIView):
         self.user_serializer = None
         self.user_data = None
         self.token = None
-        self.error = None
-        self.platform = settings.DEFAULT_PLATFORM
-        self.status_code = 200
         super(LoginAPIView, self).__init__()
 
-    def _user_save(self, app_id=settings.QQ_APPID):
-        """验证参数可用性并保存用户信息，初始化user_data"""
-        code = self.request.data.get('code')
-        user_info = self.request.data.get('userInfo')
-        # 校验参数
-        if not isinstance(code, str) and isinstance(user_info, dict):
-            self.error = "code必须是string，user_info必须是dict"
-            self.status_code = 400
-            return
-        res = code2Session.c2s(app_id, code, platform=self.platform)
-        if res.get('errcode') == 0:
-            openid = res.get('openid')
-            user_info['openid'] = openid
-            user = self.user_model.objects.filter(openid=openid)
-            # 不存在用户
-            if user.count() == 0:
-                serializer = self.user_serializer(data=user_info)
-                if serializer.is_valid():
-                    serializer.save()
-                    self.user_data = serializer.data
-                else:
-                    self.error = serializer.errors
-                    self.status_code = 400
-            else:
-                serializer = self.user_serializer(user[0], data=user_info)
-                if serializer.is_valid():
-                    serializer.save()
-                    self.user_data = serializer.data
-                else:
-                    self.error = serializer.errors
-                    self.status_code = 400
-        else:
-            self.error = "后端调用小程序接口获取openid失败"
-            self.status_code = 500
-
-    def _login(self):
-        """验证参数可用性并保存用户信息"""
+    def _get_user_class_info(self):
         # 根据不同平台初始化user类型和序列化类型
         user_model, user_serializer = get_platform_user(platform=self.platform)
-        if user_model is None or user_serializer is None:
-            return
-        self.user_model = user_model
-        self.user_serializer = user_serializer
-        if self.platform == 'QQ':
-            self._user_save(app_id=settings.QQ_APPID)
-        elif self.platform == 'WX':
-            self._user_save(app_id=settings.WX_APPID)
+        return user_model, user_serializer
 
     def _create_token(self):
         # user_data非空登陆成功，为空说明登陆失败
@@ -193,9 +145,15 @@ class LoginAPIView(APIView):
             self.status_code = 400
 
     def post(self, request):
-        platform = self.kwargs.get("platform")
+        platform = request.query_params.get("platform")
         self.platform = platform if platform is not None else self.platform
-        self._login()
+        user_model, user_serializer = self._get_user_class_info()
+        serializer = user_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            self.user_data = serializer.data
+        else:
+            return Response(ReturnCode.LoginFailResponse(msg=serializer.errors), status=400)
         self._create_token()
         if self.user_data is None or self.token is None:
             return Response(ReturnCode.LoginFailResponse(msg=self.error), status=self.status_code)

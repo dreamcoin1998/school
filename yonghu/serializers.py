@@ -6,6 +6,8 @@ from .models import QQUser, WXUser, APPUser
 
 class UserCommonSerializers(serializers.ModelSerializer):
 
+    platform = None
+
     openid = serializers.CharField(required=True, error_messages={'required': "openid 必须存在且必须是string"})
     nickName = serializers.CharField()
     gender = serializers.IntegerField(min_value=0, max_value=2, error_messages={
@@ -19,16 +21,18 @@ class UserCommonSerializers(serializers.ModelSerializer):
     is_auth = serializers.BooleanField(read_only=True)
     is_auth_new = serializers.BooleanField(read_only=True)
 
+    @property
     def _get_app_id(self):
         return settings.QQ_APPID
 
     def _get_openid(self, code, user_info):
-        """获取openid"""
+        """获取openid
+        """
         # 校验参数
         if not isinstance(code, str) and isinstance(user_info, dict):
             error = "code必须是string，user_info必须是dict"
             raise serializers.ValidationError(error)
-        res = code2Session.c2s(self._get_app_id(), code, platform=self.platform)
+        res = code2Session.c2s(self._get_app_id, code, platform=self.platform)
         if res.get('errcode') == 0:
             openid = res.get('openid')
             user_info['openid'] = openid
@@ -43,6 +47,11 @@ class UserCommonSerializers(serializers.ModelSerializer):
         try:
             # 将openid加入initial_data方便后续验证
             self.initial_data.update(self._get_openid(code, user_info))
+            # 如果已经存在openid则初始化instance
+            user_model = getattr(getattr(self, "Meta"), "model")
+            user = user_model.objects.filter(pk=user_info["openid"])
+            if user.count():
+                self.instance = user[0]
         except serializers.ValidationError as exc:
             self._validated_data = {}
             self._errors = exc.detail
@@ -50,12 +59,15 @@ class UserCommonSerializers(serializers.ModelSerializer):
         return super(UserCommonSerializers, self).is_valid()
 
 
+class empty:
+    pass
+
+
 class QQUserSerializer(UserCommonSerializers):
 
-    def __init__(self):
-        super(QQUserSerializer, self).__init__()
-        self.platform = "QQ"
+    platform = "QQ"
 
+    @property
     def _get_app_id(self):
         return settings.QQ_APPID
 
@@ -66,10 +78,9 @@ class QQUserSerializer(UserCommonSerializers):
 
 class WXUserSerializer(UserCommonSerializers):
 
-    def __init__(self):
-        super(WXUserSerializer, self).__init__()
-        self.platform = "WX"
+    platform = "WX"
 
+    @property
     def _get_app_id(self):
         return settings.WX_APPID
 
@@ -80,9 +91,7 @@ class WXUserSerializer(UserCommonSerializers):
 
 class APPUserSerializer(UserCommonSerializers):
 
-    def __init__(self):
-        super(APPUserSerializer, self).__init__()
-        self.platform = "APP"
+    platform = "APP"
 
     class Meta:
         model = APPUser

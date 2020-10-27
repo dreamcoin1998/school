@@ -1,6 +1,7 @@
 from rest_framework import permissions
 from yonghu.models import QQUser, WXUser, APPUser, NewUSCINFO
 from django.core.exceptions import ObjectDoesNotExist
+from yonghu.models import UserCommon
 
 
 def get_user_obj(request):
@@ -55,11 +56,10 @@ class CreateOrReadOnlyInfo(permissions.BasePermission):
 class IsAuthenticated(permissions.BasePermission):
 
     def has_permission(self, request, view):
-        if request.method in permissions.SAFE_METHODS:
-            return True
+        # if request.method in permissions.SAFE_METHODS:
+        #     return True
         try:
-            print(request.session['pk'])
-            if request.session['pk']:
+            if isinstance(request.user, UserCommon):
                 return True
             else:
                 return False
