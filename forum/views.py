@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from yonghu.views import CsrfExemptSessionAuthentication
 from .serializers import PostSerializer
-from utils.returnCode.ReturnCode import ReturnCode
+from utils.returnCode import ReturnCode
 from images.models import ImagePath
 from utils.getPerson import GetPersonal
 from utils.getImagePath import GetImagePath

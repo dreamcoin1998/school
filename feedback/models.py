@@ -1,6 +1,6 @@
 from django.db import models
 from transaction.models import GetImagePath
-from yonghu.models import Yonghu
+from yonghu.models import QQUser, WXUser, APPUser
 
 
 class Feedback(models.Model, GetImagePath):
@@ -11,7 +11,8 @@ class Feedback(models.Model, GetImagePath):
         (1, '已完成')
     )
     status = models.PositiveIntegerField(choices=status_code, verbose_name='状态')
-    yonghu = models.ForeignKey(Yonghu, on_delete=models.DO_NOTHING, related_name='feedbacks')
+    user = models.CharField(max_length=255, verbose_name="点赞用户ID", null=True)
+    platform = models.CharField(max_length=10, verbose_name="平台", null=True)
 
     class Meta:
         verbose_name = '用户反馈'

@@ -1,9 +1,9 @@
 from django.db.models.fields import exceptions
 from django.db import transaction
 from django.contrib.contenttypes.models import ContentType
-from yonghu.models import Yonghu
+from yonghu.models import QQUser
 from rest_framework.response import Response
-from utils.returnCode.ReturnCode import ReturnCode
+from utils.returnCode import ReturnCode
 from Messages.models import MainMessage, ReplyMessage
 from .models import ReadAndReplyNum,LikeDetail,Likes
 
@@ -67,7 +67,7 @@ class ReplyNumAdd:
         '''
         pk = self.request.session['pk']
         # pk = 'test'
-        yonghu_obj = Yonghu.objects.get(pk=pk)
+        yonghu_obj = QQUser.objects.get(pk=pk)
         return yonghu_obj
 
     def _get_or_create_read_and_reply_num_model(self, ct, obj):
@@ -102,7 +102,7 @@ class ReplyNumAdd:
         read_and_reply_num_obj = self._get_or_create_read_and_reply_num_model(ct, obj)
         msg = self.request.data.get('msg')
         reply_yonghu_pk = self.request.data.get('reply_yonghu_pk')
-        reply_yonghu_obj = Yonghu.objects.get(pk=reply_yonghu_pk)
+        reply_yonghu_obj = QQUser.objects.get(pk=reply_yonghu_pk)
         floor = int(self.request.query_params.get('floor'))
         sid = transaction.savepoint()
         num = 0

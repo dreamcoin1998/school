@@ -29,7 +29,7 @@ QQ_SECRET = config.QQ_SECRET
 wx_SECRET = config.wx_SECRET
 ### QQ 小程序APPID
 QQ_APPID = config.QQ_APPID
-wx_APPID = config.wx_APPID
+WX_APPID = config.wx_APPID
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # 当前环境
@@ -45,30 +45,25 @@ SESSION_SAVE_EVERY_REQUEST = True
 # 用redis做缓存配置
 
 # SERVER_REDIS = "www.gaoblog.cn:6379"
-SERVER_REDIS = "127.0.0.1:6379"
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': f'redis://{SERVER_REDIS}/0',
+        'LOCATION': f'redis://{config.SERVER_REDIS}/0',
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "PICKLE_VERSION": -1,
             "SOCKET_CONNECT_TIMEOUT": 5,
             "SOCKET_TIMEOUT": 5,
-            # "CLIENT_CLASS": "django_redis.client.HerdClient",
-            # "PARSER_CLASS": "redis.connection.HiredisParser"
         },
     },
     'sessions': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': f'redis://{SERVER_REDIS}/0',
+        'LOCATION': f'redis://{config.SERVER_REDIS}/0',
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "PICKLE_VERSION": -1,
             "SOCKET_CONNECT_TIMEOUT": 5,
             "SOCKET_TIMEOUT": 5,
-            # "CLIENT_CLASS": "django_redis.client.HerdClient",
-            # "PARSER_CLASS": "redis.connection.HiredisParser"
         },
     },
 }
@@ -116,12 +111,6 @@ INSTALLED_APPS = [
     'feedback',
 ]
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': [
-#         'rest_framework.permissions.IsAdminUser',
-#     ],
-#     'PAGE_SIZE': 10
-# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,16 +120,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'utils.middlewares.antiSpiders.AntiSpider', # 反爬中间件
+    'utils.middlewares.antiSpiders.AntiSpider',  # 反爬中间件
 ]
 
 ROOT_URLCONF = 'school.urls'
-
-# jwt接口验证
-JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
-    'JWT_ALLOW_REFRESH':True
-}
 
 TEMPLATES = [
     {
@@ -197,29 +180,67 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+##############
+# jwt接口验证
+##############
+
+JWT_AUTH = {
+    # 可以每个月登陆一次，最长可以一年不登陆
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=30),
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=360),
+    # 'JWT_RESPONSE_PAYLOAD_HANDLER': 'yonghu.views.jwt_response_payload_handler',
+    'JWT_PAYLOAD_HANDLER': 'utils.jwt_auth.authentication.jwt_payload_handler',
+    'JWT_ALLOW_REFRESH': True,
+    "JWT_AUTH_HEADER_PREFIX": "usc",
+    "JWT_ISSUER": "usc-school"
+}
+
 AUTHENTICATION_BACKENDS = (
-    'yonghu.views.MyYonghuBackend',
-    "django.contrib.auth.backends.ModelBackend"
+    "django.contrib.auth.backends.ModelBackend",
 )
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    'DEFAULT_VERSION': 'v1.0',
+    'VERSION_PARAM': 'version',
+    'ALLOWED_VERSIONS': ['v1.0', 'v2.0'],
     'PAGE_SIZE': 5,
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ),
     # 配置默认的认证方式 base:账号密码验证
-    #session：session_id认证
+    # session：session_id认证
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # drf的这一阶段主要是做验证,middleware的auth主要是设置session和user到request对象
         # 默认的验证是按照验证列表从上到下的验证
+        'utils.jwt_auth.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         # 'rest_framework.authentication.SessionAuthentication',
-        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
-        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+##########
+# PLATFORM
+##########
+
+PLATFORM = {
+    "QQ": {
+        "model": "QQUser",
+        "serializer": "QQUserSerializer"
+    },
+    "WX": {
+        "model": "WXUser",
+        "serializer": "WXUserSerializer"
+    },
+    "APP": {
+        "model": "APPUser",
+        "serializer": "APPUserSerializer"
+    }
+}
+DEFAULT_PLATFORM = "QQ"
 
 # Internationalization-
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -234,7 +255,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-### 系统邮件发送配置 ###
+
+################
+# EMAIL CONFIG
+################
+
 # DOMAIN = 'http://127.0.0.1:3389/auth' #用户验证邮箱访问地址
 # 设置邮件域名
 EMAIL_HOST = "smtp.exmail.qq.com"
@@ -263,13 +288,17 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
-### Celery配置
+
+#############
+# CELERY CONFIG
+#############
+
 # celery回去查看INSTALLD_APP下查看每个app下面的目录中的tasks.py文件，找到标记为task的方法，将它们注册为celery task
 djcelery.setup_loader()
 # broker的代理地址
-BROKER_URL = config.BROKER_URL
+BROKER_URL = f'redis://{config.SERVER_REDIS}/1'
 #celery结果返回，可用于跟踪结果
-CELERY_RESULT_BACKEND = config.CELERY_RESULT_BACKEND
+CELERY_RESULT_BACKEND = f'redis://{config.SERVER_REDIS}/2'
 # tasks.py文件所在位置
 CELERY_IMPORTS = ('school.tasks', )
 #celery时区设置，使用settings中TIME_ZONE同样的时区
@@ -283,29 +312,10 @@ CELERYD_CONCURRENCY = 4
 CELERY_FORCE_EXECV = True
 CELERY_ENABLE_UTC = True
 
-# 下面是定时任务的设置，我一共配置了三个定时任务.
-# from celery.schedules import crontab
-# CELERYBEAT_SCHEDULE = {
-#     '每小时获取数据': {
-#         "task": "yonghu.tasks.getApi",
-#         #"schedule": crontab(minute='*/3',),
-#         "schedule": crontab(0,'*','*','*','*'),
-#         "args": (),
-#     },
-#     '每周一进行数据库清理': {
-#         'task': 'yonghu.tasks.removeApi',
-#         'schedule': crontab(hour='*/9', minute='*/50', day_of_week='*/5'),
-#         "args": ()
-#     },
-#     '每天进行数据库备份': {
-#         'task': 'yonghu.tasks.backups',
-#         'schedule': crontab(0,1,'*','*','*'),
-#         "args": ()
-#     },
-# }
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
+#############
+# STATIC FILE CONFIG
+#############
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

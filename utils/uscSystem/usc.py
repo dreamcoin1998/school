@@ -73,8 +73,3 @@ class Usc(NewTimetable):
             return self.parse_score(data)
         else:
             return False
-
-
-if __name__ == '__main__':
-    data = Usc('20174670323', '18759799353gjb').check_score(None)
-    print(data)

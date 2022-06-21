@@ -3,7 +3,7 @@ from .serializers import FeedbackSerializer
 from utils.permissions.permissions import IsAuthenticated, IsOwnerOrReadOnlyInfo
 from yonghu.views import JSONWebTokenAuthentication, CsrfExemptSessionAuthentication
 from rest_framework.response import Response
-from utils.returnCode.ReturnCode import ReturnCode
+from utils.returnCode import ReturnCode
 from utils.getPerson import GetPersonal
 from .models import Feedback
 from images.models import ImagePath

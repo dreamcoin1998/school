@@ -1,6 +1,6 @@
 from rest_framework import mixins, viewsets
 from rest_framework.response import Response
-from utils.returnCode.ReturnCode import ReturnCode
+from utils.returnCode import ReturnCode
 from .models import MainMessage, ReplyMessage
 from transaction.models import Commody
 from forum.models import Post
@@ -15,11 +15,12 @@ from school import config
 
 
 class GetObjectType:
+
     def get_object_instance(self):
-        '''
+        """
         获取评论信息对应的类的实例，是帖子还是商品
         :return:
-        '''
+        """
         obj_type = self.request.query_params.get('type')
         obj_id = self.request.query_params.get('id')
         if not obj_id:
@@ -37,13 +38,13 @@ class GetObjectType:
 
 
 class ListCreateMainMessage(mixins.ListModelMixin,
-                        mixins.CreateModelMixin,
-                        viewsets.GenericViewSet,
-                        ReplyNumAdd,
-                        GetObjectType):
-    '''
+                            mixins.CreateModelMixin,
+                            viewsets.GenericViewSet,
+                            ReplyNumAdd,
+                            GetObjectType):
+    """
     返回或创建主楼评论
-    '''
+    """
     serializer_class = MainMessageSerializer
     permission_classes = [IsOwnerOrReadOnlyInfo]
     authentication_classes = [JSONWebTokenAuthentication, CsrfExemptSessionAuthentication]
@@ -63,10 +64,10 @@ class ListCreateMainMessage(mixins.ListModelMixin,
 
 
 class ListCreateReplyMessage(mixins.ListModelMixin,
-                                   mixins.CreateModelMixin,
-                                    viewsets.GenericViewSet,
-                                    ReplyNumAdd,
-                                    GetObjectType):
+                             mixins.CreateModelMixin,
+                             viewsets.GenericViewSet,
+                             ReplyNumAdd,
+                             GetObjectType):
     '''
     返回或创建楼中楼评论
     '''
